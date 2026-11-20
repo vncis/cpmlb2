@@ -125,6 +125,8 @@ label.chk{display:flex;gap:8px;align-items:center;margin:8px 0}
 @media(max-width:520px){body{font-size:17px}.qtext{font-size:1.12rem}.units{grid-template-columns:1fr 1fr}.ucard{min-height:140px;padding:12px}.hero h1{font-size:1.2rem}.opts{grid-template-columns:1fr 1fr}.opts.order{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}.emo.huge{font-size:3rem}.cal th,.cal td{width:32px;height:28px}}
 
 .opts.wide{grid-template-columns:1fr!important}.opts.wide .opt .pic{max-height:110px;width:auto;max-width:100%}
+
+.iconbtn.nav{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;font-size:1.15rem;padding:2px 6px;min-width:50px}.iconbtn.nav span{font-size:.62rem;font-weight:800;margin-top:2px;color:#3a3f5c}
 </style></head>
 <body><div id="app"></div><div id="wordpop" onclick="if(event.target===this)closeWord()"><div class="inner"></div></div><div id="toast"></div>
 <script>/* ===== Hand-drawn style SVG illustrations (all original drawings) ===== */
@@ -2012,8 +2014,13 @@ function closeWord(){ $('#wordpop').classList.remove('show'); }
 
 /* ---------- Navigation ---------- */
 function go(hash){ location.hash=hash; }
+const navStack=[];
+function trackNav(){ const h=location.hash||'#'; if(navStack.length>1 && navStack[navStack.length-2]===h) navStack.pop(); else if(navStack[navStack.length-1]!==h) navStack.push(h); }
+function leavingQuizOk(){ const inQuiz=/^#quiz\//.test(location.hash) && quiz && !quiz.final && quiz.res.some(Boolean); return !inQuiz || confirm('Con đang làm bài dở. Thoát ra thì bài này sẽ không được tính điểm. Thoát nhé?'); }
+function goBack(fallback){ if(!leavingQuizOk()) return; if(navStack.length>1) history.back(); else go(fallback||''); }
+function goHome(){ if(!leavingQuizOk()) return; go(''); }
 window.addEventListener('hashchange',route);
-function route(){ if(window.speechSynthesis) speechSynthesis.cancel(); closeWord(); const h=location.hash.slice(1).split('/');
+function route(){ trackNav(); if(window.speechSynthesis) speechSynthesis.cancel(); closeWord(); const h=location.hash.slice(1).split('/');
   if(h[0]=='unit') return showUnit(+h[1]);
   if(h[0]=='learn') return showLesson(h[1]);
   if(h[0]=='quiz') return startQuiz(h[1]);
@@ -2024,7 +2031,7 @@ function route(){ if(window.speechSynthesis) speechSynthesis.cancel(); closeWord
 function findSub(id){ for(const u of UNITS){ for(const s of u.subs) if(s.id==id) return {u,s}; } return null; }
 const best=()=>LS.get('best',{});
 function stars(sc){ if(sc===undefined) return '<span class="st none">☆☆☆</span>'; const n=sc>=9?3:sc>=7?2:sc>=5?1:0; return `<span class="st">${'★'.repeat(n)}${'☆'.repeat(3-n)}</span>`; }
-function header(title, back){ return `<header class="top">${back?`<button class="iconbtn" onclick="go('${back}')" aria-label="Quay lại">←</button>`:'<span class="logo">🧮</span>'}<div class="ttl">${title}</div><button class="iconbtn" onclick="go('report')" title="Kết quả học tập">📈</button><button class="iconbtn" onclick="go('settings')" title="Cài đặt giọng đọc">⚙️</button></header>`; }
+function header(title, back){ const home=back!==undefined; return `<header class="top">${home?`<button class="iconbtn nav" onclick="goBack('${back}')" title="Quay lại trang trước" aria-label="Quay lại">⬅️<span>Back</span></button><button class="iconbtn nav" onclick="goHome()" title="Về trang chủ – chọn unit" aria-label="Trang chủ">🏠<span>Home</span></button>`:'<span class="logo">🧮</span>'}<div class="ttl">${title}</div><button class="iconbtn" onclick="go('report')" title="Kết quả học tập">📈</button><button class="iconbtn" onclick="go('settings')" title="Cài đặt giọng đọc">⚙️</button></header>`; }
 
 function showHome(){
   const b=best(); let done=0,total=0; UNITS.forEach(u=>u.subs.forEach(s=>{ total++; if(b[s.id]!==undefined) done++; }));
@@ -2152,7 +2159,7 @@ function finishQuiz(){
   const skills={}; res.forEach(r=>{ const s=r.q.skill; skills[s]=skills[s]||[0,0]; skills[s][1]++; if(r.ok) skills[s][0]++; });
   const b=best(); const key=quiz.id.startsWith('cp')?quiz.id:quiz.id; if(!quiz.noSave && !quiz.id.startsWith('all') && quiz.id!='mix'){ if(b[key]===undefined || sc>b[key]) b[key]=sc; LS.set('best',b); }
   const hist=LS.get('hist',[]); if(!quiz.noSave) hist.unshift({id:quiz.id,t:quiz.title,d:new Date().toISOString(),c,n,sk:skills}); LS.set('hist',hist.slice(0,200));
-  quiz.final={c,n,sc,skills}; if(location.hash=='#result') showResult(); else go('result'); window.scrollTo(0,0);
+  quiz.final={c,n,sc,skills}; if(location.hash=='#result') showResult(); else { navStack.pop(); location.replace('#result'); } window.scrollTo(0,0);
 }
 function showResult(){
   const {c,n,sc,skills}=quiz.final; const wrong=quiz.res.filter(r=>!r.ok);

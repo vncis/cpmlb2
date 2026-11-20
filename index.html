@@ -127,6 +127,16 @@ label.chk{display:flex;gap:8px;align-items:center;margin:8px 0}
 .opts.wide{grid-template-columns:1fr!important}.opts.wide .opt .pic{max-height:110px;width:auto;max-width:100%}
 
 .iconbtn.nav{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;font-size:1.15rem;padding:2px 6px;min-width:50px}.iconbtn.nav span{font-size:.62rem;font-weight:800;margin-top:2px;color:#3a3f5c}
+
+.btn.wbb{background:#8d5524;box-shadow:0 3px 0 #5c3716;color:#fff}
+.hero .btn.big.wbb{background:#fff;color:#8d5524;box-shadow:0 3px 0 #d6c1ad}
+.herobtns{display:flex;flex-direction:column;gap:10px}
+.hero.wbh{background:linear-gradient(135deg,#8d5524,#e76f51)}
+.wbsubs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-top:8px}
+.wbsub{display:flex;align-items:center;gap:8px;text-align:left;border:2px solid #e2e8f0;background:#fff;border-radius:12px;padding:8px 10px;font:inherit;cursor:pointer;color:inherit}
+.wbsub span:nth-child(2){flex:1;font-size:.92rem}
+.lvdots{display:flex;gap:3px}.lvdots i{font-style:normal;font-size:.7rem;font-weight:900;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e2e8f0}
+.card.lv h3{margin:6px 0 0}
 </style></head>
 <body><div id="app"></div><div id="wordpop" onclick="if(event.target===this)closeWord()"><div class="inner"></div></div><div id="toast"></div>
 <script>/* ===== Hand-drawn style SVG illustrations (all original drawings) ===== */
@@ -1063,6 +1073,628 @@ check:[
   ()=>({q:'Dance: forward one step, then back one step. Where do you end up?', qVi:'Điệu nhảy: tiến 1 bước rồi lùi 1 bước. Con sẽ ở đâu?', type:'mc', opts:['where you started','one step forward','two steps back'], skill:'Chỉ dẫn di chuyển', exp:'Back one step is the reverse of forward one step, so you end up where you started.', expVi:'Lùi 1 bước là ngược lại của tiến 1 bước nên con trở về chỗ cũ.'}),
 ]});
 
+/* ================= WORKBOOK 2 — Units 1–5 ================= */
+const WB={};
+function wb(id,o){ WB[id]=o; }
+const LV={F:['Focus','Cơ bản','#06d6a0','Câu hỏi giúp con nắm vững kiến thức cơ bản.'],P:['Practice','Luyện tập','#3a86ff','Câu hỏi giúp con tự tin vận dụng.'],C:['Challenge','Thử thách','#ef476f','Câu hỏi giúp con suy nghĩ sâu hơn.']};
+function row100(start, hide){ const r=[]; for(let i=0;i<10;i++){ const v=start+i; const k=hide.indexOf(v); r.push(k>=0?'abcdefgh'[k]:v); } return r; }
+
+/* ---------- 1.1 ---------- */
+wb('1.1',{
+F:[
+ ()=>({q:'Write the missing numbers.<br>a = [[22]] b = [[23]] c = [[24]] d = [[26]] e = [[27]] f = [[28]] g = [[29]]', qVi:'Viết các số còn thiếu trong hàng của bảng 100 ô.', pic:hundredPiece([row100(21,[22,23,24,26,27,28,29])]), skill:'Bảng 100 ô', exp:'Count on in ones from 21 to 30.', expVi:'Đếm thêm 1 từ 21 đến 30.'}),
+ ()=>({q:'Write the missing numbers.<br>a = [[52]] b = [[53]] c = [[54]] d = [[56]] e = [[57]] f = [[58]] g = [[59]]', qVi:'Viết các số còn thiếu.', pic:hundredPiece([row100(51,[52,53,54,56,57,58,59])]), skill:'Bảng 100 ô', exp:'Count on in ones: 51, 52, 53 … 60.', expVi:'Đếm thêm 1: 51, 52, 53 … 60.'}),
+ ()=>({q:'This is a column from the 100 square. Count on in tens.<br>a = [[25]] b = [[45]] c = [[65]] d = [[85]]', qVi:'Đây là một cột của bảng 100 ô. Đếm thêm 10.', pic:hundredPiece([[5],['a'],[35],['b'],[55],['c'],[75],['d'],[95]]), skill:'Bảng 100 ô', exp:'The number of ones stays the same (5). The number of tens changes.', expVi:'Hàng đơn vị giữ nguyên (5), hàng chục tăng dần.'}),
+ ()=>({q:'Which 2-digit number is represented here? [[36]]', qVi:'Hình biểu diễn số có 2 chữ số nào?', pic:baseTen(3,6), skill:'Chục và đơn vị', exp:'3 tens and 6 ones = 36.', expVi:'3 chục và 6 đơn vị = 36.'}),
+ ()=>({q:'Which 2-digit number is represented here? [[61]]', qVi:'Hình biểu diễn số nào?', pic:baseTen(6,1), skill:'Chục và đơn vị', exp:'6 tens and 1 one = 61.', expVi:'6 chục và 1 đơn vị = 61.'}),
+ ()=>({q:'Which is a different representation of 47?', qVi:'Cách biểu diễn nào khác cũng là số 47?', type:'mc', opts:['40 + 7','4 + 7','74','70 + 4'], pic:baseTen(4,7), skill:'Chục và đơn vị', exp:'47 = 4 tens and 7 ones = 40 + 7.', expVi:'47 = 4 chục 7 đơn vị = 40 + 7.'}),
+],
+P:[
+ ()=>({q:'Here are rows and columns from a 100 square. Write the missing numbers.<br>a = [[14]] b = [[24]] c = [[18]] d = [[28]]', qVi:'Viết các số còn thiếu.', pic:hundredPiece([[4,null,null,null,8],['a',null,null,null,'c'],['b',null,null,null,'d']]), skill:'Bảng 100 ô', exp:'Going down a column adds 10: 4, 14, 24 and 8, 18, 28.', expVi:'Đi xuống một cột là cộng 10.'}),
+ ()=>({q:'Write the missing numbers.<br>a = [[87]] b = [[89]] c = [[78]] d = [[98]]', qVi:'Viết các số còn thiếu.', pic:hundredPiece([[null,'c',null],['a',88,'b'],[null,'d',null]]), skill:'Bảng 100 ô', exp:'Left 1 less (87), right 1 more (89), above 10 less (78), below 10 more (98).', expVi:'Trái −1, phải +1, trên −10, dưới +10.'}),
+ ()=>({q:'Look at 23 and 32. What is the same and what is different?', qVi:'So sánh 23 và 32. Điều gì giống, điều gì khác?', type:'mc', opts:['Same digits, but in 23 the 2 means 2 tens and in 32 the 2 means 2 ones','They are the same number','Both have 3 tens','Both have 2 tens'], pic:`<div class="row-pics">${baseTen(2,3)}${baseTen(3,2)}</div>`, skill:'Giá trị chữ số', exp:'23 = 2 tens and 3 ones. 32 = 3 tens and 2 ones. The digits are the same but their values are different.', expVi:'23 = 2 chục 3 đơn vị; 32 = 3 chục 2 đơn vị. Cùng chữ số nhưng giá trị khác nhau.'}),
+ ()=>({q:'Here are pieces of a 100 square. Write the missing numbers.<br>a = [[47]] b = [[56]] c = [[58]] d = [[67]]', qVi:'Viết các số còn thiếu ở mảnh bảng 100 ô.', pic:hundredPiece([[null,'a',null],['b',57,'c'],[null,'d',null]]), skill:'Bảng 100 ô', exp:'Above 57 is 47, below is 67, left is 56, right is 58.', expVi:'Trên 57 là 47, dưới là 67, trái 56, phải 58.'}),
+ ()=>({q:'Write the missing numbers.<br>a = [[26]] b = [[36]] c = [[38]] d = [[48]]', qVi:'Viết các số còn thiếu.', pic:hundredPiece([['a',27,null],['b',37,'c'],[null,47,'d']]), skill:'Bảng 100 ô', exp:'Each row goes up by 1; each column goes up by 10.', expVi:'Mỗi hàng tăng 1, mỗi cột tăng 10.'}),
+],
+C:[
+ ()=>{ const n=pick([37,81,53,75,46,69]); return {q:`Here is a blank 100 square. Where does <b>${n}</b> go? Row [[${Math.ceil(n/10)}]] (from the top), column [[${n%10||10}]] (from the left).`, qVi:`Số ${n} nằm ở hàng thứ mấy (từ trên xuống), cột thứ mấy (từ trái sang) trong bảng 100 ô?`, pic:hundredSquare({},{}).replace(/<text[^>]*>\d+<\/text>/g,''), skill:'Bảng 100 ô', exp:`${n} is in the row that starts with ${Math.floor((n-1)/10)*10+1}, and it ends in ${n%10}, so it is in column ${n%10||10}.`, expVi:`${n} nằm ở hàng bắt đầu bằng ${Math.floor((n-1)/10)*10+1}, cột ${n%10||10}.`}; },
+ ()=>({q:'Where does <b>90</b> go in the 100 square? Row [[9]], column [[10]]', qVi:'Số 90 nằm ở hàng nào, cột nào?', skill:'Bảng 100 ô', exp:'90 ends a row: it is the last number in row 9 (81–90), column 10.', expVi:'90 là số cuối của hàng 9 (81–90), cột 10.'}),
+ ()=>({q:'Use the digit cards 3, 5 and 8 to make different 2-digit numbers (use 2 different cards each time). How many different numbers can you make? [[6]]', qVi:'Dùng thẻ số 3, 5, 8 tạo các số có 2 chữ số khác nhau (mỗi lần dùng 2 thẻ khác nhau). Tạo được bao nhiêu số?', pic:'<div class="cards"><span>3</span><span>5</span><span>8</span></div>', skill:'Giá trị chữ số', exp:'35, 38, 53, 58, 83, 85 — that is 6 numbers.', expVi:'35, 38, 53, 58, 83, 85 — có 6 số.'}),
+ ()=>({q:'Using the cards 3, 5 and 8, what is the greatest 2-digit number you can make? [[85]] The smallest? [[35]]', qVi:'Với thẻ 3, 5, 8: số lớn nhất và số nhỏ nhất có 2 chữ số là gì?', pic:'<div class="cards"><span>3</span><span>5</span><span>8</span></div>', skill:'So sánh số', exp:'Greatest: biggest digit in the tens (8), then 5 → 85. Smallest: 3 in the tens, then 5 → 35.', expVi:'Lớn nhất: chữ số lớn nhất ở hàng chục → 85. Nhỏ nhất → 35.'}),
+]});
+
+/* ---------- 1.2 ---------- */
+wb('1.2',{
+F:[
+ ()=>({q:'Count in tens.<br>2 tens = [[20]] &nbsp; 4 tens = [[40]] &nbsp; 7 tens = [[70]] &nbsp; 9 tens = [[90]] &nbsp; 10 tens = [[100]]', qVi:'Đếm theo chục.', skill:'Số tròn chục', exp:'Each ten is 10: 2 tens = 20 … 10 tens = 100.', expVi:'Mỗi chục là 10. 10 chục = 100.'}),
+ ()=>({q:'Which tens number is 1 ten more than 8 tens? [[90]]', qVi:'Số tròn chục nào nhiều hơn 8 chục là 1 chục?', skill:'Số tròn chục', exp:'8 tens = 80. 1 ten more = 9 tens = 90.', expVi:'8 chục = 80, thêm 1 chục = 90.'}),
+ ()=>({q:'Which tens number is 1 ten fewer than 6 tens? [[50]]', qVi:'Số tròn chục nào ít hơn 6 chục là 1 chục?', skill:'Số tròn chục', exp:'6 tens = 60. 1 ten fewer = 5 tens = 50.', expVi:'6 chục = 60, bớt 1 chục = 50.'}),
+ ()=>({q:'Sofia chooses four tens. Zara chooses zero ones. What number do they make? [[40]]', qVi:'Sofia chọn 4 chục. Zara chọn 0 đơn vị. Hai bạn tạo thành số nào?', pic:partWhole('?',[40,0]), skill:'Chục và đơn vị', exp:'4 tens and 0 ones = 40. The 0 is a place holder.', expVi:'4 chục và 0 đơn vị = 40. Số 0 giữ chỗ hàng đơn vị.'}),
+ ()=>({q:'Arun scoops some stones out of a tray. Estimate first, then count. How many stones? [[27]]', qVi:'Arun xúc một ít sỏi. Ước lượng trước rồi đếm. Có bao nhiêu viên sỏi?', pic:emojis('🪨',27,10), skill:'Đếm đồ vật', exp:'Count in tens: 10, 20. Count on in ones: 21 … 27.', expVi:'Đếm theo chục: 10, 20, rồi đếm thêm 1: 21…27.'}),
+ ()=>({q:'Sofia counts 100 beads in twos. Which numbers did she say? Choose all.', qVi:'Sofia đếm 100 hạt cườm, mỗi lần 2 hạt. Bạn ấy đã đọc những số nào? Chọn tất cả.', type:'multi', opts:['24','59','36','42','17','78','12'], ans:[0,2,3,5,6], skill:'Số chẵn, số lẻ', exp:'Counting in twos from 0 gives even numbers: 24, 36, 42, 78, 12. 59 and 17 are odd.', expVi:'Đếm thêm 2 từ 0 chỉ được số chẵn: 24, 36, 42, 78, 12.'}),
+],
+P:[
+ ()=>({q:'Write the tens numbers in order, from 100 to 10. Tap them in order.', qVi:'Sắp xếp các số tròn chục từ 100 về 10.', type:'order', items:['100','90','80','70','60','50','40','30','20','10'], skill:'Số tròn chục', exp:'100, 90, 80 … count back in tens.', expVi:'Đếm lùi 10: 100, 90, 80, …, 10.'}),
+ ()=>({q:'Marcus chooses the tens. Arun chooses the ones. They make 53 and 87. How many tens does Marcus choose? [[5]] and [[8]]. How many ones does Arun choose? [[3]] and [[7]]', qVi:'Marcus chọn hàng chục, Arun chọn hàng đơn vị. Hai bạn tạo ra 53 và 87. Marcus chọn bao nhiêu chục? Arun chọn bao nhiêu đơn vị?', skill:'Chục và đơn vị', exp:'53 = 5 tens and 3 ones. 87 = 8 tens and 7 ones.', expVi:'53 = 5 chục 3 đơn vị; 87 = 8 chục 7 đơn vị.'}),
+ ()=>({q:'How many beans are in the collection? Count in tens, then ones. [[43]]', qVi:'Có bao nhiêu hạt đậu? Đếm theo chục rồi đơn vị.', pic:emojis('🫘',43,10), skill:'Đếm đồ vật', exp:'4 rows of 10 = 40, and 3 more = 43.', expVi:'4 hàng 10 = 40, thêm 3 = 43.'}),
+ ()=>({q:'Tick the correct sentences. Choose all that are correct.', qVi:'Đánh dấu các câu ĐÚNG. Chọn tất cả.', type:'multi', opts:['Numbers with 1, 3, 5, 7 or 9 ones are even numbers.','An even number of objects can be sorted into 2 equal groups.','2 more than an odd number is always an odd number.','0 is an odd number.'], keepOrder:true, ans:[1,2], skill:'Số chẵn, số lẻ', exp:'Numbers ending in 1, 3, 5, 7, 9 are ODD. Even numbers make 2 equal groups. Odd + 2 is still odd (7 → 9). 0 is even.', expVi:'Số tận cùng 1, 3, 5, 7, 9 là số LẺ. Số chẵn chia được 2 nhóm bằng nhau. Số lẻ + 2 vẫn là số lẻ. 0 là số chẵn.'}),
+],
+C:[
+ ()=>({q:'How many large spots ⚫ are in the box? [[18]] How many small spots • are there? [[35]]<br>You could count in twos, fives or tens.', qVi:'Có bao nhiêu chấm to và bao nhiêu chấm nhỏ? Có thể đếm theo 2, 5 hoặc 10.', pic:`<div class="emo">${'⚫'.repeat(18)}</div><div class="emo" style="font-size:1rem;letter-spacing:6px">${Array.from({length:35},(_,i)=>(i+1)%10==0?'•<br>':'•').join('')}</div>`, skill:'Đếm đồ vật', exp:'Large: 18 (9 twos). Small: 35 (3 tens and 5 ones).', expVi:'Chấm to: 18. Chấm nhỏ: 35.'}),
+ ()=>({q:'A shape joins 5 squares on the 100 square. Which shape has <b>only 1 odd number</b> inside it?', qVi:'Hình nào (gồm 5 ô trên bảng 100 ô) chỉ có ĐÚNG 1 số lẻ?', type:'mc', opts:['22, 32, 33, 34, 42','21, 22, 23, 24, 25','35, 45, 55, 65, 75','12, 13, 14, 15, 16'], skill:'Số chẵn, số lẻ', exp:'22, 32, 34, 42 are even; only 33 is odd.', expVi:'22, 32, 34, 42 là số chẵn; chỉ có 33 là số lẻ.'}),
+ ()=>({q:'Now find a shape where <b>only 1 number is even</b>.', qVi:'Tìm hình chỉ có ĐÚNG 1 số chẵn.', type:'mc', opts:['15, 25, 26, 27, 35','14, 15, 16, 17, 18','24, 34, 44, 54, 64','41, 42, 43, 52, 53'], skill:'Số chẵn, số lẻ', exp:'15, 25, 27, 35 are odd; only 26 is even.', expVi:'Chỉ có 26 là số chẵn.'}),
+]});
+
+/* ---------- 1.3 ---------- */
+wb('1.3',{
+F:[
+ ()=>{ const v=pick([15,43,78,32]); const opts=[v, v+20>100?v-20:v+20, 100-v==v?v+10:100-v].map(String); return {q:`Estimate! Which number is the arrow pointing to?`, qVi:'Ước lượng: mũi tên đang chỉ vào số nào?', type:'mc', opts, pic:numberLine({min:0,max:100,step:10,marks:[{v,t:'?'}]}), skill:'Tia số', exp:`${v} is ${Math.floor(v/10)} tens and ${v%10} ones, so it is between ${Math.floor(v/10)*10} and ${Math.floor(v/10)*10+10}.`, expVi:`${v} nằm giữa ${Math.floor(v/10)*10} và ${Math.floor(v/10)*10+10}.`}; },
+ ()=>({q:'Which elephant is the <b>3rd</b> from the left?', qVi:'Con voi thứ 3 tính từ bên trái là con nào?', type:'mc', opts:['C','A','B','D','E'], keep:true, ansText:'C', pic:`<div class="emo big">🐘 🐘 🐘 🐘 🐘 🐘 🐘</div><div class="emo">&nbsp;A &nbsp; B &nbsp; C &nbsp; D &nbsp; E &nbsp; F &nbsp; G</div>`, skill:'Số thứ tự', exp:'1st A, 2nd B, 3rd C.', expVi:'Thứ nhất A, thứ hai B, thứ ba C.'}),
+ ()=>({q:'Arun is last in a queue of 32 people. What is his place in the queue?', qVi:'Arun đứng cuối hàng có 32 người. Arun đứng thứ mấy?', type:'mc', opts:['32nd','31st','33rd','1st'], skill:'Số thứ tự', exp:'There are 32 people and he is last, so he is 32nd (thirty-second).', expVi:'Hàng có 32 người, Arun đứng cuối nên là thứ 32.'}),
+ ()=>({q:'A number sequence starts at 42. It counts on in tens and stops at 72.<br>42, [[52]], [[62]], 72', qVi:'Dãy số bắt đầu từ 42, đếm thêm 10, dừng ở 72.', skill:'Dãy số', exp:'Add 10 each time: 42, 52, 62, 72.', expVi:'Cộng 10 mỗi lần.'}),
+ ()=>({q:'A number sequence starts at 32. It counts on in twos and stops at 38.<br>32, [[34]], [[36]], 38', qVi:'Dãy số bắt đầu từ 32, đếm thêm 2, dừng ở 38.', skill:'Dãy số', exp:'Add 2 each time.', expVi:'Cộng 2 mỗi lần.'}),
+ ()=>({q:'Look at 42, 52, 62, 72. All the numbers are [[even]]. All the numbers have the same number of [[ones]].', qVi:'Dãy 42, 52, 62, 72: tất cả là số lẻ (odd) hay chẵn (even)? Có cùng số hàng chục (tens) hay đơn vị (ones)?', hint:'odd / even ; ones / tens', skill:'Dãy số', exp:'They all end in 2, so they are even and all have 2 ones.', expVi:'Đều tận cùng 2 nên là số chẵn và có cùng 2 đơn vị.'}),
+ ()=>({q:'Compare 35 and 53. Which number is greater?', qVi:'So sánh 35 và 53. Số nào lớn hơn?', type:'mc', opts:['53','35'], skill:'So sánh số', exp:'53 has 5 tens; 35 has only 3 tens.', expVi:'53 có 5 chục, 35 chỉ có 3 chục.'}),
+ ()=>({q:'Order these numbers from smallest to greatest.', qVi:'Sắp xếp từ bé đến lớn.', type:'order', items:['12','21','35','53'], skill:'Sắp xếp số', exp:'12 < 21 < 35 < 53.', expVi:'12 < 21 < 35 < 53.'}),
+],
+P:[
+ ()=>({q:'Draw a ring around the <b>last</b> leaf. Which leaf is last? (Count from the left.)', qVi:'Chiếc lá cuối cùng là chiếc thứ mấy?', type:'mc', opts:['6th','1st','4th','5th'], pic:`<div class="emo big">🍃 🍂 🍁 🌿 🍀 🌱</div>`, skill:'Số thứ tự', exp:'There are 6 leaves, so the last one is the 6th.', expVi:'Có 6 chiếc lá, chiếc cuối là thứ 6.'}),
+ ()=>({q:'Which leaf is the <b>4th</b> one?', qVi:'Chiếc lá thứ 4 là chiếc nào?', type:'mc', opts:['🌿','🍁','🍀','🍂'], pic:`<div class="emo big">🍃 🍂 🍁 🌿 🍀 🌱</div>`, skill:'Số thứ tự', exp:'1st 🍃, 2nd 🍂, 3rd 🍁, 4th 🌿.', expVi:'Thứ 4 là 🌿.'}),
+ ()=>({q:"Zara's number sequence is 78, 76, 74, 72, 70.<br>Start at [[78]]. Count [[back]] in [[twos|2]]. Stop at [[70]].", qVi:'Mô tả dãy số của Zara: bắt đầu …, đếm (lùi/thêm) theo …, dừng ở …', hint:'back / on', skill:'Dãy số', exp:'The numbers get smaller by 2 each time: count back in twos.', expVi:'Các số giảm 2 mỗi lần: đếm lùi theo 2.'}),
+ ()=>({q:'Compare 63 and 36. Which is the <b>smaller</b> number?', qVi:'So sánh 63 và 36. Số nào NHỎ hơn?', type:'mc', opts:['36','63'], skill:'So sánh số', exp:'36 has only 3 tens; 63 has 6 tens.', expVi:'36 chỉ có 3 chục.'}),
+ ()=>({q:'Order these numbers from smallest to largest.', qVi:'Sắp xếp từ bé đến lớn.', type:'order', items:['29','46','57','64','73'], skill:'Sắp xếp số', exp:'Compare the tens: 2, 4, 5, 6, 7.', expVi:'So sánh hàng chục: 2, 4, 5, 6, 7.'}),
+ ()=>({q:'Estimate! Where is 49? Which arrow shows 49?', qVi:'Mũi tên nào chỉ số 49?', type:'mc', opts:['B','A','C'], keep:true, ansText:'B', pic:numberLine({min:0,max:100,step:10,marks:[{v:3,t:'A',c:C.blue},{v:49,t:'B'},{v:74,t:'C',c:C.green}]}), skill:'Tia số', exp:'49 is just before 50, in the middle of the line. A shows 3.', expVi:'49 gần 50, ở giữa tia số. A là số 3.'}),
+],
+C:[
+ ()=>({q:'Sofia and Zara join a queue. There are 51 people in front of them. What are their positions? [[52]]nd and [[53]]rd', qVi:'Sofia và Zara xếp hàng. Phía trước có 51 người. Hai bạn đứng thứ mấy?', skill:'Số thứ tự', exp:'51 people are in front, so the next places are 52nd and 53rd.', expVi:'Có 51 người phía trước nên hai bạn đứng thứ 52 và 53.'}),
+ ()=>({q:'Order these numbers from <b>greatest</b> to <b>smallest</b>.', qVi:'Sắp xếp từ LỚN đến BÉ.', type:'order', items:['84','82','48','42','28'], skill:'Sắp xếp số', exp:'84 > 82 > 48 > 42 > 28. When the tens are the same, look at the ones.', expVi:'84 > 82 > 48 > 42 > 28.'}),
+ ()=>({q:'Arun marks two numbers on the number line. Estimate them. A ≈ ?', qVi:'Ước lượng số tại A.', type:'mc', opts:['25','15','35','52'], pic:numberLine({min:0,max:90,step:10,marks:[{v:25,t:'A'},{v:68,t:'B',c:C.blue}]}), skill:'Tia số', exp:'A is halfway between 20 and 30, about 25.', expVi:'A ở giữa 20 và 30, khoảng 25.'}),
+ ()=>({q:'Write a sequence: start at 91, count back in tens, stop at 41.<br>91, [[81]], [[71]], [[61]], [[51]], 41', qVi:'Dãy số: bắt đầu 91, đếm lùi 10, dừng ở 41.', skill:'Dãy số', exp:'Subtract 10 each time.', expVi:'Trừ 10 mỗi lần.'}),
+]});
+
+/* ---------- 2.1 ---------- */
+wb('2.1',{
+F:[
+ ()=>{ const s=pick(['cube','cuboid','cylinder','pyramid','sphere']); const nm={cube:'cube',cuboid:'cuboid',cylinder:'cylinder',pyramid:'square-based pyramid',sphere:'sphere'}; return {q:'Match the shape to its name.', qVi:'Nối hình với tên của nó.', type:'mc', opts:[nm[s],...sample(Object.values(nm).filter(x=>x!=nm[s]),3)], pic:shape3d(s,C.orange), skill:'Tên hình 3D', exp:`This is a ${nm[s]}.`, expVi:`Đây là ${SH3VI[s]}.`}; },
+ ()=>({q:'This shape is a cube. It has [[6]] faces, [[12]] edges and [[8]] vertices.', qVi:'Hình lập phương có bao nhiêu mặt, cạnh, đỉnh?', pic:shape3d('cube',C.blue), skill:'Mặt, cạnh, đỉnh', exp:'A cube has 6 square faces, 12 edges and 8 vertices.', expVi:'Hình lập phương: 6 mặt, 12 cạnh, 8 đỉnh.'}),
+ ()=>({q:'A cylinder has [[2]] flat faces, [[1]] curved surface, [[2]] edges and [[0]] vertices.', qVi:'Hình trụ có bao nhiêu mặt phẳng, mặt cong, cạnh, đỉnh?', pic:shape3d('cylinder',C.green), skill:'Mặt, cạnh, đỉnh', exp:'2 circle faces, 1 curved surface, 2 curved edges, no vertices.', expVi:'2 mặt tròn, 1 mặt cong, 2 cạnh cong, không có đỉnh.'}),
+ ()=>({q:'A sphere has [[0]] faces, [[1]] curved surface and [[0]] vertices.', qVi:'Hình cầu có bao nhiêu mặt, mặt cong, đỉnh?', pic:shape3d('sphere',C.red), skill:'Mặt, cạnh, đỉnh', exp:'A sphere is like a ball: only 1 curved surface.', expVi:'Hình cầu như quả bóng: chỉ có 1 mặt cong.'}),
+ ()=>({q:'A square-based pyramid has [[5]] faces, [[8]] edges and [[5]] vertices.', qVi:'Hình chóp đáy vuông có bao nhiêu mặt, cạnh, đỉnh?', pic:shape3d('pyramid',C.yellow), skill:'Mặt, cạnh, đỉnh', exp:'1 square face + 4 triangle faces = 5 faces; 8 edges; 5 vertices.', expVi:'1 mặt vuông + 4 mặt tam giác = 5 mặt; 8 cạnh; 5 đỉnh.'}),
+],
+P:[
+ ()=>({q:'Tony has a 3D shape. One face of the shape is a square. What could the shape be? Choose all.', qVi:'Tony có một hình 3D có một mặt hình vuông. Hình đó có thể là gì? Chọn tất cả.', type:'multi', opts:['cube','cuboid','pyramid','sphere','cylinder'].map(x=>({h:shape3d(x)+`<b>${x}</b>`,v:x})), ans:[0,1,2], pics:true, skill:'Mặt của hình 3D', exp:'A cube, a cuboid (it can have square ends) and a square-based pyramid can all have a square face.', expVi:'Lập phương, hộp chữ nhật và hình chóp đáy vuông đều có thể có mặt vuông.'}),
+ ()=>({q:"What am I? 'I have more than 2 faces. None of my faces are circles. I have 1 square face. Some of my faces are triangles.'", qVi:'Mình là hình gì? "Có hơn 2 mặt, không có mặt tròn, có 1 mặt vuông, có vài mặt tam giác."', type:'mc', opts:['square-based pyramid','cube','cylinder','cuboid'], skill:'Tên hình 3D', exp:'1 square face and triangle faces: a square-based pyramid.', expVi:'1 mặt vuông và các mặt tam giác: hình chóp đáy vuông.'}),
+ ()=>({q:"What am I? 'I have more than 2 vertices. I have no triangular faces. All my faces are the same size. I have no curved surfaces.'", qVi:'Mình là hình gì? "Hơn 2 đỉnh, không có mặt tam giác, tất cả các mặt bằng nhau, không có mặt cong."', type:'mc', opts:['cube','cuboid','sphere','pyramid'], skill:'Tên hình 3D', exp:'All faces the same size: a cube (6 equal squares).', expVi:'Các mặt bằng nhau: hình lập phương.'}),
+ ()=>({q:'Venn diagram: which shapes go in the circle <b>“Curved surfaces”</b>? Choose all.', qVi:'Những hình nào có mặt cong? Chọn tất cả.', type:'multi', opts:['sphere','cube','cylinder','cone','cuboid','pyramid'].map(x=>({h:shape3d(x)+`<b>${x}</b>`,v:x})), ans:[0,2,3], pics:true, skill:'Mặt của hình 3D', exp:'Sphere, cylinder and cone have curved surfaces.', expVi:'Hình cầu, trụ và nón có mặt cong.'}),
+ ()=>({q:'A cuboid can have [[2]] square faces and [[4]] rectangular faces.', qVi:'Một hình hộp chữ nhật có thể có mấy mặt vuông và mấy mặt chữ nhật?', pic:shape3d('cuboid',C.purple), skill:'Mặt của hình 3D', exp:'2 + 4 = 6 faces altogether.', expVi:'2 + 4 = 6 mặt.'}),
+],
+C:[
+ ()=>({q:"Susie's 3D shape has 12 edges. Max says it can be a square-based pyramid, a cube or a cuboid. Is Max correct?", qVi:'Hình của Susie có 12 cạnh. Max nói nó có thể là hình chóp đáy vuông, lập phương hoặc hộp chữ nhật. Max đúng không?', type:'mc', opts:['No — a square-based pyramid has only 8 edges','Yes, all three have 12 edges','No — a cube has only 6 edges'], skill:'Mặt, cạnh, đỉnh', exp:'Cube and cuboid have 12 edges, but a square-based pyramid has 8.', expVi:'Lập phương và hộp chữ nhật có 12 cạnh, hình chóp đáy vuông chỉ có 8 cạnh.'}),
+ ()=>({q:'A cube and a cuboid: what is the same?', qVi:'Hình lập phương và hình hộp chữ nhật giống nhau ở điểm nào?', type:'mc', opts:['Both have 6 faces, 12 edges and 8 vertices','Both have only square faces','Both have curved surfaces'], pic:shapes3dRow(['cube','cuboid']), skill:'Mặt, cạnh, đỉnh', exp:'Both have 6 faces, 12 edges, 8 vertices. The cube’s faces are all squares; the cuboid has rectangles.', expVi:'Cả hai có 6 mặt, 12 cạnh, 8 đỉnh.'}),
+ ()=>({q:'Venn diagram “Only flat faces”. Which shapes belong <b>outside</b> the circle? Choose all.', qVi:'Sơ đồ Venn "Chỉ có mặt phẳng". Những hình nào nằm NGOÀI vòng tròn? Chọn tất cả.', type:'multi', opts:['cube','pyramid','cylinder','sphere','cuboid'].map(x=>({h:shape3d(x)+`<b>${x}</b>`,v:x})), ans:[2,3], pics:true, skill:'Mặt của hình 3D', exp:'The cylinder and sphere have curved surfaces, so they are outside.', expVi:'Hình trụ và hình cầu có mặt cong nên nằm ngoài.'}),
+]});
+
+/* ---------- 2.2 ---------- */
+wb('2.2',{
+F:[
+ ()=>{ const c=pick([['heart','v',true],['star','v',true],['rectangle','h',true],['L','v',false],['flag','h',true],['triangle','h',false]]); return {q:'Is the red line a line of symmetry?', qVi:'Đường màu đỏ có phải trục đối xứng không?', type:'mc', opts:['Yes','No'], keep:true, ansText:c[2]?'Yes':'No', pic:symLine(c[0],c[1]), skill:'Trục đối xứng', exp:c[2]?'Fold along the line: both sides match exactly.':'Fold along the line: the sides do not match.', expVi:c[2]?'Gấp theo đường này hai bên trùng khít.':'Gấp theo đường này hai bên không trùng nhau.'}; },
+ ()=>{ const s=pick(['pentagon','hexagon','octagon','triangle','rectangle']); return {q:`Name this shape. It has [[${SIDES[s]}]] sides and [[${SIDES[s]}]] vertices. It is a [[${s}]].`, qVi:'Gọi tên hình và đếm số cạnh, số đỉnh.', pic:shape2d(s,C.green), skill:'Tên hình 2D', exp:`A ${s} has ${SIDES[s]} sides and ${SIDES[s]} vertices.`, expVi:`${SH2VI[s]} có ${SIDES[s]} cạnh và ${SIDES[s]} đỉnh.`, text:true}; },
+ ()=>({q:'A shape with 8 sides is called a …', qVi:'Hình có 8 cạnh gọi là gì?', type:'mc', opts:['octagon','hexagon','pentagon','polygon'], pic:shape2d('octagon',C.red), skill:'Tên hình 2D', exp:'octagon = 8 sides (octopus has 8 arms!).', expVi:'octagon = 8 cạnh (bạch tuộc octopus có 8 tay!).'}),
+],
+P:[
+ ()=>{ const list=shuffle([['heart',true],['star',true],['L',false],['arrowR',true],['flag',true],['circle',true]]).slice(0,5); return {q:'Tick the symmetrical pictures. Choose all.', qVi:'Chọn tất cả các hình đối xứng.', type:'multi', opts:list.map(x=>({h:shape2d(x[0],C.yellow,80),v:x[0]})), ans:list.map((x,i)=>x[1]?i:-1).filter(i=>i>=0), pics:true, skill:'Trục đối xứng', exp:'Only the L shape cannot be folded into two matching halves.', expVi:'Chỉ có hình chữ L không đối xứng.'}; },
+ ()=>{ const p=[[0,2],[1,1],[1,2],[2,0],[2,1],[2,2],[3,2]]; const mir=p.map(([r,c])=>[r,5-c]); return {q:'Join the shape with its matching symmetrical half. Which one is correct?', qVi:'Nối hình với nửa đối xứng phù hợp. Hình nào đúng?', type:'mc', opts:[gridShape(4,6,p,3,C.green,mir),gridShape(4,6,p,3,C.green,p.map(([r,c])=>[r,c+3])),gridShape(4,6,p,3,C.green,p.map(([r,c])=>[3-r,5-c]))], pics:true, pic:gridShape(4,6,p,3,C.green), skill:'Vẽ hình đối xứng', exp:'The matching half is a mirror image across the red line.', expVi:'Nửa còn lại là ảnh qua gương.'}; },
+ ()=>({q:'How many lines of symmetry does a square have? [[4]]', qVi:'Hình vuông có bao nhiêu trục đối xứng?', pic:S(120,120,`<rect x="15" y="15" width="90" height="90" fill="${C.yellow}" stroke="${C.ink}" stroke-width="3"/><g stroke="${C.red}" stroke-width="2.5" stroke-dasharray="6 4"><line x1="60" y1="5" x2="60" y2="115"/><line x1="5" y1="60" x2="115" y2="60"/><line x1="10" y1="10" x2="110" y2="110"/><line x1="110" y1="10" x2="10" y2="110"/></g>`,110), skill:'Trục đối xứng', exp:'A square has 4: vertical, horizontal and 2 diagonal lines.', expVi:'Hình vuông có 4 trục: dọc, ngang và 2 đường chéo.'}),
+],
+C:[
+ ()=>{ const p=[[0,1],[1,0],[1,1],[2,2],[3,1],[3,2]]; const mir=p.map(([r,c])=>[r,5-c]); return {q:'Complete the drawing to make it symmetrical. Which picture is correct? (Think about the shapes AND the colours.)', qVi:'Hoàn thành hình để đối xứng. Hình nào đúng? (chú ý cả vị trí lẫn màu)', type:'mc', opts:[gridShape(4,6,p,3,C.pink,mir),gridShape(4,6,p,3,C.pink,mir.map(([r,c])=>[r,c==5?3:c])),gridShape(4,6,p,3,C.pink,p.map(([r,c])=>[r,c+3]))], pics:true, pic:gridShape(4,6,p,3,C.pink), skill:'Vẽ hình đối xứng', exp:'Each coloured square must be the same distance from the mirror line on the other side.', expVi:'Mỗi ô màu phải cách đường gương một khoảng bằng nhau ở phía bên kia.'}; },
+ ()=>({q:'Which of these shapes has <b>no</b> line of symmetry?', qVi:'Hình nào KHÔNG có trục đối xứng?', type:'mc', opts:[{h:shape2d('L',C.blue,80),v:'L'},{h:shape2d('heart',C.blue,80),v:'heart'},{h:shape2d('hexagon',C.blue,80),v:'hex'},{h:shape2d('triangle',C.blue,80),v:'tri'}], pics:true, skill:'Trục đối xứng', exp:'The L shape cannot be folded into two matching halves.', expVi:'Hình chữ L không gấp được thành hai nửa trùng nhau.'}),
+]});
+
+/* ---------- 2.3 ---------- */
+wb('2.3',{
+F:[
+ ()=>{ const q=Math.random()<.5; return {q:'Is this shape divided into halves or quarters?', qVi:'Hình này được chia thành một nửa (halves) hay một phần tư (quarters)?', type:'mc', opts:['halves','quarters'], keep:true, ansText:q?'quarters':'halves', pic:fracShape(pick(['circle','square']),q?4:2,0), skill:'Phần bằng nhau', exp:'2 equal parts show halves. 4 equal parts show quarters.', expVi:'2 phần bằng nhau là một nửa; 4 phần bằng nhau là một phần tư.'}; },
+ ()=>({q:`${fracLabel(1,2)} + ${fracLabel(1,2)} = [[1]] whole`, qVi:'Hai nửa cộng lại bằng bao nhiêu?', pic:fracShape('square',2,1,true,C.green), skill:'Gọi tên phân số', exp:'Two halves make 1 whole.', expVi:'Hai nửa bằng 1 hình nguyên.'}),
+ ()=>({q:'Which shape has <b>one quarter</b> coloured?', qVi:'Hình nào được tô một phần tư?', type:'mc', opts:[fracShape('circle',4,1),fracShape('circle',2,1),fracShape('rect',4,1,false),fracShape('circle',4,3)], pics:true, skill:'Gọi tên phân số', exp:'One quarter = 1 of 4 EQUAL parts.', expVi:'Một phần tư = 1 trong 4 phần BẰNG NHAU.'}),
+ ()=>({q:'Which shape has <b>one half</b> coloured?', qVi:'Hình nào được tô một nửa?', type:'mc', opts:[fracShape('rect',2,1),fracShape('rect',2,1,false),fracShape('rect',4,1),fracShape('rect',3,1)], pics:true, skill:'Gọi tên phân số', exp:'One half = 1 of 2 EQUAL parts.', expVi:'Một nửa = 1 trong 2 phần bằng nhau.'}),
+],
+P:[
+ ()=>({q:`Show ${fracLabel(1,2)} + ${fracLabel(1,2)} = 1 whole. This shape has 8 squares. Half of the shape has [[4]] squares coloured. The whole shape has [[8]] squares.`, qVi:'Hình có 8 ô vuông. Một nửa hình có mấy ô? Cả hình có mấy ô?', pic:arrayDots(2,4,'🟦'), skill:'Gọi tên phân số', exp:'Half of 8 is 4. 4 + 4 = 8.', expVi:'Một nửa của 8 là 4.'}),
+ ()=>({q:'Tick the shapes that show quarters. Choose all.', qVi:'Chọn tất cả các hình được chia thành phần tư.', type:'multi', opts:[{h:fracShape('square',4,0),v:'a'},{h:fracShape('rect',4,0,false),v:'b'},{h:fracShape('circle',4,0),v:'c'},{h:fracShape('rect',4,0),v:'d'},{h:fracShape('circle',3,0),v:'e'}], ans:[0,2,3], pics:true, skill:'Phần bằng nhau', exp:'Quarters are 4 equal parts. One rectangle has 4 unequal parts and the circle has 3 parts.', expVi:'Phần tư là 4 phần BẰNG NHAU.'}),
+ ()=>({q:'A quarter of this chocolate bar is coloured. How many squares is that? [[2]]', qVi:'Một phần tư thanh sô-cô-la (8 ô) là mấy ô?', pic:arrayDots(2,4,'🟫'), skill:'Gọi tên phân số', exp:'8 squares ÷ 4 = 2 squares.', expVi:'8 : 4 = 2 ô.'}),
+],
+C:[
+ ()=>({q:'These biscuits have been broken in half. There are 10 halves. How many whole biscuits are there? [[5]]', qVi:'Các bánh quy bị bẻ đôi. Có 10 nửa. Có bao nhiêu chiếc bánh nguyên?', pic:`<div class="emo big">${'🍪'.repeat(10)}</div>`, skill:'Gọi tên phân số', exp:'2 halves make 1 whole biscuit. 10 halves = 5 biscuits.', expVi:'2 nửa = 1 bánh. 10 nửa = 5 bánh.'}),
+ ()=>{ const k=pick([[1,'one quarter'],[2,'one half'],[3,'three-quarters']]); return {q:'What fraction of the shape has been coloured?', qVi:'Phần tô màu là phân số nào?', type:'mc', opts:['one quarter','one half','three-quarters'], keep:true, ansText:k[1], pic:fracShape('square',4,k[0],true,C.purple), skill:'Gọi tên phân số', exp:`${k[0]} of 4 equal parts: ${k[1]}.`, expVi:`${k[0]} trong 4 phần bằng nhau.`}; },
+ ()=>({q:'What fraction of the large square is shaded?', qVi:'Bao nhiêu phần của hình vuông lớn được tô?', type:'mc', opts:['one half','one quarter','three-quarters'], pic:fracShape('tri',2,1), skill:'Gọi tên phân số', exp:'The shape is cut into 2 equal triangles; 1 is shaded: one half.', expVi:'Chia 2 phần bằng nhau, tô 1 phần: một nửa.'}),
+]});
+
+/* ---------- 3.1 ---------- */
+wb('3.1',{
+F:[
+ ()=>({q:'You measure a table with your finger, then with your hand. Why are the numbers different?', qVi:'Đo cái bàn bằng ngón tay rồi bằng bàn tay. Tại sao kết quả khác nhau?', type:'mc', opts:['A hand is wider than a finger, so you need fewer hands','The table changed size','Fingers are longer than hands'], pic:`<div class="emo huge">☝️ ✋</div>`, skill:'Đo không chuẩn', exp:'Bigger units → fewer of them. Smaller units → more of them.', expVi:'Đơn vị lớn thì cần ít lần đo hơn.'}),
+ ()=>({q:'A ruler is about 30 centimetres long. Which objects are <b>shorter</b> than 30 cm? Choose all.', qVi:'Thước kẻ dài khoảng 30 cm. Những vật nào NGẮN hơn 30 cm? Chọn tất cả.', type:'multi', opts:['a fork 🍴','your table','a straw 🥤','a skipping rope','your hand ✋'], ans:[0,2,4], skill:'Ước lượng độ dài', exp:'A fork, a straw and your hand are short. A table and a skipping rope are longer than 30 cm.', expVi:'Dĩa, ống hút, bàn tay ngắn hơn 30 cm.'}),
+ ()=>{ const b=R(5,12); return {q:`Measure the length of this object. [[${b}]] centimetres`, qVi:'Đo độ dài vật này.', pic:rulerBar(0,b,13,C.orange), skill:'Đo bằng thước', exp:`It starts at 0 and ends at ${b}.`, expVi:`Bắt đầu 0, kết thúc ${b}.`}; },
+],
+P:[
+ ()=>{ const o=pick([['the length of a swimming pool','metres'],['the length of a bar of chocolate','centimetres'],['the length of your shoe','centimetres'],['the length of 5 paper clips joined together','centimetres'],['the length of a bus','metres'],['the length of a worm','centimetres']]); return {q:`Would you measure ${o[0]} using centimetres or metres?`, qVi:'Con đo bằng xăng-ti-mét hay mét?', type:'mc', opts:['centimetres','metres'], keep:true, ansText:o[1], skill:'Đơn vị đo', exp:o[1]=='metres'?'It is long: use metres.':'It is short: use centimetres.', expVi:o[1]=='metres'?'Vật dài: dùng mét.':'Vật ngắn: dùng cm.'}; },
+ ()=>({q:'Use a ruler. How long is the pen? [[11]] cm', qVi:'Cây bút dài bao nhiêu cm?', pic:rulerBar(0,11,14,C.blue), skill:'Đo bằng thước', exp:'From 0 to 11: 11 cm.', expVi:'Từ 0 đến 11: 11 cm.'}),
+ ()=>({q:'Which thing is about 15 centimetres long?', qVi:'Vật nào dài khoảng 15 cm?', type:'mc', opts:['a pencil ✏️','a door 🚪','a bus 🚌','an ant 🐜'], skill:'Ước lượng độ dài', exp:'A pencil is about 15 cm long.', expVi:'Bút chì dài khoảng 15 cm.'}),
+],
+C:[
+ ()=>{ const a=R(2,5), b=a+R(4,8); return {q:`Estimate and then measure the length of the bar. [[${b-a}]] cm`, qVi:'Đo thanh màu (chú ý không bắt đầu từ 0).', pic:rulerBar(a,b,14,C.purple), skill:'Đo bằng thước', exp:`${b} − ${a} = ${b-a} cm.`, expVi:`${b} − ${a} = ${b-a} cm.`}; },
+ ()=>({q:'Write these lengths in order, starting with the shortest.', qVi:'Sắp xếp các độ dài từ NGẮN nhất.', type:'order', items:['30 cm','39 cm','50 cm','70 cm'], skill:'So sánh độ dài', exp:'30 < 39 < 50 < 70.', expVi:'30 < 39 < 50 < 70.'}),
+ ()=>({q:'Write these lengths in order, starting with the shortest.', qVi:'Sắp xếp từ ngắn nhất.', type:'order', items:['77 cm','78 cm','87 cm','88 cm'], skill:'So sánh độ dài', exp:'Compare the tens first, then the ones.', expVi:'So sánh hàng chục trước rồi hàng đơn vị.'}),
+ ()=>({q:'Which is longer: 1 metre or 90 centimetres?', qVi:'1 mét hay 90 cm dài hơn?', type:'mc', opts:['1 metre','90 centimetres','They are the same'], skill:'Đơn vị đo', exp:'1 metre = 100 cm, which is more than 90 cm.', expVi:'1 m = 100 cm > 90 cm.'}),
+]});
+
+/* ---------- 3.2 ---------- */
+wb('3.2',{
+F:[
+ ()=>{ const b=R(3,13); return {q:`Use a ruler to measure the line. [[${b}]] cm`, qVi:'Dùng thước đo đoạn thẳng.', pic:rulerBar(0,b,14,C.red), skill:'Đo bằng thước', exp:'Put 0 at the start of the line.', expVi:'Đặt số 0 ở đầu đoạn thẳng.'}; },
+ ()=>({q:'The length of an object is usually … than its width.', qVi:'Chiều dài của vật thường … hơn chiều rộng.', type:'mc', opts:['longer','shorter'], keep:true, ansText:'longer', skill:'Đơn vị đo', exp:'Length is along the longest side; width is the shortest side.', expVi:'Chiều dài là cạnh dài nhất.'}),
+],
+P:[
+ ()=>{ const o=pick([['a pencil case','centimetres'],['a bus','metres'],['a pencil','centimetres'],['a wall','metres'],['a book','centimetres'],['a car','metres']]); return {q:`Would you use metres or centimetres to measure ${o[0]}?`, qVi:'Dùng mét hay xăng-ti-mét?', type:'mc', opts:['metres','centimetres'], keep:true, ansText:o[1], skill:'Đơn vị đo', exp:o[1]=='metres'?'Long objects: metres.':'Short objects: centimetres.', expVi:'Vật dài dùng mét, vật ngắn dùng cm.'}; },
+ ()=>({q:'Use words like <i>just over</i> and <i>just under</i>. A room is 395 cm long. That is …', qVi:'Căn phòng dài 395 cm. Như vậy là …', type:'mc', opts:['just under 4 metres','just over 4 metres','exactly 3 metres'], skill:'Đơn vị đo', exp:'4 metres = 400 cm. 395 is a little less: just under 4 metres.', expVi:'4 m = 400 cm. 395 cm hơi ít hơn: "just under 4 metres".'}),
+],
+C:[
+ ()=>{ const a=R(6,13), b=R(3,a-2); return {q:`Which line is longer? [[red]] How much longer? [[${a-b}]] cm`, qVi:'Đoạn nào dài hơn (red/blue)? Dài hơn bao nhiêu cm?', pic:rulerBar(0,a,14,C.red)+rulerBar(0,b,14,C.blue), skill:'Cộng, trừ độ dài', exp:`Red ${a} cm, blue ${b} cm. ${a} − ${b} = ${a-b}.`, expVi:`Đỏ ${a} cm, xanh ${b} cm. Hơn ${a-b} cm.`, hint:'red / blue'}; },
+ ()=>({q:'The shaded rectangle is …', qVi:'Hình chữ nhật được tô dài bao nhiêu?', type:'mc', opts:['6 centimetres','7 centimetres'], keep:true, ansText:'6 centimetres', pic:rulerBar(2,8,12,C.grey), skill:'Đo bằng thước', exp:'From 2 to 8 is 6 cm (not 8!).', expVi:'Từ 2 đến 8 là 6 cm (không phải 8).'}),
+ ()=>{ const p=pick([['The height of an apple is about …',['10 centimetres','60 centimetres','1 metre','3 centimetres']],['The height of a strawberry is about …',['5 centimetres','25 centimetres','1 metre','15 centimetres']],['The length of a pencil is about …',['20 centimetres','1 metre','120 centimetres']],['The height of a tree is about …',['5 metres','30 centimetres','100 centimetres']],['The length of a plaster is about …',['5 centimetres','55 centimetres','1 metre']]]); return {q:p[0], qVi:'Chọn ước lượng hợp lý nhất.', type:'mc', opts:p[1], skill:'Ước lượng độ dài', exp:`The best estimate is ${p[1][0]}.`, expVi:`Ước lượng hợp lý: ${p[1][0]}.`}; },
+]});
+
+/* ---------- 4.1 ---------- */
+wb('4.1',{
+F:[
+ ()=>({q:"Arun says: 'If I spin a 6-number spinner 12 times, it will land on each number twice.' Is he correct?", qVi:'Arun nói: "Quay vòng quay 6 số 12 lần thì mỗi số sẽ xuất hiện đúng 2 lần." Đúng không?', type:'mc', opts:['Not always — the results are random','Yes, always','No, it lands on 1 every time'], pic:spinner(['red','blue','yellow','green','purple','orange']), skill:'Khả năng xảy ra', exp:'Each number could come up, but we cannot be sure how many times. You can check by doing the experiment and making a tally chart.', expVi:'Kết quả là ngẫu nhiên, không chắc mỗi số đúng 2 lần.'}),
+ ()=>{ const s=pick([['circle','Curved'],['square','Not curved'],['triangle','Not curved'],['semicircle','Curved'],['oval','Curved']]); return {q:'Which box of the Carroll diagram does this shape go in?', qVi:'Hình này xếp vào ô nào?', type:'mc', opts:['Curved','Not curved'], keep:true, ansText:s[1], pic:shape2d(s[0],C.teal)+carroll(['Curved','Not curved'],null,['',' ']), skill:'Sơ đồ Carroll', exp:`A ${s[0]} ${s[1]=='Curved'?'has a curved side':'has only straight sides'}.`, expVi:s[1]=='Curved'?'Có cạnh cong.':'Chỉ có cạnh thẳng.'}; },
+],
+P:[
+ ()=>{ const n=R(8,19); return {q:`Count the starfish. Use tally marks. How many are there? [[${n}]]`, qVi:'Đếm sao biển. Có bao nhiêu con?', pic:emojis('⭐',n,6), skill:'Đọc vạch kiểm đếm', exp:`There are ${n}: ${Math.floor(n/5)} groups of 5 and ${n%5} more.`, expVi:`Có ${n} con.`}; },
+ ()=>{ const w=[16,20,23,21]; const k=pick([[`How many bikes are sold in the 4th week? [[21]]`,'Tuần 4 bán bao nhiêu xe?','Week 4: 4 fives and 1 = 21.'],[`How many bikes are sold in the 1st week? [[16]]`,'Tuần 1 bán bao nhiêu xe?','Week 1: 3 fives and 1 = 16.'],[`How many bikes are sold altogether in the 2nd and 3rd weeks? [[43]]`,'Tuần 2 và tuần 3 bán tổng cộng bao nhiêu xe?','20 + 23 = 43.'],[`How many bikes are sold in the 4 weeks altogether? [[80]]`,'Cả 4 tuần bán bao nhiêu xe?','16 + 20 + 23 + 21 = 80.']]); return {q:'This tally chart shows the bikes a shop sold in 4 weeks. '+k[0], qVi:'Bảng kiểm đếm số xe đạp cửa hàng bán trong 4 tuần. '+k[1], pic:table(['Week','Bikes sold'],w.map((v,i)=>['Week '+(i+1),tallyHTML(v)])), skill:'Đọc bảng kiểm đếm', exp:k[2], expVi:k[2]}; },
+ ()=>{ const n=pick([[3,'Has 4 sides'],[4,'Has 4 sides'],[5,'Does not have 4 sides'],[6,'Does not have 4 sides']]); const sh={3:'triangle',4:'rectangle',5:'pentagon',6:'hexagon'}[n[0]]; return {q:'Sort the shape in the Carroll diagram.', qVi:'Xếp hình vào sơ đồ Carroll.', type:'mc', opts:['Has 4 sides','Does not have 4 sides'], keep:true, ansText:n[0]==4?'Has 4 sides':'Does not have 4 sides', pic:shape2d(sh,C.pink), skill:'Sơ đồ Carroll', exp:`A ${sh} has ${n[0]} sides.`, expVi:`${SH2VI[sh]} có ${n[0]} cạnh.`}; },
+],
+C:[
+ ()=>({q:'Carroll diagram “Has legs / Has no legs”. Which animals go in <b>Has legs</b>? Choose all.', qVi:'Những con vật nào xếp vào ô "Có chân"? Chọn tất cả.', type:'multi', opts:['dolphin 🐬','penguin 🐧','eagle 🦅','tiger 🐯','fish 🐟','tortoise 🐢','snake 🐍','bee 🐝'], ans:[1,2,3,5,7], skill:'Sơ đồ Carroll', exp:'Penguin, eagle, tiger, tortoise and bee have legs. Dolphin, fish and snake have no legs.', expVi:'Chim cánh cụt, đại bàng, hổ, rùa, ong có chân. Cá heo, cá, rắn không có chân.'}),
+ ()=>({q:'You spin a spinner 12 times and get: red 4, blue 5, green 3. Which colour came up most? [[blue]] How many spins were not red? [[8]]', qVi:'Quay 12 lần: đỏ 4, xanh dương 5, xanh lá 3. Màu nào nhiều nhất? Bao nhiêu lần không ra màu đỏ?', pic:table(['Colour','Tally'],[['red',tallyHTML(4)],['blue',tallyHTML(5)],['green',tallyHTML(3)]]), skill:'Đọc bảng kiểm đếm', exp:'Blue has 5. Not red: 5 + 3 = 8 (or 12 − 4).', expVi:'Xanh dương 5. Không phải đỏ: 12 − 4 = 8.', hint:'red / blue / green'}),
+]});
+
+/* ---------- 5.1 ---------- */
+wb('5.1',{
+F:[
+ ()=>({q:'How many counters are there? [[13]]', qVi:'Có bao nhiêu chấm tròn?', pic:tenFrame(10,3), skill:'Cặp số tròn chục', exp:'One full ten frame is 10, plus 3 = 13.', expVi:'Một khung đầy là 10, thêm 3 = 13.'}),
+ ()=>({q:'5 counters are on the ten frame. How many more make 10? [[5]]', qVi:'Có 5 chấm. Cần thêm mấy chấm để được 10?', pic:tenFrame(5), skill:'Cặp số tròn chục', exp:'5 + 5 = 10.', expVi:'5 + 5 = 10.'}),
+ ()=>({q:'a 25 + 4 = [[29]] &nbsp; b 42 + 5 = [[47]] &nbsp; c 51 + 7 = [[58]] &nbsp; d 33 + 6 = [[39]]', qVi:'Tính tổng.', pic:numberLine({min:20,max:60,step:1,label:10,jumps:[{a:23,b:28,t:'+5'}]}), skill:'Cộng đơn vị', exp:'Add the ones. The tens have not changed.', expVi:'Cộng hàng đơn vị, hàng chục giữ nguyên.'}),
+ ()=>({q:'a 28 + 10 = [[38]] &nbsp; b 32 + 10 = [[42]] &nbsp; c 54 + 20 = [[74]] &nbsp; d 41 + 20 = [[61]]', qVi:'Tính tổng.', skill:'Cộng số chục', exp:'Add the tens. The ones have not changed.', expVi:'Cộng hàng chục, hàng đơn vị giữ nguyên.'}),
+ ()=>({q:'a 5 + 5 + 5 = [[15]] &nbsp; b 6 + 5 + 4 = [[15]] &nbsp; c 8 + 4 + 2 = [[14]]', qVi:'Tìm tổng của ba số.', skill:'Cộng 3 số', exp:'Look for 10: 6 + 4 = 10, then + 5 = 15. 8 + 2 = 10, then + 4 = 14.', expVi:'Tìm cặp bằng 10 trước: 6 + 4 = 10; 8 + 2 = 10.'}),
+],
+P:[
+ ()=>({q:'a 64 + 5 = [[69]] &nbsp; b 31 + 8 = [[39]] &nbsp; c 84 + 3 = [[87]] &nbsp; d 92 + 6 = [[98]]', qVi:'Tính tổng.', skill:'Cộng đơn vị', exp:'Add the ones only.', expVi:'Chỉ cộng hàng đơn vị.'}),
+ ()=>({q:'a 89 + 10 = [[99]] &nbsp; b 26 + 20 = [[46]] &nbsp; c 68 + 20 = [[88]] &nbsp; d 77 + 10 = [[87]]', qVi:'Tính tổng.', skill:'Cộng số chục', exp:'Add the tens only.', expVi:'Chỉ cộng hàng chục.'}),
+ ()=>({q:'8 + 2 = 10. Use it to complete:<br>18 + [[2]] = 20 &nbsp; 8 + [[12]] = 20 &nbsp; 80 + [[20]] = 100', qVi:'Dùng 8 + 2 = 10 để hoàn thành các phép tính.', skill:'Cặp số tròn chục', exp:'Add 10 to one number and the total → 20. Change ones to tens → 100.', expVi:'Thêm 10 vào một số và tổng → 20; đổi đơn vị thành chục → 100.'}),
+ ()=>({q:'Use the number bonds for 6 to show complements of 60:<br>10 + [[50]] = 60 &nbsp; 20 + [[40]] = 60 &nbsp; 30 + [[30]] = 60 &nbsp; 40 + [[20]] = 60', qVi:'Dùng các cặp số cộng bằng 6 để viết các cặp số tròn chục cộng bằng 60.', skill:'Cặp số tròn chục', exp:'1 + 5 = 6 so 10 + 50 = 60, and so on.', expVi:'1 + 5 = 6 nên 10 + 50 = 60…'}),
+ ()=>({q:'a 4 + 6 + 7 = [[17]] &nbsp; b 2 + 9 + 5 = [[16]] &nbsp; c 4 + 5 + 8 = [[17]]', qVi:'Tìm tổng ba số.', skill:'Cộng 3 số', exp:'4 + 6 = 10, + 7 = 17. 9 + 5 = 14, + 2 = 16. 4 + 5 = 9, + 8 = 17.', expVi:'Tìm cặp dễ cộng trước.'}),
+],
+C:[
+ ()=>({q:'a 58 + 20 = [[78]] &nbsp; b 62 + 7 = [[69]] &nbsp; c 46 + 20 = [[66]] &nbsp; d 83 + 6 = [[89]] &nbsp; e 55 + 30 = [[85]] &nbsp; f 71 + 8 = [[79]]', qVi:'Tính tổng.', skill:'Cộng số chục', exp:'Decide: are you adding ones or tens?', expVi:'Xác định đang cộng hàng đơn vị hay hàng chục.'}),
+ ()=>({q:'Sofia writes 4 + 6 = 10 and 40 + 60 = 100. Which complement of 20 could she use? 14 + [[6]] = 20', qVi:'Sofia viết 4 + 6 = 10 và 40 + 60 = 100. Cặp số cộng bằng 20 nào bạn ấy có thể dùng?', skill:'Cặp số tròn chục', exp:'4 + 6 = 10, so 14 + 6 = 20 (or 4 + 16 = 20).', expVi:'14 + 6 = 20.'}),
+ ()=>({q:'Complements of 90 using tens numbers:<br>10 + [[80]] = 90 &nbsp; 20 + [[70]] = 90 &nbsp; 30 + [[60]] = 90 &nbsp; 40 + [[50]] = 90', qVi:'Các cặp số tròn chục cộng bằng 90.', skill:'Cặp số tròn chục', exp:'1 + 8, 2 + 7, 3 + 6, 4 + 5 make 9, so the tens make 90.', expVi:'1 + 8 = 9 nên 10 + 80 = 90…'}),
+ ()=>({q:'a 7 + 3 + 8 = [[18]] &nbsp; b 5 + 6 + 7 + 8 = [[26]] &nbsp; c 1 + 4 + 5 + 8 + 9 = [[27]]', qVi:'Tìm tổng (tìm các cặp bằng 10 hoặc gần 10).', skill:'Cộng 3 số', exp:'7 + 3 = 10, + 8 = 18. 5 + 6 + 7 + 8 = 26. 1 + 9 = 10, 4 + 5 = 9, + 8 → 27.', expVi:'Tìm các cặp bằng 10 trước.'}),
+ ()=>({q:'Magic square: write 1 to 9 so every row, column and diagonal adds to 15. Which number must go in the <b>centre</b>? [[5]]', qVi:'Hình vuông kỳ diệu: điền 1–9 để mỗi hàng, cột, đường chéo có tổng 15. Số nào ở chính giữa?', pic:table(null,[['2','7','6'],['9','?','1'],['4','3','8']],'big'), skill:'Cộng 3 số', exp:'9 + 5 + 1 = 15 and 7 + 5 + 3 = 15, so the centre is 5.', expVi:'9 + 5 + 1 = 15 nên ô giữa là 5.'}),
+]});
+
+/* ---------- 5.2 ---------- */
+wb('5.2',{
+F:[
+ ()=>({q:'a 39 − 8 = [[31]] &nbsp; b 48 − 5 = [[43]] &nbsp; c 77 − 5 = [[72]] &nbsp; d 59 − 7 = [[52]]', qVi:'Tìm số còn thiếu.', skill:'Trừ đơn vị', exp:'Subtract the ones. The tens have not changed.', expVi:'Trừ hàng đơn vị, hàng chục giữ nguyên.'}),
+ ()=>({q:'a 24 − 10 = [[14]] &nbsp; b 41 − 10 = [[31]] &nbsp; c 52 − 20 = [[32]] &nbsp; d 38 − 20 = [[18]]', qVi:'Tìm số còn thiếu.', skill:'Trừ số chục', exp:'Subtract the tens. The ones stay the same.', expVi:'Trừ hàng chục, hàng đơn vị giữ nguyên.'}),
+ ()=>({q:'A farmer has 6 ducks and 22 ducklings. How many ducks and ducklings does she have altogether?<br>[[add|+]] → answer [[28]]', qVi:'Bác nông dân có 6 con vịt và 22 con vịt con. Tất cả có bao nhiêu con? Cộng (add) hay trừ (subtract)?', hint:'add / subtract', pic:`<div class="emo big">🦆×6 🐥×22</div>`, skill:'Toán có lời văn', exp:'Altogether means add: 22 + 6 = 28.', expVi:'"Altogether" là cộng: 22 + 6 = 28.'}),
+ ()=>({q:'There are 37 elephants in a herd. 5 of them are calves. How many adult elephants are there?<br>[[subtract|-|−]] → answer [[32]]', qVi:'Đàn voi có 37 con, 5 con là voi con. Có bao nhiêu voi trưởng thành?', hint:'add / subtract', skill:'Toán có lời văn', exp:'Take away the calves: 37 − 5 = 32.', expVi:'37 − 5 = 32.'}),
+ ()=>({q:'Which calculation does <b>not</b> have the same answer as the others?', qVi:'Phép tính nào có kết quả KHÁC các phép tính còn lại?', type:'mc', opts:['29 − 4','27 − 3','14 + 10','34 − 10'], skill:'Kiểm tra phép tính', exp:'27 − 3 = 24, 14 + 10 = 24, 34 − 10 = 24, but 29 − 4 = 25.', expVi:'Các phép kia bằng 24, còn 29 − 4 = 25.'}),
+],
+P:[
+ ()=>({q:'a 57 − 4 = [[53]] &nbsp; b 88 − 3 = [[85]] &nbsp; c 69 − 5 = [[64]]', qVi:'Tìm số còn thiếu.', skill:'Trừ đơn vị', exp:'Subtract the ones.', expVi:'Trừ hàng đơn vị.'}),
+ ()=>({q:'a 57 − 10 = [[47]] &nbsp; b 94 − 20 = [[74]] &nbsp; c 66 − 30 = [[36]] &nbsp; d 89 − 30 = [[59]] &nbsp; e 45 − 20 = [[25]]', qVi:'Tìm số còn thiếu.', skill:'Trừ số chục', exp:'Subtract the tens.', expVi:'Trừ hàng chục.'}),
+ ()=>({q:'There are 42 zebras in a herd. 20 of them are foals. How many adult zebras? [[22]]', qVi:'Đàn ngựa vằn có 42 con, 20 con là ngựa con. Có bao nhiêu ngựa trưởng thành?', skill:'Toán có lời văn', exp:'42 − 20 = 22.', expVi:'42 − 20 = 22.'}),
+ ()=>({q:'There are 35 small balls and 30 large balls in the cupboard. How many balls altogether? [[65]]', qVi:'Tủ có 35 quả bóng nhỏ và 30 quả bóng lớn. Tất cả bao nhiêu quả?', skill:'Toán có lời văn', exp:'35 + 30 = 65.', expVi:'35 + 30 = 65.'}),
+ ()=>({q:'Tick the correct calculations. Choose all that are correct.', qVi:'Chọn các phép tính ĐÚNG.', type:'multi', opts:['45 − 2 = 43','52 − 40 = 12','32 + 5 = 37','99 − 8 = 19'], ans:[0,1,2], skill:'Kiểm tra phép tính', exp:'99 − 8 = 91, not 19. The others are correct.', expVi:'99 − 8 = 91, không phải 19.'}),
+ ()=>({q:"Sofia is thinking of a number. When she adds 7, she gets 59. What is Sofia's number? [[52]]", qVi:'Sofia nghĩ một số. Cộng thêm 7 thì được 59. Số đó là số nào?', pic:numberLine({min:50,max:60,step:1,label:5,jumps:[{a:52,b:59,t:'+7'}]}), skill:'Phép tính ngược', exp:'Work backwards: 59 − 7 = 52.', expVi:'Tính ngược: 59 − 7 = 52.'}),
+],
+C:[
+ ()=>({q:'There are 68 strawberries in the garden. Arun eats 5. How many are left? [[63]]', qVi:'Vườn có 68 quả dâu. Arun ăn 5 quả. Còn lại bao nhiêu?', skill:'Toán có lời văn', exp:'68 − 5 = 63.', expVi:'68 − 5 = 63.'}),
+ ()=>({q:'Zara collects 32 shells and 30 stones. How many altogether? [[62]]', qVi:'Zara nhặt 32 vỏ sò và 30 viên đá. Tất cả bao nhiêu?', skill:'Toán có lời văn', exp:'32 + 30 = 62.', expVi:'32 + 30 = 62.'}),
+ ()=>({q:'Write the missing digit: 6☐ + 30 = 98 → the missing digit is [[8]]', qVi:'Tìm chữ số còn thiếu.', skill:'Phép tính ngược', exp:'98 − 30 = 68, so the digit is 8.', expVi:'98 − 30 = 68.'}),
+ ()=>({q:'Write the missing digit: 7☐ − 10 = 66 → the missing digit is [[6]]', qVi:'Tìm chữ số còn thiếu.', skill:'Phép tính ngược', exp:'66 + 10 = 76.', expVi:'66 + 10 = 76.'}),
+ ()=>({q:'I am thinking of a number. When I add 6 and subtract 30, I get 17. What is my number? [[41]]', qVi:'Tôi nghĩ một số. Cộng 6 rồi trừ 30 được 17. Số đó là bao nhiêu?', skill:'Phép tính ngược', exp:'Work backwards: 17 + 30 = 47, 47 − 6 = 41.', expVi:'Tính ngược: 17 + 30 = 47; 47 − 6 = 41.'}),
+]});
+
+/* ---------- 5.3 ---------- */
+wb('5.3',{
+F:[
+ ()=>({q:'How many shoes? 5 children each wear 2 shoes. [[10]]', qVi:'5 bạn, mỗi bạn đi 2 chiếc giày. Có bao nhiêu chiếc giày?', pic:`<div class="emo big">👟👟 👟👟 👟👟 👟👟 👟👟</div>`, skill:'Nhân là cộng lặp', exp:'2 + 2 + 2 + 2 + 2 = 10, or 5 × 2 = 10.', expVi:'5 × 2 = 10.'}),
+ ()=>({q:'How many legs on 3 birds? 2 + 2 + 2 = [[6]] → 3 × 2 = 6', qVi:'3 con chim có bao nhiêu chân?', pic:`<div class="emo big">🐦 🐦 🐦</div>`, skill:'Nhân là cộng lặp', exp:'Each bird has 2 legs.', expVi:'Mỗi con chim có 2 chân.'}),
+ ()=>({q:'How many toes on 4 feet? [[20]] → 4 × [[5]] = 20', qVi:'4 bàn chân có bao nhiêu ngón?', pic:`<div class="emo big">🦶🦶🦶🦶</div>`, skill:'Nhân là cộng lặp', exp:'Each foot has 5 toes: 5 + 5 + 5 + 5 = 20.', expVi:'Mỗi bàn chân 5 ngón: 4 × 5 = 20.'}),
+ ()=>({q:'Write the repeated addition and multiplication for this number line.<br>2 + 2 + 2 + 2 + 2 + 2 = [[12]] → [[6]] × 2 = 12', qVi:'Viết phép cộng lặp và phép nhân.', pic:numberLine({min:0,max:20,step:1,label:2,jumps:[0,2,4,6,8,10].map(a=>({a,b:a+2}))}), skill:'Nhân là cộng lặp', exp:'6 jumps of 2 = 12.', expVi:'6 bước nhảy 2 = 12.'}),
+ ()=>({q:'Write a multiplication sentence for the array. [[5]] × [[4]] = [[20]]', qVi:'Viết phép nhân cho mảng.', pic:arrayDots(5,4,'🟢'), anyOrder:[[0,1]], skill:'Mảng (array)', exp:'5 rows of 4 = 20.', expVi:'5 hàng, mỗi hàng 4 = 20.'}),
+ ()=>{ const n=R(1,10); return {q:`The multiplication table for 2: 2 × ${n} = [[${2*n}]]`, qVi:'Bảng nhân 2.', skill:'Bảng nhân 1, 2, 5, 10', exp:`Count in twos ${n} times.`, expVi:`Đếm thêm 2, ${n} lần.`}; },
+],
+P:[
+ ()=>({q:'+5 +5 +5 +5 +5 → 5 + 5 + 5 + 5 + 5 = [[25]] → [[5]] × 5 = 25', qVi:'Viết phép cộng lặp và phép nhân.', pic:numberLine({min:0,max:50,step:5,label:10,jumps:[0,5,10,15,20].map(a=>({a,b:a+5,t:'+5'}))}), skill:'Nhân là cộng lặp', exp:'5 jumps of 5 = 25.', expVi:'5 bước nhảy 5 = 25.'}),
+ ()=>({q:'10 + 10 + 10 = 30 → [[3]] × 10 = 30<br>5 × 8 = 40 → 5 + 5 + 5 + 5 + 5 + 5 + 5 + 5 = [[40]]<br>5 + 5 + 5 + 5 + 5 + 5 = 30 → [[6]] × 5 = 30', qVi:'Viết các câu còn thiếu.', skill:'Nhân là cộng lặp', exp:'Count how many times the number is added.', expVi:'Đếm số lần cộng.'}),
+ ()=>({q:'Draw an array for 2 × 9 = 18. Which array is correct?', qVi:'Mảng nào đúng cho 2 × 9 = 18?', type:'mc', opts:[arrayDots(2,9,'🔵'),arrayDots(2,8,'🔵'),arrayDots(3,6,'🔵')], pics:true, wide:true, skill:'Mảng (array)', exp:'2 rows of 9.', expVi:'2 hàng, mỗi hàng 9.'}),
+ ()=>({q:'10 + 10 = 20 → 2 × 10 = [[20]] &nbsp; double 1 is [[2]] &nbsp; 2 × 2 = [[4]] → double [[2]] is 4', qVi:'Hoàn thành.', skill:'Gấp đôi', exp:'Multiplying by 2 is doubling.', expVi:'Nhân 2 là gấp đôi.'}),
+ ()=>({q:'Counting stick: the 3rd number when counting in twos from 0 = [[6]]; the 1st number in fives = [[5]]; the 4th number in tens = [[40]]', qVi:'Que đếm: số thứ 3 khi đếm thêm 2 từ 0; số thứ 1 khi đếm thêm 5; số thứ 4 khi đếm thêm 10.', skill:'Đếm theo 2, 5, 10', exp:'2, 4, 6 → 6. 5 → 5. 10, 20, 30, 40 → 40.', expVi:'3 × 2 = 6; 1 × 5 = 5; 4 × 10 = 40.'}),
+],
+C:[
+ ()=>({q:'Complete the multiplication grid.<br>× 2 row: 2 × 5 = [[10]] &nbsp; × 5 row: 5 × 5 = [[25]] &nbsp; × 10 row: 10 × 5 = [[50]] &nbsp; 10 × 10 = [[100]]', qVi:'Hoàn thành bảng nhân.', pic:table(['×','1','2','5','10'],[['1','1','2','5','10'],['2','2','4','?','20'],['5','5','10','?','50'],['10','10','20','?','?']]), skill:'Bảng nhân 1, 2, 5, 10', exp:'Read the row and the column and multiply.', expVi:'Nhân số ở hàng với số ở cột.'}),
+ ()=>({q:'The 9th number counting in fives from 0 = [[45]]; the 6th in tens = [[60]]; the 9th in twos = [[18]]', qVi:'Số thứ 9 khi đếm thêm 5; số thứ 6 khi đếm thêm 10; số thứ 9 khi đếm thêm 2.', skill:'Đếm theo 2, 5, 10', exp:'9 × 5 = 45, 6 × 10 = 60, 9 × 2 = 18.', expVi:'9 × 5 = 45; 6 × 10 = 60; 9 × 2 = 18.'}),
+ ()=>({q:'Multiplication pyramid: multiply numbers next to each other to find the number above. Bottom row: 1, 2, 5. Middle row: [[2]], [[10]]. Top: [[20]]', qVi:'Tháp nhân: nhân hai số cạnh nhau để được số phía trên.', pic:`<div class="emo">&nbsp;&nbsp;&nbsp;&nbsp;?<br>&nbsp;&nbsp;? &nbsp; ?<br>1 &nbsp; 2 &nbsp; 5</div>`, skill:'Bảng nhân 1, 2, 5, 10', exp:'1 × 2 = 2, 2 × 5 = 10, 2 × 10 = 20.', expVi:'1 × 2 = 2; 2 × 5 = 10; 2 × 10 = 20.'}),
+]});
+
+/* ---------- 5.4 ---------- */
+wb('5.4',{
+F:[
+ ()=>({q:'Use repeated subtraction. 20 ÷ 5 = [[4]]', qVi:'Dùng trừ lặp lại.', pic:numberLine({min:0,max:20,step:1,label:5,jumps:[20,15,10,5].map(a=>({a,b:a-5,t:'−5'}))}), skill:'Chia là trừ lặp', exp:'Take away 5 from 20 until 0: 4 jumps.', expVi:'Bớt 5 từ 20 đến 0: 4 lần.'}),
+ ()=>({q:'Use the array. 20 ÷ 10 = [[2]] and 20 ÷ 2 = [[10]]', qVi:'Dùng mảng để chia.', pic:arrayDots(2,10,'🌼'), skill:'Chia nhóm, chia đều', exp:'2 rows of 10. 20 ÷ 10 = 2; 20 ÷ 2 = 10.', expVi:'2 hàng, mỗi hàng 10.'}),
+ ()=>({q:'Each column has 5 flowers. There are 6 columns. 30 ÷ 5 = [[6]]', qVi:'Mỗi cột có 5 bông hoa. Có 6 cột. 30 : 5 = ?', pic:arrayDots(5,6,'🌷'), skill:'Chia nhóm, chia đều', exp:'6 groups of 5 = 30.', expVi:'6 nhóm 5 = 30.'}),
+],
+P:[
+ ()=>({q:'50 ÷ 5 = [[10]]', qVi:'Dùng trừ lặp lại.', pic:numberLine({min:0,max:50,step:5,label:10,jumps:Array.from({length:10},(_,i)=>({a:50-i*5,b:45-i*5}))}), skill:'Chia là trừ lặp', exp:'10 jumps of 5 from 50 to 0.', expVi:'10 bước nhảy 5.'}),
+ ()=>({q:'Which number sentence matches this array of 45 cars in rows of 9?', qVi:'Phép tính nào phù hợp với mảng 45 ô tô (mỗi hàng 9 xe)?', type:'mc', opts:['45 ÷ 5 = 9','45 ÷ 9 = 9','45 ÷ 5 = 5'], pic:arrayDots(5,9,'🚗'), skill:'Chia nhóm, chia đều', exp:'5 rows of 9 cars. 45 ÷ 5 = 9.', expVi:'5 hàng, mỗi hàng 9 xe.'}),
+ ()=>({q:'a 12 ÷ 2 = [[6]] &nbsp; b 40 ÷ 5 = [[8]] &nbsp; c 70 ÷ 10 = [[7]]', qVi:'Tính.', skill:'Chia nhóm, chia đều', exp:'6 × 2 = 12; 8 × 5 = 40; 7 × 10 = 70.', expVi:'Dùng bảng nhân.'}),
+ ()=>({q:'Marcus rolls a dice 3 times. He gets a 2 each time. What is his total score?<br>[[multiply|x|×]] → [[6]]', qVi:'Marcus gieo xúc xắc 3 lần, lần nào cũng ra 2. Tổng điểm là bao nhiêu? Nhân hay chia?', hint:'multiply / divide', pic:`<div class="emo big">🎲⚁ 🎲⚁ 🎲⚁</div>`, skill:'Toán có lời văn', exp:'3 × 2 = 6.', expVi:'3 × 2 = 6.'}),
+ ()=>({q:'18 children want to play football. They make 2 equal teams. How many in each team?<br>[[divide|÷|/]] → [[9]]', qVi:'18 bạn chơi bóng, chia thành 2 đội bằng nhau. Mỗi đội mấy bạn?', hint:'multiply / divide', skill:'Toán có lời văn', exp:'18 ÷ 2 = 9.', expVi:'18 : 2 = 9.'}),
+],
+C:[
+ ()=>({q:'Draw a ring around the two correct number sentences for this array.', qVi:'Chọn HAI phép tính đúng cho mảng này.', type:'multi', opts:['30 ÷ 6 = 5','30 ÷ 5 = 6','30 ÷ 6 = 6','30 ÷ 3 = 5'], ans:[0,1], pic:arrayDots(5,6,'🔴'), skill:'Chia nhóm, chia đều', exp:'5 rows of 6 = 30. So 30 ÷ 6 = 5 and 30 ÷ 5 = 6.', expVi:'5 hàng 6 = 30.'}),
+ ()=>({q:'Egg cartons hold 10 eggs. There are 100 eggs. How many cartons? [[10]]', qVi:'Mỗi hộp đựng 10 quả trứng. Có 100 quả. Cần bao nhiêu hộp?', pic:`<div class="emo big">🥚</div>`, skill:'Toán có lời văn', exp:'100 ÷ 10 = 10.', expVi:'100 : 10 = 10.'}),
+ ()=>({q:'How many wheels on 9 bicycles? [[18]]', qVi:'9 chiếc xe đạp có bao nhiêu bánh?', pic:`<div class="emo big">🚲×9</div>`, skill:'Toán có lời văn', exp:'9 × 2 = 18.', expVi:'9 × 2 = 18.'}),
+ ()=>({q:'Which problem matches 60 ÷ 10 = 6?', qVi:'Bài toán nào phù hợp với 60 : 10 = 6?', type:'mc', opts:['60 pencils are put in boxes of 10. How many boxes?','There are 60 pencils and 10 more. How many?','10 boxes have 60 pencils each. How many?'], skill:'Toán có lời văn', exp:'Grouping 60 into tens gives 6 groups.', expVi:'Chia 60 thành các nhóm 10 được 6 nhóm.'}),
+]});
+
+/* ================= WORKBOOK 2 — Units 6–10 ================= */
+/* ---------- 6.1 ---------- */
+wb('6.1',{
+F:[
+ ()=>{ const n=R(3,9); return {q:`Count in tens. What is the total value of these coins? [[${n*10}]] cents`, qVi:'Đếm theo 10. Tổng giá trị các đồng xu là bao nhiêu?', pic:coins(Array(n).fill(10)), skill:'Tính tổng tiền', exp:`${n} dimes: ${Array.from({length:n},(_,i)=>(i+1)*10).join(', ')} → ${n*10}c.`, expVi:`${n} đồng 10 xu = ${n*10} xu.`}; },
+ ()=>({q:'Marcus sorts US banknotes in a Carroll diagram “Less than $10 / Not less than $10”. Which notes go in <b>Less than $10</b>? Choose all.', qVi:'Những tờ tiền nào thuộc ô "Ít hơn 10 đô"? Chọn tất cả.', type:'multi', opts:['$1','$2','$5','$10','$20','$50','$100'], keepOrder:true, ans:[0,1,2], skill:'Giá trị đồng xu', exp:'$1, $2 and $5 are less than $10. $10 is not less than $10.', expVi:'$1, $2, $5 ít hơn $10. $10 không ít hơn $10.'}),
+ ()=>({q:'Sofia spends 25c on some candy. Which coins could she pay with?', qVi:'Sofia mua kẹo hết 25 xu. Bạn ấy có thể trả bằng nhóm xu nào?', type:'mc', opts:[[10,10,5],[10,10,1],[25,5],[5,5,5]].map(x=>({h:coins(x),v:x.join('+')})), pics:true, wide:true, skill:'Đổi tiền', exp:'10 + 10 + 5 = 25c. (A single quarter also works!)', expVi:'10 + 10 + 5 = 25 xu.'}),
+ ()=>({q:'Zara spends US$30 on some books. Which banknotes could she pay with?', qVi:'Zara mua sách hết 30 đô. Bạn ấy có thể trả bằng tờ tiền nào?', type:'mc', opts:[[20,10],[20,5],[10,10],[50]].map(x=>({h:notes(x),v:x.join('+')})), pics:true, wide:true, skill:'Đổi tiền', exp:'$20 + $10 = $30.', expVi:'20 + 10 = 30 đô.'}),
+ ()=>({q:'Arun spends US$5 and 45c. Which banknotes and coins could he pay with?', qVi:'Arun tiêu 5 đô 45 xu. Có thể trả bằng gì?', type:'mc', opts:[{h:notes([5])+coins([25,10,10]),v:'a'},{h:notes([5])+coins([25,10]),v:'b'},{h:notes([2,2])+coins([25,10,10]),v:'c'}], pics:true, wide:true, skill:'Đổi tiền', exp:'$5 and 25c + 10c + 10c = 45c.', expVi:'5 đô và 25 + 10 + 10 = 45 xu.'}),
+],
+P:[
+ ()=>{ const n=R(3,9); return {q:`Count in fives. What is the total value of these coins? [[${n*5}]] cents`, qVi:'Đếm theo 5. Tổng giá trị là bao nhiêu?', pic:coins(Array(n).fill(5)), skill:'Tính tổng tiền', exp:`${n} nickels = ${n*5}c.`, expVi:`${n} đồng 5 xu = ${n*5} xu.`}; },
+ ()=>({q:"Zara's mum spends US$57 and 90c. One way to pay: $50, $5, $2, 3 quarters, a dime and a nickel. Check: 3 quarters + 1 dime + 1 nickel = [[90]] cents", qVi:'Mẹ Zara tiêu 57 đô 90 xu. Kiểm tra: 3 đồng 25 xu + 1 đồng 10 xu + 1 đồng 5 xu = ? xu', pic:notes([50,5,2])+coins([25,25,25,10,5]), skill:'Tính tổng tiền', exp:'25 + 25 + 25 = 75, + 10 = 85, + 5 = 90.', expVi:'75 + 10 + 5 = 90 xu.'}),
+ ()=>({q:"Marcus' dad spends US$62 and 15c. Which is a correct way to pay?", qVi:'Bố Marcus tiêu 62 đô 15 xu. Cách trả nào đúng?', type:'mc', opts:[{h:notes([50,10,2])+coins([10,5]),v:'a'},{h:notes([50,10])+coins([10,5]),v:'b'},{h:notes([50,10,2])+coins([10,1]),v:'c'}], pics:true, wide:true, skill:'Đổi tiền', exp:'$50 + $10 + $2 = $62; 10c + 5c = 15c.', expVi:'50 + 10 + 2 = 62 đô; 10 + 5 = 15 xu.'}),
+],
+C:[
+ ()=>({q:"Arun matches a US$1 banknote and a 1c coin because both have 'one' on them. Which other match could he make?", qVi:'Arun ghép tờ 1 đô với đồng 1 xu vì cùng có chữ "one". Cặp nào cũng ghép được như vậy?', type:'mc', opts:['$5 banknote and 5c coin','$5 banknote and 10c coin','$2 banknote and 25c coin'], skill:'Giá trị đồng xu', exp:'$5 and 5c both have five; also $10 and 10c, $50 and 50c.', expVi:'$5 và 5 xu đều có "five".'}),
+ ()=>({q:'Sofia has 5 silver coins. Marcus has 3 silver coins. They have the same amount of money. Which could be true?', qVi:'Sofia có 5 đồng xu bạc, Marcus có 3 đồng xu bạc, số tiền bằng nhau. Trường hợp nào đúng?', type:'mc', opts:['Sofia: 5 nickels (25c); Marcus: 2 dimes and 1 nickel (25c)','Sofia: 5 dimes; Marcus: 3 dimes','Sofia: 5 nickels; Marcus: 3 dimes'], skill:'Đổi tiền', exp:'5 × 5c = 25c and 10c + 10c + 5c = 25c.', expVi:'5 × 5 = 25 xu và 10 + 10 + 5 = 25 xu.'}),
+ ()=>({q:'Which currency symbol is used in the USA?', qVi:'Ký hiệu tiền tệ của Mỹ là gì?', type:'mc', opts:['$','¥','£','₫'], skill:'Giá trị đồng xu', exp:'USA: $ (dollar). Japan: ¥ (yen). UK: £ (pound). Vietnam: ₫ (đồng).', expVi:'Mỹ: $; Nhật: ¥; Anh: £; Việt Nam: ₫.'}),
+ ()=>({q:'Which currency symbol is used in Vietnam?', qVi:'Ký hiệu tiền Việt Nam là gì?', type:'mc', opts:['₫','$','¥','€'], skill:'Giá trị đồng xu', exp:'Vietnam uses the đồng: ₫ (VND).', expVi:'Việt Nam dùng đồng: ₫.'}),
+]});
+
+/* ---------- 7.1 ---------- */
+wb('7.1',{
+F:[
+ ()=>({q:'Which thing takes about an <b>hour</b>?', qVi:'Việc nào mất khoảng 1 giờ?', type:'mc', opts:['a school lesson or watching a film','blinking','tying a shoelace','sleeping all night'], skill:'Ước lượng thời gian', exp:'A lesson is about an hour. Blinking takes a second; tying a shoelace takes seconds; sleeping takes many hours.', expVi:'Một tiết học khoảng 1 giờ.'}),
+ ()=>({q:'Put these units of time in order from the shortest to the longest.', qVi:'Sắp xếp từ ngắn nhất đến dài nhất.', type:'order', items:['second','minute','hour','month','year'], skill:'Đơn vị thời gian', exp:'second < minute < hour < month < year.', expVi:'giây < phút < giờ < tháng < năm.'}),
+ ()=>({q:'How many days in a week? [[7]] How many months in a year? [[12]]', qVi:'1 tuần có mấy ngày? 1 năm có mấy tháng?', skill:'Đơn vị thời gian', exp:'7 days, 12 months.', expVi:'7 ngày, 12 tháng.'}),
+ ()=>{ const p=pick([['first Thursday',3],['last Wednesday',30],['third Tuesday',15],['first Sunday',6]]); return {q:`Look at the calendar for June. The ${p[0]} in June is the [[${p[1]}]]`, qVi:'Nhìn lịch tháng 6. Đó là ngày bao nhiêu?', pic:calendar('June 2021',1,30,[]), skill:'Đọc lịch', exp:`Look down the column: the ${p[0]} is the ${ordSuffix(p[1])}.`, expVi:`Nhìn theo cột: ngày ${p[1]}.`}; },
+ ()=>{ const p=pick([['12/11/21','Friday 12th November 2021','Saturday 12th November 2021','Friday 11th December 2021'],['05/12/21','Sunday 5th December 2021','Monday 5th December 2021','Sunday 12th May 2021'],['30/11/21','Tuesday 30th November 2021','Wednesday 30th November 2021','Tuesday 11th March 2021']]); return {q:`Write this date in words: <b>${p[0]}</b>`, qVi:'Viết ngày này bằng chữ (kèm thứ).', type:'mc', opts:[p[1],p[2],p[3]], pic:`<div class="row-pics">${calendar('November 2021',0,30,[])}${calendar('December 2021',2,31,[])}</div>`, skill:'Ghi ngày tháng', exp:`${p[0]} = ${p[1]}. Day/month/year, and find the day of the week on the calendar.`, expVi:'Ngày/tháng/năm; xem lịch để biết thứ.'}; },
+ ()=>{ const p=pick([['Monday 13th July 2020','13/07/20'],['Saturday 11th September 2021','11/09/21'],['Wednesday 23rd February 2022','23/02/22']]); return {q:`Write this date in numbers: <b>${p[0]}</b>`, qVi:'Viết ngày tháng bằng số.', type:'mc', opts:[p[1], p[1].split('/').slice(0,2).reverse().concat(p[1].split('/')[2]).join('/'), p[1].replace(/\/(\d\d)$/,(m,y)=>'/'+(+y+1))], skill:'Ghi ngày tháng', exp:'Day first, then month, then year.', expVi:'Ngày trước, rồi tháng, rồi năm.'}; },
+],
+P:[
+ ()=>({q:'Put in order from shortest to longest.', qVi:'Sắp xếp từ ngắn đến dài.', type:'order', items:['clapping once (about a second)','brushing teeth (about a minute)','a football match (about an hour)'], skill:'Ước lượng thời gian', exp:'second < minute < hour.', expVi:'giây < phút < giờ.'}),
+ ()=>{ const p=pick([['first Saturday',1],['last Monday',31],['third Friday',21],['fifth Sunday',30]]); return {q:`January 2022. The ${p[0]} in January is the [[${p[1]}]]`, qVi:'Lịch tháng 1/2022. Đó là ngày bao nhiêu?', pic:calendar('January 2022',5,31,[]), skill:'Đọc lịch', exp:`It is the ${ordSuffix(p[1])} January.`, expVi:`Ngày ${p[1]} tháng 1.`}; },
+ ()=>{ const p=pick([['May 2022',6,31,14,'Saturday 14th May 2022','14/05/22'],['May 2022',6,31,17,'Tuesday 17th May 2022','17/05/22'],['June 2022',2,30,8,'Wednesday 8th June 2022','08/06/22'],['June 2022',2,30,22,'Wednesday 22nd June 2022','22/06/22']]); return {q:'Write the ringed date in words.', qVi:'Viết ngày được khoanh tròn bằng chữ.', type:'mc', opts:[p[4], p[4].replace(/^\w+/,w=>DAYS[(DAYS.indexOf(w)+1)%7]), p[4].replace(/\d+(st|nd|rd|th)/,ordSuffix(p[3]+1))], pic:calendar(p[0],p[1],p[2],[p[3]]), skill:'Ghi ngày tháng', exp:`${p[4]} = ${p[5]}.`, expVi:`${p[5]}.`}; },
+ ()=>{ const p=pick([['The month after June is …','July'],['The month before October is …','September'],['Two months before April is …','February'],['Three months after August is …','November']]); return {q:p[0], qVi:'Viết tháng còn thiếu.', type:'mc', opts:[p[1],...sample(MONTHS.filter(m=>m!=p[1]),3)], skill:'Tháng trong năm', exp:`Count along the months: ${p[1]}.`, expVi:`Đếm theo thứ tự tháng: ${p[1]}.`}; },
+],
+C:[
+ ()=>({q:'Put these units of time in order from <b>longest</b> to <b>shortest</b>.', qVi:'Sắp xếp từ DÀI nhất đến NGẮN nhất.', type:'order', items:['year','month','week','weekend','day','hour','minute','second'], skill:'Đơn vị thời gian', exp:'year > month > week > weekend (2 days) > day > hour > minute > second.', expVi:'năm > tháng > tuần > cuối tuần > ngày > giờ > phút > giây.'}),
+ ()=>({q:'In which months of 2022 will you find Thursday 8th? Choose all.', qVi:'Năm 2022, tháng nào có "thứ Năm ngày 8"? Chọn tất cả.', type:'multi', opts:['September','December','March','July'], ans:[0,1], skill:'Đọc lịch', exp:'8th September 2022 and 8th December 2022 were Thursdays.', expVi:'8/9/2022 và 8/12/2022 là thứ Năm.'}),
+ ()=>({q:'Write the date in words for the day after 31/12/22.', qVi:'Ngày sau 31/12/22 là ngày nào?', type:'mc', opts:['Sunday 1st January 2023','Sunday 32nd December 2022','Saturday 1st January 2022'], skill:'Ghi ngày tháng', exp:'31st December is the last day of the year, so the next day is 1st January 2023 (a Sunday).', expVi:'31/12 là ngày cuối năm, hôm sau là 1/1/2023.'}),
+ ()=>({q:'Today is Friday 15th May. Zara is going to a party in 2 weeks’ time. What is the date of the party?', qVi:'Hôm nay là thứ Sáu 15/5. 2 tuần nữa Zara đi dự tiệc. Đó là ngày nào?', type:'mc', opts:['Friday 29th May','Friday 22nd May','Saturday 29th May','Friday 17th May'], skill:'Đọc lịch', exp:'2 weeks = 14 days. 15 + 14 = 29: Friday 29th May.', expVi:'2 tuần = 14 ngày. 15 + 14 = 29.'}),
+ ()=>({q:'Marcus visits his grandfather on Saturday 24th July, and again 3 weeks later. What is the date?', qVi:'Marcus thăm ông vào thứ Bảy 24/7 và lại thăm sau 3 tuần. Đó là ngày nào?', type:'mc', opts:['Saturday 14th August','Saturday 14th July','Saturday 45th July','Sunday 14th August'], skill:'Đọc lịch', exp:'3 weeks = 21 days. July has 31 days: 24 + 7 = 31 July, then 7th, then 14th August.', expVi:'3 tuần = 21 ngày. Tháng 7 có 31 ngày → 14/8.'}),
+]});
+
+/* ---------- 8.1 ---------- */
+wb('8.1',{
+F:[
+ ()=>({q:'Write the number in words: <b>29</b> = [[twenty-nine|twenty nine]]', qVi:'Viết số 29 bằng chữ.', pic:baseTen(2,9), skill:'Đọc, viết số bằng chữ', exp:'29 = twenty-nine.', expVi:'29 = twenty-nine.', text:true}),
+ ()=>{ const p=pick([['eighty-six',86],['thirty-four',34],['forty-seven',47],['sixty-two',62]]); return {q:`Read the number word and write the number: <b>${p[0]}</b> = [[${p[1]}]]`, qVi:'Đọc chữ và viết thành số.', skill:'Đọc, viết số bằng chữ', exp:`${p[0]} = ${p[1]}.`, expVi:`${p[0]} = ${p[1]}.`}; },
+ ()=>({q:'forty-one: draw [[4]] counters in the tens and [[1]] counter in the ones.', qVi:'Biểu diễn forty-one: mấy chấm ở hàng chục, mấy chấm ở hàng đơn vị?', skill:'Chục và đơn vị', exp:'41 = 4 tens and 1 one.', expVi:'41 = 4 chục 1 đơn vị.'}),
+ ()=>({q:'Round each number to the nearest 10.<br>a 51 → [[50]] &nbsp; b 68 → [[70]] &nbsp; c 45 → [[50]]', qVi:'Làm tròn đến hàng chục gần nhất.', skill:'Làm tròn', exp:'51 is closer to 50. 68 is closer to 70. 45 is in the middle: round up to 50.', expVi:'51 → 50; 68 → 70; 45 → 50 (5 làm tròn lên).'}),
+ ()=>({q:'Find ways to regroup 24.<br>24 = 20 + 4 = 10 + [[14]] = 0 + [[24]]', qVi:'Tách số 24 theo các cách khác nhau.', skill:'Tách số (regroup)', exp:'Move 10 from the tens to the ones each time.', expVi:'Mỗi lần chuyển 10 sang phần đơn vị.'}),
+],
+P:[
+ ()=>({q:'Use the words five, fifty, four, ninety, sixty to write numbers. Which is <b>not</b> possible?', qVi:'Dùng các từ five, fifty, four, ninety, sixty để viết số. Số nào KHÔNG viết được?', type:'mc', opts:['seventy-five','fifty-four','ninety-five','sixty-four'], skill:'Đọc, viết số bằng chữ', exp:'You do not have the word “seventy”.', expVi:'Không có từ "seventy".'}),
+ ()=>({q:'A number rounds to 50. When 1 is added, it rounds to 60. What is the number? [[54]]', qVi:'Một số làm tròn thành 50. Cộng thêm 1 thì làm tròn thành 60. Đó là số nào?', pic:numberLine({min:50,max:60,step:1,label:5}), skill:'Làm tròn', exp:'54 rounds to 50, but 55 rounds up to 60.', expVi:'54 làm tròn thành 50, còn 55 làm tròn thành 60.'}),
+ ()=>({q:'Zara rounds 50 to 60 when rounding to the nearest 10. What is her mistake?', qVi:'Zara làm tròn 50 thành 60. Bạn ấy sai ở đâu?', type:'mc', opts:['50 is already a tens number, so it stays 50','50 should round to 40','She is correct'], skill:'Làm tròn', exp:'Only numbers ending in 5 (like 55) round up. 50 has 0 ones: it stays 50.', expVi:'50 đã là số tròn chục nên giữ nguyên 50.'}),
+ ()=>({q:'Regroup 35 into 3 numbers: 20 + 10 + [[5]] = 35 &nbsp; 10 + 10 + [[15]] = 35', qVi:'Tách 35 thành 3 số.', skill:'Tách số (regroup)', exp:'The three numbers must add up to 35.', expVi:'Ba số cộng lại phải bằng 35.'}),
+],
+C:[
+ ()=>{ const p=pick([['Forty-two add twenty equals','sixty-two'],['Seventy-six subtract five equals','seventy-one'],['Fifty-one add eight equals','fifty-nine'],['Ninety-seven subtract fifty equals','forty-seven']]); return {q:`Write your answer in words. ${p[0]} [[${p[1]}|${p[1].replace('-',' ')}]]`, qVi:'Tính và viết đáp án bằng chữ tiếng Anh.', skill:'Đọc, viết số bằng chữ', exp:`The answer is ${p[1]}.`, expVi:`Đáp án: ${p[1]}.`, text:true}; },
+ ()=>({q:'Round each length to the nearest 10 centimetres.<br>58 cm → [[60]] cm &nbsp; 94 cm → [[90]] cm &nbsp; 26 m → [[30]] m', qVi:'Làm tròn độ dài đến hàng chục.', skill:'Làm tròn', exp:'58 → 60, 94 → 90, 26 → 30.', expVi:'58 → 60; 94 → 90; 26 → 30.'}),
+ ()=>({q:'49 is regrouped into 3 numbers. One of the numbers is 23. The other two numbers add up to [[26]]. For example 23 + 20 + [[6]] = 49', qVi:'Tách 49 thành 3 số, một số là 23. Hai số còn lại có tổng bao nhiêu?', skill:'Tách số (regroup)', exp:'49 − 23 = 26, so the other two make 26 (e.g. 20 + 6, 10 + 16).', expVi:'49 − 23 = 26.'}),
+]});
+
+/* ---------- 8.2 ---------- */
+wb('8.2',{
+F:[
+ ()=>({q:`a ${fracLabel(1,2)} of 2 = [[1]] &nbsp; b ${fracLabel(1,2)} of 4 = [[2]] &nbsp; c 6 ÷ 2 = [[3]] &nbsp; d 8 ÷ 2 = [[4]] &nbsp; e 10 ÷ 2 = [[5]] &nbsp; f ${fracLabel(1,2)} of 14 = [[7]]`, qVi:'Tìm một nửa / chia 2.', skill:'Một nửa của số', exp:'Half of a number = the number ÷ 2.', expVi:'Một nửa = chia 2.'}),
+ ()=>({q:`a ${fracLabel(1,4)} of 4 = [[1]] &nbsp; b 8 ÷ 4 = [[2]] &nbsp; c 12 ÷ 4 = [[3]] &nbsp; d 20 ÷ 4 = [[5]] &nbsp; e ${fracLabel(1,4)} of 8 = [[2]]`, qVi:'Tìm một phần tư / chia 4.', skill:'Một phần tư của số', exp:'A quarter of a number = the number ÷ 4.', expVi:'Một phần tư = chia 4.'}),
+ ()=>({q:`Colour half of the shape. ${fracLabel(1,2)} of 10 = [[5]]`, qVi:'Tô một nửa hình (10 ô).', pic:arrayDots(2,5,'⬜'), skill:'Một nửa của số', exp:'10 ÷ 2 = 5 squares.', expVi:'10 : 2 = 5 ô.'}),
+ ()=>({q:`Colour a quarter of the shape. ${fracLabel(1,4)} of 12 = [[3]]`, qVi:'Tô một phần tư hình (12 ô).', pic:arrayDots(3,4,'⬜'), skill:'Một phần tư của số', exp:'12 ÷ 4 = 3 squares.', expVi:'12 : 4 = 3 ô.'}),
+],
+P:[
+ ()=>({q:'Sofia and Zara share 16 beads equally. What fraction do they each get? [[half|1/2|one half]] How many beads each? [[8]]', qVi:'Sofia và Zara chia đều 16 hạt cườm. Mỗi bạn được phân số nào? Mấy hạt?', pic:emojis('📿',16,8), skill:'Một nửa của số', exp:'2 people share equally: each gets one half. 16 ÷ 2 = 8.', expVi:'2 người chia đều: mỗi người một nửa = 8 hạt.', text:true}),
+ ()=>({q:'What is the number below the line in a fraction called?', qVi:'Số ở dưới gạch ngang của phân số gọi là gì?', type:'mc', opts:['the denominator — it tells how many equal parts the whole is split into','the numerator','the total'], pic:`<div class="emo big">${fracLabel(1,4)}</div>`, skill:'Gọi tên phân số', exp:'The denominator (bottom number) shows how many equal parts make the whole.', expVi:'Mẫu số (denominator) cho biết hình được chia thành mấy phần bằng nhau.'}),
+ ()=>({q:'You are given a quarter of a packet of 20 marbles. How many marbles? [[5]]', qVi:'Con được một phần tư gói 20 viên bi. Con có mấy viên?', pic:groups(4,5,'🔵'), skill:'Một phần tư của số', exp:'20 ÷ 4 = 5.', expVi:'20 : 4 = 5.'}),
+ ()=>({q:'Half of a number is 1. What is the number? [[2]] &nbsp; A quarter of a number is 5. What is the number? [[20]]', qVi:'Một nửa của số là 1 → số đó? Một phần tư của số là 5 → số đó?', skill:'Một phần tư của số', exp:'1 + 1 = 2. 5 + 5 + 5 + 5 = 20.', expVi:'1 × 2 = 2; 5 × 4 = 20.'}),
+ ()=>({q:`Sofia eats 2 quarters of green apple and a quarter of red apple. What fraction of an apple does she eat?`, qVi:'Sofia ăn 2 phần tư táo xanh và 1 phần tư táo đỏ. Bạn ấy ăn tất cả bao nhiêu phần quả táo?', type:'mc', opts:[{h:fracLabel(3,4)+' three-quarters',v:'3/4'},{h:fracLabel(1,2)+' one half',v:'1/2'},{h:'1 whole',v:'1'}], pic:`<div class="emo big">🍏 🍎</div>`, skill:'Cộng phân số', exp:`${fracLabel(2,4)} + ${fracLabel(1,4)} = ${fracLabel(3,4)}.`, expVi:'2 phần tư + 1 phần tư = 3 phần tư.'}),
+ ()=>({q:'Marcus eats 4 quarters of green apple. What fraction of an apple does he eat?', qVi:'Marcus ăn 4 phần tư quả táo. Đó là bao nhiêu quả?', type:'mc', opts:[{h:'1 whole apple',v:'1'},{h:fracLabel(3,4),v:'3/4'},{h:fracLabel(1,4),v:'1/4'}], skill:'Cộng phân số', exp:'4 quarters make 1 whole.', expVi:'4 phần tư = 1 quả nguyên.'}),
+],
+C:[
+ ()=>({q:`${fracLabel(1,4)} of a number is 6. What is ${fracLabel(1,2)} of that number? [[12]]`, qVi:'Một phần tư của một số là 6. Một nửa của số đó là bao nhiêu?', skill:'Một phần tư của số', exp:'The number is 24. Half of 24 is 12. (2 quarters = 6 + 6 = 12.)', expVi:'Số đó là 24, một nửa là 12.'}),
+ ()=>({q:`${fracLabel(1,2)} of a number is 4. What is ${fracLabel(1,4)} of that number? [[2]]`, qVi:'Một nửa của một số là 4. Một phần tư của số đó là bao nhiêu?', skill:'Một phần tư của số', exp:'The number is 8. A quarter of 8 is 2.', expVi:'Số đó là 8, một phần tư là 2.'}),
+ ()=>({q:`Tick the calculations with the same value as ${fracLabel(1,4)} of 12. Choose all.`, qVi:'Chọn các phép tính có cùng giá trị với 1/4 của 12.', type:'multi', opts:['12 ÷ 4','12 ÷ 2',`${fracLabel(1,2)} of 6`,`${fracLabel(1,2)} of 12`], ans:[0,2], skill:'Hai vế bằng nhau', exp:`${fracLabel(1,4)} of 12 = 3. 12 ÷ 4 = 3 and half of 6 = 3.`, expVi:'1/4 của 12 = 3; 12 : 4 = 3; một nửa của 6 = 3.'}),
+ ()=>({q:'Mum cuts each sandwich into 4 equal pieces. Dad eats 2 whole sandwiches. How many pieces does he eat? [[8]]', qVi:'Mẹ cắt mỗi bánh mì thành 4 miếng bằng nhau. Bố ăn 2 bánh nguyên. Bố ăn mấy miếng?', pic:`<div class="emo big">🥪 🥪</div>`, skill:'Một phần tư của số', exp:'2 × 4 = 8 quarters.', expVi:'2 × 4 = 8 miếng.'}),
+ ()=>({q:'You have a US$1 banknote. How can you give your friend a quarter of a dollar? [[25]] cents', qVi:'Con có 1 đô-la. Một phần tư đô-la là bao nhiêu xu?', pic:notes([1]), skill:'Một phần tư của số', exp:'1 dollar = 100 cents. 100 ÷ 4 = 25c — that is why the coin is called a quarter!', expVi:'100 xu : 4 = 25 xu (đồng "quarter").'}),
+]});
+
+/* ---------- 9.1 ---------- */
+wb('9.1',{
+F:[
+ ()=>{ const n=pick([25,9,13,62,78,21]); const odd=n%2==1, m=n>20; const a=odd&&m?'in the middle':odd?'only in “Odd”':m?'only in “More than 20”':'outside'; return {q:`Where does <b>${n}</b> go in the Venn diagram?`, qVi:`Số ${n} đặt ở đâu trong sơ đồ Venn?`, type:'mc', opts:['only in “Odd”','in the middle','only in “More than 20”','outside'], keep:true, ansText:a, pic:venn('Odd','More than 20',[],[],[],[]), skill:'Sơ đồ Venn', exp:`${n} is ${odd?'odd':'even'} and ${m?'more than 20':'not more than 20'}.`, expVi:`${n} ${odd?'là số lẻ':'là số chẵn'}, ${m?'lớn hơn 20':'không lớn hơn 20'}.`}; },
+ ()=>({q:'Write the labels for the Venn diagram. What is the best label for the blue circle?', qVi:'Nhãn nào phù hợp cho vòng tròn màu xanh?', type:'mc', opts:['Even numbers','Odd numbers','More than 50'], pic:venn('?','More than 10',['2','4','8'],['12','16'],['11','15'],['3']), skill:'Sơ đồ Venn', exp:'2, 4, 8, 12, 16 are all even.', expVi:'2, 4, 8, 12, 16 đều là số chẵn.'}),
+ ()=>({q:'Arun’s shopping list: carrot, apple, potato, bread, onion, milk. How many vegetables? [[3]] How many are not vegetables? [[3]] How many altogether? [[6]]', qVi:'Danh sách: cà rốt, táo, khoai tây, bánh mì, hành, sữa. Có mấy loại rau củ? Mấy loại không phải rau củ? Tất cả?', pic:table(['Vegetables','Not vegetables'],[['🥕 carrot','🍎 apple'],['🥔 potato','🍞 bread'],['🧅 onion','🥛 milk']]), skill:'Đọc bảng', exp:'Carrot, potato, onion = 3 vegetables.', expVi:'Cà rốt, khoai tây, hành = 3 rau củ.'}),
+],
+P:[
+ ()=>{ const a=6, b=4, c=5, d=3; const k=pick([[`like both swimming and dancing? [[${b}]]`,`The middle: ${b}.`,'thích cả bơi và nhảy'],[`do not like dancing? [[${a+d}]]`,`Swimming only (${a}) + outside (${d}) = ${a+d}.`,'không thích nhảy'],[`do not like swimming? [[${c+d}]]`,`Dancing only (${c}) + outside (${d}) = ${c+d}.`,'không thích bơi'],[`are there altogether? [[${a+b+c+d}]]`,`${a} + ${b} + ${c} + ${d} = ${a+b+c+d}.`,'tất cả']]); return {q:'Zara asks boys what they like doing. How many boys '+k[0], qVi:'Zara hỏi các bạn trai thích làm gì. Có bao nhiêu bạn '+k[2]+'?', pic:venn('Swimming 🏊','Dancing 💃',[String(a)],[String(b)],[String(c)],[String(d)]), skill:'Sơ đồ Venn', exp:k[1], expVi:'Đọc đúng vùng của sơ đồ Venn.'}; },
+ ()=>({q:'Arun needs to buy these foods for dinner. Would a list or a table be better to show just the names of the foods?', qVi:'Arun cần mua đồ ăn cho bữa tối. Chỉ ghi tên đồ ăn thì dùng danh sách hay bảng?', type:'mc', opts:['a list','a table'], keep:true, ansText:'a list', skill:'Đọc bảng', exp:'A list is quick for just names. A table is better when you sort or count by groups.', expVi:'Chỉ cần ghi tên thì dùng danh sách. Cần phân nhóm, đếm thì dùng bảng.'}),
+ ()=>({q:'A food is red and green. Where does it go in the Venn diagram “Red / Green”?', qVi:'Một loại quả vừa đỏ vừa xanh. Đặt ở đâu?', type:'mc', opts:['in the middle (both)','only in Red','only in Green','outside'], keep:true, ansText:'in the middle (both)', pic:venn('Red 🍓','Green 🥦',[],['🍎?'],[],[]), skill:'Sơ đồ Venn', exp:'It fits both rules, so it goes where the circles overlap.', expVi:'Thoả cả hai nên đặt ở phần giao.'}),
+],
+C:[
+ ()=>{ const ms=30, b=40, s=20, n=10; const k=pick([[`like milk? [[${ms+b}]]`,`${ms} + ${b} = ${ms+b}`,'thích sữa'],[`like sugar but not milk? [[${s}]]`,`only sugar: ${s}`,'thích đường nhưng không thích sữa'],[`like milk and sugar? [[${b}]]`,`middle: ${b}`,'thích cả sữa và đường'],[`like milk or sugar (or both)? [[${ms+b+s}]]`,`${ms} + ${b} + ${s} = ${ms+b+s}`,'thích sữa hoặc đường']]); return {q:'Marcus asks 100 parents about milk and sugar in their coffee. How many '+k[0], qVi:'Marcus hỏi 100 phụ huynh về sữa và đường trong cà phê. Có bao nhiêu người '+k[2]+'?', pic:venn('Milk','Sugar',[String(ms)],[String(b)],[String(s)],[String(n)]), skill:'Sơ đồ Venn', exp:k[1]+'.', expVi:k[1]+'.'}; },
+ ()=>({q:'Land-living and water-living animals. Where does a frog 🐸 go?', qVi:'Con ếch sống ở đâu trong sơ đồ "Sống trên cạn / Sống dưới nước"?', type:'mc', opts:['in the middle (both)','only land','only water'], keep:true, ansText:'in the middle (both)', pic:venn('Land','Water',['🐘'],['?'],['🐟'],[]), skill:'Sơ đồ Venn', exp:'Frogs live on land and in water.', expVi:'Ếch sống được cả trên cạn và dưới nước.'}),
+]});
+
+/* ---------- 9.2 ---------- */
+wb('9.2',{
+F:[
+ ()=>{ const v=[4,5,4,1]; const L=['Vanilla','Chocolate','Strawberry','Coffee']; const k=pick([['Which flavour was the most popular?','Chocolate','Vị nào được yêu thích nhất?'],['Which flavour was the least popular?','Coffee','Vị nào ít được yêu thích nhất?'],['How many ice creams were eaten on Thursday? [[14]]',null,'Thứ Năm ăn tổng cộng bao nhiêu kem?']]); const pic=pictogram(L.map((l,i)=>[l,v[i]]),'🍦','1 ice cream'); return k[1]?{q:k[0], qVi:k[2], type:'mc', opts:L, keep:true, ansText:k[1], pic, skill:'Biểu đồ tranh', exp:`Chocolate has the most (5); coffee has the fewest (1).`, expVi:'Sô-cô-la nhiều nhất (5), cà phê ít nhất (1).'}:{q:k[0], qVi:k[2], pic, skill:'Biểu đồ tranh', exp:'4 + 5 + 4 + 1 = 14.', expVi:'4 + 5 + 4 + 1 = 14.'}; },
+ ()=>{ const L=['A','B','C','D','E'], v=[6,8,5,3,4]; const k=pick([['Which team has scored the most goals?','B'],['Which team has scored the least goals?','D'],['How many more goals has Team B scored than Team D? [[5]]',null],['How many fewer goals has Team E scored than Team A? [[2]]',null]]); const pic=blockGraph(L.map(x=>'Team '+x),v,9,'Goals scored'); return k[1]?{q:k[0], qVi:'Đọc biểu đồ cột số bàn thắng.', type:'mc', opts:L.map(x=>'Team '+x), keep:true, ansText:'Team '+k[1], pic, skill:'Biểu đồ cột', exp:'Look for the tallest / shortest column.', expVi:'Tìm cột cao nhất / thấp nhất.'}:{q:k[0], qVi:'Đọc biểu đồ cột số bàn thắng.', pic, skill:'Biểu đồ cột', exp:'B 8 − D 3 = 5. A 6 − E 4 = 2.', expVi:'Lấy số lớn trừ số bé.'}; },
+],
+P:[
+ ()=>{ const L=['Water','Milk','Orange juice','Tea'], v=[6,4,5,3]; const k=pick([['How many children like orange juice? [[5]]','Có bao nhiêu bạn thích nước cam?','Count the orange juice row: 5.'],['Which drink is liked by 3 children? [[tea]]','Đồ uống nào có 3 bạn thích?','Tea has 3 pictures.'],['How many more children like milk than tea? [[1]]','Số bạn thích sữa nhiều hơn số bạn thích trà bao nhiêu?','4 − 3 = 1.'],['How many children were asked altogether? [[18]]','Tổng cộng hỏi bao nhiêu bạn?','6 + 4 + 5 + 3 = 18.']]); return {q:k[0], qVi:k[1], pic:pictogram(L.map((l,i)=>[l,v[i]]),'🥤','1 child'), skill:'Biểu đồ tranh', exp:k[2], expVi:k[2], text:/tea/.test(k[0])}; },
+ ()=>{ const L=['Ara','Kai','Ohan','Akila'], v=[5,3,7,6]; const k=pick([['How many letters are in Ohan’s family name? [[7]]','7'],['Whose family name has the most letters? [[Ohan]]','Ohan'],['How many more letters are in Ohan’s family name than in Kai’s? [[4]]','7 − 3 = 4'],['How many fewer letters are in Ara’s family name than in Akila’s? [[1]]','6 − 5 = 1']]); return {q:'This block graph shows the number of letters in some children’s family names. '+k[0], qVi:'Biểu đồ cột cho biết số chữ cái trong họ của các bạn.', pic:blockGraph(L,v,8,'Number of letters'), skill:'Biểu đồ cột', exp:k[1]+'.', expVi:k[1]+'.', text:/Whose/.test(k[0])}; },
+],
+C:[
+ ()=>{ const L=['Apples','Pears','Kiwis','Oranges','Mangoes','Bananas'], v=[5,6,2,4,3,2]; const k=pick([['How many pieces of fruit are in the bowl? [[22]]','5+6+2+4+3+2 = 22'],['How many more pears are there than mangoes? [[3]]','6 − 3 = 3'],['How many fewer bananas are there than apples? [[3]]','5 − 2 = 3']]); return {q:'The pictogram shows fruit in a fruit bowl. '+k[0], qVi:'Biểu đồ tranh cho biết số trái cây trong bát.', pic:pictogram(L.map((l,i)=>[l,v[i]]),'🍑','1 piece of fruit'), skill:'Biểu đồ tranh', exp:k[1]+'.', expVi:k[1]+'.'}; },
+ ()=>{ const d=pick([['2',9],['0',6],['1',5],['6',1]]); return {q:`Here are 5 telephone numbers:<br><b>842229902 &nbsp;024771024 &nbsp;061382517 &nbsp;245027538 &nbsp;143195035</b><br>How many times is the digit <b>${d[0]}</b> used? [[${d[1]}]]`, qVi:`Đếm xem chữ số ${d[0]} xuất hiện bao nhiêu lần trong 5 số điện thoại.`, skill:'Biểu đồ cột', exp:`Count carefully, one number at a time. The digit ${d[0]} is used ${d[1]} times.`, expVi:`Đếm cẩn thận từng số: chữ số ${d[0]} xuất hiện ${d[1]} lần.`}; },
+ ()=>({q:'In the telephone numbers, which digit is used the <b>most</b>?', qVi:'Chữ số nào xuất hiện NHIỀU nhất?', type:'mc', opts:['2','0','5','1'], pic:blockGraph(['0','1','2','3','4','5','6','7','8','9'],[6,5,9,4,5,5,1,4,3,3],10,'Number of times used'), skill:'Biểu đồ cột', exp:'2 is used 9 times — the tallest column.', expVi:'Chữ số 2 xuất hiện 9 lần — cột cao nhất.'}),
+]});
+
+/* ---------- 10.1 ---------- */
+wb('10.1',{
+F:[
+ ()=>({q:'a 32 + 26 = [[58]] &nbsp; b 41 + 35 = [[76]] &nbsp; c 23 + 34 = [[57]]', qVi:'Cộng hai số có 2 chữ số.', skill:'Cộng 2 số có 2 chữ số', exp:'Add the tens, then the ones: 30 + 20 = 50, 2 + 6 = 8 → 58.', expVi:'Cộng chục với chục, đơn vị với đơn vị.'}),
+ ()=>({q:'<div class="vsum"><span>57</span><span>+ 21</span></div> = [[78]] &nbsp; <div class="vsum"><span>43</span><span>+ 14</span></div> = [[57]] &nbsp; <div class="vsum"><span>23</span><span>+ 24</span></div> = [[47]]', qVi:'Tính theo cột dọc.', skill:'Cộng 2 số có 2 chữ số', exp:'Add the ones column, then the tens column.', expVi:'Cộng cột đơn vị rồi cột chục.'}),
+ ()=>({q:'46 − 12 = [[34]]', qVi:'Tính (tách chục và đơn vị).', pic:baseTen(4,6), skill:'Trừ 2 số có 2 chữ số', exp:'40 − 10 = 30 and 6 − 2 = 4 → 34.', expVi:'40 − 10 = 30; 6 − 2 = 4 → 34.'}),
+ ()=>({q:'Use the 100 square. a 27 + 12 = [[39]] &nbsp; b 33 + 24 = [[57]]', qVi:'Dùng bảng 100 ô để tính.', pic:hundredSquare({27:'#bde0fe',33:'#ffd6a5'}), skill:'Cộng 2 số có 2 chữ số', exp:'27 → down 1 row (37) → right 2 (39). 33 → down 2 rows (53) → right 4 (57).', expVi:'Đi xuống theo chục, sang phải theo đơn vị.'}),
+ ()=>({q:'Find the difference between 26 and 38. [[12]]', qVi:'Tìm hiệu giữa 26 và 38.', pic:numberLine({min:20,max:40,step:1,label:10,marks:[{v:26,t:'26',c:C.blue},{v:38,t:'38'}]}), skill:'Tìm hiệu', exp:'Count on: 26 → 36 is 10, 36 → 38 is 2. 38 − 26 = 12.', expVi:'Đếm thêm từ 26 đến 38: 12.'}),
+],
+P:[
+ ()=>({q:'Marcus makes some mistakes. Which number facts are correct? Choose all.', qVi:'Marcus viết sai vài đẳng thức. Chọn các đẳng thức ĐÚNG.', type:'multi', opts:['53 + 24 = 54 + 25','63 + 25 = 53 + 35','85 − 33 = 95 − 23','37 − 12 = 39 − 14'], ans:[1,3], skill:'Hai vế bằng nhau', exp:'53 + 24 = 77 but 54 + 25 = 79 ✗. 63 + 25 = 88 = 53 + 35 ✓. 85 − 33 = 52 but 95 − 23 = 72 ✗. 37 − 12 = 25 = 39 − 14 ✓.', expVi:'Tính từng vế rồi so sánh.'}),
+ ()=>({q:'The difference between two numbers is 23. One of the numbers is 74. What could the other be? Choose all.', qVi:'Hiệu hai số là 23. Một số là 74. Số kia có thể là? Chọn tất cả.', type:'multi', opts:['51','97','61','87'], ans:[0,1], skill:'Tìm hiệu', exp:'74 − 23 = 51 and 74 + 23 = 97.', expVi:'74 − 23 = 51 và 74 + 23 = 97.'}),
+ ()=>{ const a=pick([42,68,47]), b=pick([31,21,12]); return {q:`Choose a number from each cloud and add: ${a} + ${b} = [[${a+b}]]`, qVi:'Chọn mỗi đám mây một số rồi cộng.', skill:'Cộng 2 số có 2 chữ số', exp:`${a} + ${b} = ${a+b}.`, expVi:`${a} + ${b} = ${a+b}.`}; },
+],
+C:[
+ ()=>({q:'Using the digits 1, 2, 3, 4 and 5 only once, make two 2-digit numbers and add them. What is the <b>smallest</b> total? [[37]]', qVi:'Dùng các chữ số 1–5 (mỗi số dùng 1 lần) tạo 2 số có 2 chữ số rồi cộng. Tổng NHỎ nhất là bao nhiêu?', pic:'<div class="cards"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>', skill:'Cộng 2 số có 2 chữ số', exp:'Put the smallest digits in the tens: 13 + 24 = 37 (or 14 + 23).', expVi:'Đặt chữ số nhỏ nhất ở hàng chục: 13 + 24 = 37.'}),
+ ()=>({q:'Using the digits 1–5 only once, what is the <b>greatest</b> total of two 2-digit numbers? [[95]]', qVi:'Tổng LỚN nhất là bao nhiêu?', pic:'<div class="cards"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>', skill:'Cộng 2 số có 2 chữ số', exp:'Put the biggest digits in the tens: 53 + 42 = 95.', expVi:'Đặt chữ số lớn nhất ở hàng chục: 53 + 42 = 95.'}),
+ ()=>{ const c=pick([['42 + 33',75],['87 − 34',53],['99 − 42',57],['97 − 26',71],['18 + 21',39],['51 + 43',94],['79 − 31',48],['88 − 22',66],['85 − 22',63],['44 + 43',87],['88 − 14',74],['77 − 45',32],['79 − 55',24],['84 − 43',41]]); return {q:`Number puzzle clue: ${c[0]} = [[${c[1]}]]`, qVi:'Giải ô chữ số.', skill:c[0].includes('+')?'Cộng 2 số có 2 chữ số':'Trừ 2 số có 2 chữ số', exp:`${c[0]} = ${c[1]}.`, expVi:`${c[0]} = ${c[1]}.`}; },
+]});
+
+/* ---------- 10.2 ---------- */
+wb('10.2',{
+F:[
+ ()=>{ const p=pick([['7 + 3 = 10','10 − 3 = [[7]]'],['13 + 5 = 18','18 − 5 = [[13]]'],['32 + 17 = 49','49 − 17 = [[32]]'],['8 − 6 = 2','2 + 6 = [[8]]'],['19 − 12 = 7','7 + 12 = [[19]]'],['28 − 15 = 13','13 + 15 = [[28]]']]); return {q:`Find an inverse calculation: ${p[0]} → ${p[1]}`, qVi:'Tìm phép tính ngược.', skill:'Phép tính ngược', exp:'Addition and subtraction undo each other.', expVi:'Phép cộng và phép trừ là phép tính ngược của nhau.'}; },
+ ()=>({q:'Write the fact family for 4, 3 and 7.<br>4 + 3 = [[7]] &nbsp; 3 + 4 = [[7]] &nbsp; 7 − 4 = [[3]] &nbsp; 7 − 3 = [[4]]', qVi:'Viết gia đình phép tính của 4, 3, 7.', pic:partWhole(7,[4,3]), skill:'Gia đình phép tính', exp:'You can add in any order; subtract a part from the whole.', expVi:'Cộng theo thứ tự nào cũng được; lấy tổng trừ một phần.'}),
+ ()=>({q:'Two additions with a total of 20: 12 + [[8]] = 20, inverse: 20 − 8 = [[12]]', qVi:'Hai số có tổng 20 và phép tính ngược.', skill:'Phép tính ngược', exp:'12 + 8 = 20, so 20 − 8 = 12.', expVi:'12 + 8 = 20 nên 20 − 8 = 12.'}),
+],
+P:[
+ ()=>({q:'Find the inverse to check: ☐ + 12 = 27 → 27 − 12 = [[15]]', qVi:'Dùng phép tính ngược để tìm số.', skill:'Phép tính ngược', exp:'27 − 12 = 15.', expVi:'27 − 12 = 15.'}),
+ ()=>({q:'Find the inverse to check: ☐ − 23 = 11 → 11 + 23 = [[34]]', qVi:'Dùng phép tính ngược để tìm số.', skill:'Phép tính ngược', exp:'11 + 23 = 34.', expVi:'11 + 23 = 34.'}),
+ ()=>({q:'Find the missing digit: 3☐ + 24 = 57 → [[3]]', qVi:'Tìm chữ số còn thiếu.', skill:'Phép tính ngược', exp:'57 − 24 = 33.', expVi:'57 − 24 = 33.'}),
+ ()=>({q:'50 + 40 = 90. Write the related subtractions: 90 − 50 = [[40]] &nbsp; 90 − 40 = [[50]]', qVi:'Viết các phép trừ liên quan.', skill:'Gia đình phép tính', exp:'Take each part away from the whole 90.', expVi:'Lấy 90 trừ từng phần.'}),
+ ()=>({q:'Estimate 54 + 35 by rounding: [[50]] + [[40]] = [[90]]. Then solve: 54 + 35 = [[89]]', qVi:'Ước lượng bằng cách làm tròn, rồi tính.', skill:'Ước lượng', exp:'54 → 50, 35 → 40. Estimate 90; answer 89 is close.', expVi:'54 → 50, 35 → 40. Ước lượng 90, đáp án 89.'}),
+ ()=>({q:'Estimate 77 − 44: [[80]] − [[40]] = [[40]]. Solve: 77 − 44 = [[33]]', qVi:'Ước lượng rồi tính.', skill:'Ước lượng', exp:'77 → 80, 44 → 40. Estimate 40; answer 33.', expVi:'77 → 80; 44 → 40.'}),
+],
+C:[
+ ()=>({q:'30 + 30 = 60. Why are there only 2 related subtractions? (60 − 30 = 30 twice.)', qVi:'Vì sao 30 + 30 = 60 chỉ có 2 phép trừ liên quan?', type:'mc', opts:['Because both parts are the same number, so the facts repeat','Because 60 is too big','Because you cannot subtract 30'], pic:partWhole(60,[30,30]), skill:'Gia đình phép tính', exp:'30 + 30 and 60 − 30 = 30 are the same both ways.', expVi:'Hai phần bằng nhau nên các phép tính bị lặp lại.'}),
+ ()=>({q:'Marcus rounds to estimate 40 + 30 = 70. His answer is 74. What could his addition have been?', qVi:'Marcus làm tròn được 40 + 30 = 70, kết quả thật là 74. Phép cộng có thể là gì?', type:'mc', opts:['42 + 32','35 + 39','47 + 27','44 + 35'], skill:'Ước lượng', exp:'42 rounds to 40 and 32 rounds to 30; 42 + 32 = 74. (44 + 30, 43 + 31, 41 + 33, 40 + 34 also work.)', expVi:'42 → 40, 32 → 30, 42 + 32 = 74.'}),
+ ()=>({q:'Zara estimates 70 − 40 = 30. Her answer is 27. Which subtraction could it be?', qVi:'Zara ước lượng 70 − 40 = 30, kết quả thật là 27. Phép trừ nào phù hợp?', type:'mc', opts:['68 − 41','75 − 48','62 − 35','71 − 34'], skill:'Ước lượng', exp:'68 → 70, 41 → 40; 68 − 41 = 27.', expVi:'68 → 70, 41 → 40; 68 − 41 = 27.'}),
+]});
+
+/* ---------- 10.3 ---------- */
+wb('10.3',{
+F:[
+ ()=>({q:'Half of: 10 × 8 = 80 → 5 × 8 = [[40]]<br>Double: 5 × 4 = 20 → 10 × 4 = [[40]]<br>Half of: 10 × 3 = 30 → 5 × 3 = [[15]]<br>Double: 5 × 9 = 45 → 10 × 9 = [[90]]', qVi:'Gấp đôi hoặc lấy một nửa.', skill:'Liên hệ bảng nhân', exp:'5× facts are half of 10× facts.', expVi:'Bảng nhân 5 bằng một nửa bảng nhân 10.'}),
+ ()=>({q:'Doubling: 1 × 2 = [[2]] → 1 + 1 = 2 &nbsp; 10 × 2 = [[20]] → 10 + 10 = 20 &nbsp; 5 × 2 = [[10]] → 5 + 5', qVi:'Nhân 2 là gấp đôi.', skill:'Gấp đôi', exp:'× 2 means double.', expVi:'Nhân 2 = gấp đôi.'}),
+ ()=>({q:'Equal product machine: 4 × 2 = 8 = [[8]] × 1', qVi:'Máy tạo phép nhân bằng nhau.', skill:'Hai vế bằng nhau', exp:'8 × 1 = 8 too.', expVi:'8 × 1 = 8.'}),
+ ()=>({q:'Equal product machine: 2 × 10 = 20 = 4 × [[5]]', qVi:'Tìm số để hai vế bằng nhau.', skill:'Hai vế bằng nhau', exp:'4 × 5 = 20.', expVi:'4 × 5 = 20.'}),
+],
+P:[
+ ()=>({q:'Sofia uses 10 hands to make a fact from the 5 table: 10 × 5 = [[50]]', qVi:'Sofia dùng 10 bàn tay (mỗi tay 5 ngón). Có bao nhiêu ngón?', pic:`<div class="emo big">${'🖐️'.repeat(10)}</div>`, skill:'Bảng nhân 1, 2, 5, 10', exp:'10 hands × 5 fingers = 50.', expVi:'10 × 5 = 50.'}),
+ ()=>({q:'Zara uses five pairs of hands (10 fingers in each pair). 5 × 10 = [[50]]', qVi:'Zara dùng 5 đôi tay, mỗi đôi 10 ngón. Có bao nhiêu ngón?', skill:'Bảng nhân 1, 2, 5, 10', exp:'5 × 10 = 50.', expVi:'5 × 10 = 50.'}),
+ ()=>{ const p=pick([['3 × 2','3 + 3'],['10 × 2','10 + 10'],['1 × 2','1 + 1'],['6 × 2','6 + 6']]); return {q:`Which calculation is equivalent to <b>${p[0]}</b>?`, qVi:'Phép tính nào bằng với phép tính này?', type:'mc', opts:[p[1],...['3 + 3','10 + 10','1 + 1','6 + 6'].filter(x=>x!=p[1]).slice(0,3)], skill:'Gấp đôi', exp:`${p[0]} = ${p[1]} (doubling).`, expVi:'Nhân 2 là cộng số đó với chính nó.'}; },
+],
+C:[
+ ()=>({q:'Which products are in both the 5 times table and the 10 times table? Choose all.', qVi:'Những tích nào có trong cả bảng nhân 5 và bảng nhân 10? Chọn tất cả.', type:'multi', opts:['10','15','20','25','30','35'], keepOrder:true, ans:[0,2,4], skill:'Liên hệ bảng nhân', exp:'10, 20, 30 … (numbers ending in 0) are in both. 15, 25, 35 are only in the 5 table.', expVi:'Các số tận cùng 0 có trong cả hai bảng.'}),
+ ()=>({q:'Put in order of value, from smallest to greatest.', qVi:'Sắp xếp theo giá trị từ bé đến lớn.', type:'order', items:['1 × 7','2 × 6','5 × 3','5 × 4','10 × 3','10 × 5'], skill:'Hai vế bằng nhau', exp:'7 < 12 < 15 < 20 < 30 < 50.', expVi:'7 < 12 < 15 < 20 < 30 < 50.'}),
+ ()=>({q:'Biscuits cost 10c each. Arun writes 10 × 4 = 40 to find the cost of 4 biscuits. Is he correct?', qVi:'Mỗi bánh 10 xu. Arun viết 10 × 4 = 40 để tính giá 4 cái bánh. Đúng không?', type:'mc', opts:['Yes, 4 biscuits cost 40c','No, it is 14c','No, it is 4c'], skill:'Toán có lời văn', exp:'4 lots of 10c = 40c.', expVi:'4 lần 10 xu = 40 xu.'}),
+]});
+
+/* ---------- 10.4 ---------- */
+wb('10.4',{
+F:[
+ ()=>{ const n=R(1,10); return {q:`10 × ${n} = ${10*n}, so ${10*n} ÷ 10 = [[${n}]]`, qVi:'Dùng bảng nhân 10 để viết phép chia.', skill:'Bảng chia', exp:'Division is the inverse of multiplication.', expVi:'Phép chia là phép ngược của phép nhân.'}; },
+ ()=>({q:'Write the inverse division fact: 1 × 5 = 5 → 5 ÷ 5 = [[1]] &nbsp; 2 × 7 = 14 → 14 ÷ 2 = [[7]]', qVi:'Viết phép chia ngược.', skill:'Bảng chia', exp:'5 ÷ 5 = 1; 14 ÷ 2 = 7.', expVi:'5 : 5 = 1; 14 : 2 = 7.'}),
+ ()=>({q:'Write a division fact with the same value: 5 × 2 = 10 = 20 ÷ [[2]] &nbsp; 9 × 1 = 9 = 18 ÷ [[2]]', qVi:'Viết phép chia có cùng giá trị.', skill:'Hai vế bằng nhau', exp:'20 ÷ 2 = 10; 18 ÷ 2 = 9.', expVi:'20 : 2 = 10; 18 : 2 = 9.'}),
+],
+P:[
+ ()=>({q:'Write a multiplication fact and the inverse division fact for the picture: [[3]] × 5 = 15 → 15 ÷ 5 = [[3]]', qVi:'Viết phép nhân và phép chia ngược cho hình.', pic:groups(3,5,'🍓'), skill:'Bảng chia', exp:'3 groups of 5 = 15.', expVi:'3 nhóm 5 = 15.'}),
+ ()=>{ const p=pick([[`${fracLabel(1,2)} of 18 = 9`,'18 ÷ 2 = [[9]]'],['14 ÷ 2 = 7',`${fracLabel(1,2)} of 14 = [[7]]`],['16 ÷ 4 = 4',`${fracLabel(1,4)} of 16 = [[4]]`],[`${fracLabel(1,4)} of 4 = 1`,'4 ÷ 4 = [[1]]']]); return {q:`Write the matching fact: ${p[0]} → ${p[1]}`, qVi:'Viết phép tính tương ứng (chia ↔ phân số).', skill:'Một nửa, một phần tư', exp:'Half = ÷ 2; quarter = ÷ 4.', expVi:'Một nửa = chia 2; một phần tư = chia 4.'}; },
+],
+C:[
+ ()=>({q:"Marcus makes a cube snake with 16 cubes. Zara's snake uses half as many: [[8]] cubes. Arun's snake uses a quarter: [[4]] cubes.", qVi:'Rắn của Marcus có 16 khối. Rắn của Zara bằng một nửa, của Arun bằng một phần tư. Mỗi rắn có mấy khối?', pic:`<div class="emo">${'🟩'.repeat(16)}</div>`, skill:'Một nửa, một phần tư', exp:'16 ÷ 2 = 8. 16 ÷ 4 = 4.', expVi:'16 : 2 = 8; 16 : 4 = 4.'}),
+ ()=>({q:'Put in order of value, from smallest to greatest.', qVi:'Sắp xếp theo giá trị từ bé đến lớn.', type:'order', items:[`${fracLabel(1,4)} of 12`,'40 ÷ 10','18 ÷ 2','6 × 2'], skill:'Hai vế bằng nhau', exp:'3 < 4 < 9 < 12.', expVi:'3 < 4 < 9 < 12.'}),
+ ()=>({q:'Which is equivalent to 1 × 8? Choose all.', qVi:'Những phép tính nào bằng 1 × 8? Chọn tất cả.', type:'multi', opts:['2 × 4','16 ÷ 2','4 × 4','40 ÷ 5','8 ÷ 8'], ans:[0,1,3], skill:'Hai vế bằng nhau', exp:'1 × 8 = 8 = 2 × 4 = 16 ÷ 2 = 40 ÷ 5.', expVi:'Đều bằng 8.'}),
+]});
+
+/* ================= WORKBOOK 2 — Units 11–15 ================= */
+/* path on a grid: moves like ['F2','R','F3','L','F1'] starting facing up */
+function pathPic(moves, startR, startC, rows, cols, endEm){
+  const cs=40; let r=startR, c=startC, d=0; const D=[[-1,0],[0,1],[1,0],[0,-1]]; const pts=[[c,r]]; const turns=[];
+  moves.forEach(m=>{ if(m=='R'){ d=(d+1)%4; turns.push([c,r,'R']); } else if(m=='L'){ d=(d+3)%4; turns.push([c,r,'L']); } else { const n=+m.slice(1); r+=D[d][0]*n; c+=D[d][1]*n; pts.push([c,r]); } });
+  let s=''; for(let i=0;i<rows;i++) for(let j=0;j<cols;j++) s+=`<rect x="${j*cs+2}" y="${i*cs+2}" width="${cs}" height="${cs}" fill="#f0fdf4" stroke="#cbd5e1"/>`;
+  s+=`<polyline points="${pts.map(([x,y])=>`${x*cs+2+cs/2},${y*cs+2+cs/2}`).join(' ')}" fill="none" stroke="#94a3b8" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>`;
+  s+=`<text x="${startC*cs+2+cs/2}" y="${startR*cs+2+cs/2+10}" font-size="26" text-anchor="middle">🐢</text>`;
+  const [ex,ey]=pts[pts.length-1]; s+=`<text x="${ex*cs+2+cs/2}" y="${ey*cs+2+cs/2+10}" font-size="26" text-anchor="middle">${endEm||'🏠'}</text>`;
+  return {svg:S(cols*cs+4,rows*cs+4,s,cols*cs*1.1), cw:turns.filter(t=>t[2]=='R').length, acw:turns.filter(t=>t[2]=='L').length};
+}
+function clockMin(n){ return clock(12,0,{noHands:true}).replace('</svg>',`<line x1="80" y1="80" x2="${80+56*Math.sin(n*Math.PI/6)}" y2="${80-56*Math.cos(n*Math.PI/6)}" stroke="${C.blue}" stroke-width="5" stroke-linecap="round"/><circle cx="80" cy="80" r="5" fill="${C.ink}"/></svg>`); }
+
+/* ---------- 11.1 ---------- */
+wb('11.1',{
+F:[
+ ()=>{ const P=pick([['F2','R','F3','L','F2','R','F2'],['F3','R','F2','R','F1','L','F2'],['F1','L','F2','R','F3','R','F1']]); const sc=P[1]=='L'?4:0; const p=pathPic(P,5,sc,6,6); return {q:`Follow the grey path from the tortoise to the house. How many right angle turns does it make? [[${p.cw+p.acw}]] How many clockwise? [[${p.cw}]] How many anticlockwise? [[${p.acw}]]`, qVi:'Đi theo con đường xám từ chú rùa đến ngôi nhà. Có bao nhiêu lần rẽ góc vuông? Bao nhiêu lần theo chiều kim đồng hồ (rẽ phải)? Bao nhiêu lần ngược chiều (rẽ trái)?', pic:p.svg, skill:'Quay theo chiều kim đồng hồ', exp:'Imagine walking along the path. Turning right is clockwise, turning left is anticlockwise.', expVi:'Tưởng tượng mình đi trên đường: rẽ phải là theo chiều kim đồng hồ, rẽ trái là ngược chiều.'}; },
+ ()=>{ const s=pick([['square',4],['rectangle',2],['triangle',3],['hexagon',6]]); return {q:`Predict: how many times does a ${s[0]==='triangle'?'triangle with equal sides':s[0]} look identical as it completes a full turn? [[${s[1]}]]`, qVi:'Dự đoán: hình này trông giống hệt ban đầu bao nhiêu lần khi quay trọn một vòng?', pic:shape2d(s[0],C.orange), skill:'Hình giống nhau khi quay', exp:`A ${s[0]} looks the same ${s[1]} times in a full turn.`, expVi:`Hình này trông giống nhau ${s[1]} lần.`}; },
+ ()=>({q:'Which shape will look identical <b>3 times</b> as it completes a full turn?', qVi:'Hình nào trông giống nhau 3 lần khi quay một vòng?', type:'mc', opts:[{h:shape2d('triangle',C.green,80),v:'tri'},{h:shape2d('square',C.green,80),v:'sq'},{h:shape2d('rectangle',C.green,80),v:'rect'}], pics:true, skill:'Hình giống nhau khi quay', exp:'A triangle with 3 equal sides looks the same 3 times.', expVi:'Tam giác đều trông giống nhau 3 lần.'}),
+],
+P:[
+ ()=>{ const d=pick(DIRS); const a=pick([['half',turnDir(d,'half',true)],['full',d],['quarter',turnDir(d,'quarter',true)]]); return {q:`Shape A looks like this. Which shape shows Shape A after a <b>${a[0]} turn</b>${a[0]=='quarter'?' clockwise':''}?`, qVi:`Hình A sau khi quay ${a[0]=='half'?'nửa vòng':a[0]=='full'?'một vòng':'1/4 vòng theo chiều kim đồng hồ'} trông như thế nào?`, type:'mc', opts:DIRS.map(x=>({h:arrowPic(x,C.purple),v:x})), keep:true, ansVal:a[1], pics:true, pic:arrowPic(d,C.purple), skill:'Quay hình', exp:a[0]=='full'?'After a full turn it is back where it started.':a[0]=='half'?'A half turn makes it face the opposite way.':'A quarter turn clockwise: up → right → down → left.', expVi:a[0]=='full'?'Quay một vòng thì trở lại như cũ.':a[0]=='half'?'Quay nửa vòng thì hướng ngược lại.':'1/4 vòng theo chiều kim đồng hồ: lên → phải → xuống → trái.'}; },
+ ()=>({q:'A shape makes 3 half turns clockwise. It looks the same as after …', qVi:'Một hình quay 3 lần nửa vòng theo chiều kim đồng hồ. Kết quả giống như sau …', type:'mc', opts:['1 half turn','a full turn','no turn'], skill:'Phần tư vòng, nửa vòng', exp:'2 half turns = a full turn (back to start), so 3 half turns = 1 half turn.', expVi:'2 lần nửa vòng = 1 vòng; 3 lần nửa vòng = nửa vòng.'}),
+ ()=>({q:'How many right angle quarter turns make a full turn? [[4]]', qVi:'Bao nhiêu lần quay góc vuông thì được một vòng?', pic:turnArrow('cw','full'), skill:'Phần tư vòng, nửa vòng', exp:'4 quarter turns = 1 full turn.', expVi:'4 lần 1/4 vòng = 1 vòng.'}),
+],
+C:[
+ ()=>({q:"Lyra the ladybird says, 'I can make a half turn clockwise or two quarter turns anticlockwise to see the spider.' How else can she turn?", qVi:'Bọ rùa Lyra có thể quay nửa vòng theo chiều kim đồng hồ hoặc 2 lần 1/4 vòng ngược chiều để thấy con nhện. Còn cách nào khác?', type:'mc', opts:['a half turn anticlockwise','a quarter turn clockwise','a full turn'], pic:`<div class="emo big">🕷️<br>⬆<br>🐞</div>`, skill:'Phần tư vòng, nửa vòng', exp:'A half turn either way faces the opposite direction. (Two quarter turns clockwise also works.)', expVi:'Quay nửa vòng theo chiều nào cũng quay ngược hướng.'}),
+ ()=>({q:'The elephant must face the way it is walking. It faces up and needs to go right. What should it do?', qVi:'Chú voi đang quay mặt lên trên và cần đi sang phải. Nó phải làm gì?', type:'mc', opts:['a quarter turn clockwise','a quarter turn anticlockwise','a half turn'], pic:gridMap(3,4,[{r:1,c:3,em:'🏠'}],{r:1,c:0,dir:'up'}), skill:'Quay theo chiều kim đồng hồ', exp:'From up, a quarter turn clockwise faces right.', expVi:'Từ hướng lên, quay 1/4 vòng theo chiều kim đồng hồ là sang phải.'}),
+]});
+
+/* ---------- 11.2 ---------- */
+wb('11.2',{
+F:[
+ ()=>({q:'Which circle shows the centre dot?', qVi:'Hình tròn nào có chấm ở tâm?', type:'mc', opts:['A','B','C','D'].map((l,i)=>({h:S(110,120,`<circle cx="55" cy="55" r="45" fill="#fff" stroke="${C.ink}" stroke-width="3"/><circle cx="${[55,35,70,55][i]}" cy="${[55,40,70,20][i]}" r="5" fill="${C.red}"/>`+T(55,116,l,16,C.ink,'middle',900),100),v:l})), keep:true, ansVal:'A', pics:true, skill:'Tâm hình tròn', exp:'The centre is the same distance from every point on the edge.', expVi:'Tâm cách đều mọi điểm trên đường tròn.'}),
+ ()=>({q:'You draw 4 lines from the centre of a circle to the edge. What do you notice about their lengths?', qVi:'Vẽ 4 đoạn từ tâm ra mép hình tròn. Độ dài các đoạn như thế nào?', type:'mc', opts:['They are all the same length','They are all different','The top one is longest'], pic:S(120,120,`<circle cx="60" cy="60" r="50" fill="#fff" stroke="${C.ink}" stroke-width="3"/><g stroke="${C.blue}" stroke-width="3"><line x1="60" y1="60" x2="60" y2="10"/><line x1="60" y1="60" x2="110" y2="60"/><line x1="60" y1="60" x2="60" y2="110"/><line x1="60" y1="60" x2="25" y2="25"/></g><circle cx="60" cy="60" r="4" fill="${C.red}"/>`,110), skill:'Tâm hình tròn', exp:'Every point on the edge is the same distance from the centre.', expVi:'Mọi điểm trên đường tròn cách tâm một khoảng bằng nhau.'}),
+],
+P:[
+ ()=>{ const d=pick([8,10,12]); return {q:`The distance from one edge to the other through the centre is ${d} cm. How long is one line from the centre to the edge? [[${d/2}]] cm`, qVi:`Khoảng cách từ mép này sang mép kia qua tâm là ${d} cm. Đoạn từ tâm ra mép dài bao nhiêu?`, pic:S(140,120,`<circle cx="70" cy="60" r="50" fill="#fff" stroke="${C.ink}" stroke-width="3"/><line x1="20" y1="60" x2="120" y2="60" stroke="${C.blue}" stroke-width="3"/><circle cx="70" cy="60" r="4" fill="${C.red}"/>`+T(70,52,d+' cm',15,C.blue,'middle',900),130), skill:'Tâm hình tròn', exp:`The centre is halfway: half of ${d} is ${d/2}.`, expVi:`Tâm ở chính giữa: một nửa của ${d} là ${d/2}.`}; },
+],
+C:[
+ ()=>{ const n=pick([1,2,3,4,5,12]); const o=(n+6)%12||12; return {q:`On a clock, which number is opposite <b>${n}</b>? [[${o}]]`, qVi:`Trên mặt đồng hồ, số nào đối diện số ${n}?`, pic:clock(12,0,{noHands:true}), skill:'Tâm hình tròn', exp:`A line from ${n} through the centre reaches ${o} (add or take away 6).`, expVi:`Đường thẳng từ ${n} qua tâm đến ${o} (cộng/trừ 6).`}; },
+ ()=>({q:'You join opposite numbers on a clock with straight lines: 12–6, 1–7, 2–8, 3–9, 4–10, 5–11. How many lines is that? [[6]] Where do they all cross? At the [[centre|center]].', qVi:'Nối các số đối diện trên đồng hồ. Có bao nhiêu đường? Chúng cắt nhau ở đâu?', pic:clock(12,0,{noHands:true}), skill:'Tâm hình tròn', exp:'12 numbers make 6 pairs. All the lines pass through the centre.', expVi:'12 số tạo 6 cặp. Mọi đường đều đi qua tâm.', text:true}),
+]});
+
+/* ---------- 12.1 ---------- */
+wb('12.1',{
+F:[
+ ()=>{ const h=R(1,12), m=pick([0,15,30,45,5,20,40]); return {q:'Write the time shown on the clock: [[' + h + ']] : [[' + String(m).padStart(2,'0') + '|' + m + ']]', qVi:'Viết giờ dạng số.', pic:clock(h,m), skill:'Đồng hồ số', exp:`${timeWords(h,m)} = ${h}:${String(m).padStart(2,'0')}.`, expVi:`${timeVi(h,m)}.`}; },
+ ()=>{ const h=R(1,11), m=pick([10,25,35,50]); return {q:`Which analogue clock matches the digital clock?`, qVi:'Đồng hồ kim nào khớp với đồng hồ số?', type:'mc', opts:[[h,m],[h,(m+30)%60],[h%12+1,m]].map(([a,b])=>({h:clock(a,b,{size:120}),v:a+':'+b})), pics:true, pic:digital(h,m), skill:'Đồng hồ số', exp:`${m} minutes: the minute hand points to ${m/5}.`, expVi:`${m} phút: kim phút chỉ số ${m/5}.`}; },
+ ()=>({q:'How many minutes are there in a quarter of an hour? [[15]]', qVi:'Một phần tư giờ có bao nhiêu phút?', pic:clock(12,15), skill:'Phút và giờ', exp:'60 ÷ 4 = 15 minutes.', expVi:'60 : 4 = 15 phút.'}),
+],
+P:[
+ ()=>{ const p=pick([['25 minutes past 8',8,25],['5 minutes to 12',11,55],['15 minutes to 4',3,45],['25 minutes to 3',2,35],['10 minutes past 10',10,10],['20 minutes past 6',6,20]]); return {q:`Make the digital clock show <b>${p[0]}</b>: [[${p[1]}]] : [[${p[2]}]]`, qVi:'Viết giờ dạng số.', skill:'Past và To', exp:p[2]>30?`${60-p[2]} minutes to ${p[1]+1} = ${p[2]} minutes past ${p[1]}.`:`${p[2]} minutes past ${p[1]}.`, expVi:p[2]>30?`Kém ${60-p[2]} phút đến ${p[1]+1} giờ = ${p[1]} giờ ${p[2]} phút.`:`${p[1]} giờ ${p[2]} phút.`}; },
+ ()=>{ const p=pick([['Quarter past 9. “Good morning!”','morning',9,15],['Quarter to 7. “Can I watch TV before bed?”','evening',6,45],['Quarter past 3. “Welcome to after-school club!”','afternoon',3,15]]); return {q:`${p[0]} What time of day is it?`, qVi:'Đó là buổi nào trong ngày?', type:'mc', opts:['morning','afternoon','evening'], keep:true, ansText:p[1], pic:clock(p[2],p[3]), skill:'Buổi trong ngày', exp:`It is ${p[1]}.`, expVi:{morning:'Buổi sáng.',afternoon:'Buổi chiều.',evening:'Buổi tối.'}[p[1]]}; },
+],
+C:[
+ ()=>{ const h=R(1,12), k=R(1,11); return {q:`Spinner: the hour is ${h}. The minute spin is ${k} (sets of 5 minutes past). What time is it? [[${h}]] : [[${String(5*k).padStart(2,'0')}|${5*k}]]`, qVi:`Vòng quay: giờ là ${h}; phút là ${k} lần 5 phút. Mấy giờ?`, skill:'Phút và giờ', exp:`5 × ${k} = ${5*k} minutes past ${h}.`, expVi:`5 × ${k} = ${5*k} phút.`}; },
+ ()=>({q:'Odd one out: which is <b>not</b> the same time as the others?', qVi:'Cái nào KHÁC các cái còn lại?', type:'mc', opts:[{h:'20 minutes past 10',v:'a'},{h:digital(9,40),v:'b'},{h:'20 minutes to 10',v:'c'},{h:clock(9,40,{size:110}),v:'d'}], pics:true, skill:'Past và To', exp:'20 minutes to 10 = 9:40. 20 minutes PAST 10 is 10:20.', expVi:'20 minutes to 10 = 9:40; 20 minutes past 10 = 10:20.'}),
+ ()=>({q:'A quarter dollar is 25c. A half dollar is 50c. How could this confuse people when telling the time?', qVi:'Đồng "quarter" là 25 xu, "half dollar" là 50 xu. Điều này có thể gây nhầm lẫn gì khi xem giờ?', type:'mc', opts:['A quarter of an hour is 15 minutes, not 25; half an hour is 30 minutes, not 50','There is no confusion','A quarter of an hour is 25 minutes'], skill:'Phút và giờ', exp:'An hour has 60 minutes: a quarter = 15, a half = 30. A dollar has 100 cents.', expVi:'1 giờ có 60 phút: 1/4 giờ = 15 phút, nửa giờ = 30 phút (khác với tiền).'}),
+]});
+
+/* ---------- 13.1 ---------- */
+wb('13.1',{
+F:[
+ ()=>({q:'Arun makes 10 small cakes with 8 cups of flour, 4 cups of sugar, 2 cups of butter and 2 eggs. For 5 cakes he needs [[4]] cups of flour, [[2]] cups of sugar, [[1]] cup of butter and [[1]] egg.', qVi:'Công thức 10 bánh: 8 cốc bột, 4 cốc đường, 2 cốc bơ, 2 quả trứng. Làm 5 bánh cần bao nhiêu?', skill:'Một nửa công thức', exp:'5 is half of 10, so halve each amount.', expVi:'5 là một nửa của 10 nên lấy một nửa mỗi nguyên liệu.'}),
+ ()=>({q:'A cookie recipe for 4 people uses 100 g flour, 2 eggs and 50 g sugar. For 2 people: [[50]] g flour, [[1]] egg, [[25]] g sugar.', qVi:'Công thức cho 4 người: 100 g bột, 2 trứng, 50 g đường. Cho 2 người cần bao nhiêu?', skill:'Một nửa công thức', exp:'2 is half of 4: halve everything.', expVi:'2 là một nửa của 4.'}),
+ ()=>{ const v=pick([3,5,6,8]); return {q:`What mass does the scale show? [[${v}]] kilograms`, qVi:'Cân chỉ bao nhiêu kg?', pic:scaleDial(10,v), skill:'Đọc cân', exp:`The pointer is on ${v}.`, expVi:`Kim chỉ ${v}.`}; },
+ ()=>{ const p=pick([['A caterpillar 🐛','3 grams','30 grams'],['A bug 🐞','1 gram','100 grams'],['3 pencils ✏️','15 grams','50 grams']]); return {q:`Estimate the mass: ${p[0]}`, qVi:'Ước lượng khối lượng.', type:'mc', opts:[p[1],p[2]], keep:true, ansText:p[1], skill:'Đơn vị khối lượng', exp:`${p[0]} is very light: about ${p[1]}.`, expVi:'Vật rất nhẹ.'}; },
+ ()=>{ const p=pick([['3 kilograms + 2 kilograms',5],['6 kilograms + 2 kilograms',8],['3 kilograms + 3 kilograms + 1 kilogram',7]]); return {q:`${p[0]} = [[${p[1]}]] kilograms`, qVi:'Tính tổng khối lượng.', pic:scaleDial(10,p[1]), skill:'Đọc cân', exp:`Add the masses: ${p[1]} kg.`, expVi:`Cộng lại: ${p[1]} kg.`}; },
+ ()=>({q:'2 frogs balance 12 blocks. 1 frog = [[6]] blocks. Is 1 frog heavier or lighter than 6 blocks? [[same|the same|equal]]', qVi:'2 con ếch cân bằng với 12 khối. 1 con ếch = mấy khối? 1 con ếch nặng hơn, nhẹ hơn hay bằng 6 khối?', pic:balance('🐸🐸','🟫'.repeat(6),0), skill:'Nặng hơn, nhẹ hơn', exp:'12 ÷ 2 = 6. One frog balances 6 blocks exactly: the same.', expVi:'12 : 2 = 6. Một con ếch bằng đúng 6 khối.', hint:'heavier / lighter / same', text:true}),
+ ()=>({q:'Zara measures the temperature at 10 o’clock and at 3 o’clock. There is a difference of 9 °C. If it was 12 °C in the morning, it could be [[21]] °C in the afternoon.', qVi:'Nhiệt độ lúc 10 giờ và 3 giờ chiều chênh nhau 9 °C. Nếu buổi sáng 12 °C thì buổi chiều có thể là bao nhiêu?', skill:'Nhiệt độ', exp:'12 + 9 = 21 (like 17 and 26 in the book).', expVi:'12 + 9 = 21.'}),
+],
+P:[
+ ()=>({q:'Put these masses in order, starting with the lightest.', qVi:'Sắp xếp từ nhẹ nhất.', type:'order', items:['5 grams','50 grams','500 grams','2 kilograms','14 kilograms'], skill:'Đơn vị khối lượng', exp:'Grams are light; 1 kilogram = 1000 grams.', expVi:'1 kg = 1000 g.'}),
+ ()=>{ const p=pick([['a bag of flour','2 kilograms',['2 kilograms','90 grams','56 kilograms']],['an apple','90 grams',['90 grams','2 kilograms','56 kilograms']],['a dog','14 kilograms',['14 kilograms','5 grams','1 gram']],['a paper clip','1 gram',['1 gram','14 kilograms','50 grams']]]); return {q:`Draw a ring around the best estimate for the mass of ${p[0]}.`, qVi:'Chọn ước lượng hợp lý nhất.', type:'mc', opts:p[2], skill:'Đơn vị khối lượng', exp:`${p[0]}: about ${p[1]}.`, expVi:`Khoảng ${p[1]}.`}; },
+ ()=>{ const p=pick([['a brick 🧱','more'],['a baby 👶','more'],['a cat 🐱','more'],['a mouse 🐭','less'],['a fly 🪰','less']]); return {q:`Is the mass of ${p[0]} more or less than a kilogram?`, qVi:'Khối lượng nhiều hơn hay ít hơn 1 kg?', type:'mc', opts:['more','less'], keep:true, ansText:p[1], skill:'Đơn vị khối lượng', exp:`${p[0]} is ${p[1]=='more'?'heavier':'lighter'} than 1 kg.`, expVi:p[1]=='more'?'Nặng hơn 1 kg.':'Nhẹ hơn 1 kg.'}; },
+ ()=>({q:'If the temperature increases, the number on the thermometer goes …', qVi:'Khi nhiệt độ tăng, số trên nhiệt kế …', type:'mc', opts:['up','down','stays the same'], keep:true, ansText:'up', pic:thermometer(25), skill:'Nhiệt độ', exp:'Warmer = higher number.', expVi:'Ấm hơn = số lớn hơn.'}),
+ ()=>{ const t=pick([10,15,20,25,30,35]); return {q:`Write the temperature on the thermometer. [[${t}]] °C`, qVi:'Đọc nhiệt độ.', pic:thermometer(t), skill:'Nhiệt độ', exp:`The red line reaches ${t}.`, expVi:`Cột đỏ đến ${t}.`}; },
+],
+C:[
+ ()=>({q:'One apple weighs 10 cubes. A pineapple balances 3 apples. How many cubes balance 1 pineapple? [[30]]', qVi:'1 quả táo nặng bằng 10 khối. 1 quả dứa nặng bằng 3 quả táo. Dứa nặng bằng bao nhiêu khối?', pic:balance('🍍','🍎🍎🍎',0), skill:'Nặng hơn, nhẹ hơn', exp:'3 × 10 = 30 cubes.', expVi:'3 × 10 = 30 khối.'}),
+ ()=>({q:'2 bananas weigh 12 cubes. A pear weighs the same as 1 banana. How many cubes balance 1 pear? [[6]]', qVi:'2 quả chuối nặng bằng 12 khối. 1 quả lê nặng bằng 1 quả chuối. Quả lê bằng bao nhiêu khối?', pic:balance('🍌🍌','🟫'.repeat(6),0), skill:'Nặng hơn, nhẹ hơn', exp:'12 ÷ 2 = 6.', expVi:'12 : 2 = 6.'}),
+ ()=>({q:'You have weights of 100 g and 20 g. Make 220 g: 2 × 100 g + [[1]] × 20 g', qVi:'Có quả cân 100 g và 20 g. Tạo 220 g như thế nào?', skill:'Đơn vị khối lượng', exp:'200 + 20 = 220 g.', expVi:'200 + 20 = 220 g.'}),
+ ()=>({q:'A thermometer shows halfway between 12 and 13 °C. Which is closest?', qVi:'Nhiệt kế chỉ ở giữa 12 và 13 °C. Đó là bao nhiêu?', type:'mc', opts:['twelve and a half degrees','12 degrees','13 degrees','25 degrees'], skill:'Nhiệt độ', exp:'Halfway between 12 and 13 is 12 and a half.', expVi:'Giữa 12 và 13 là 12 rưỡi.'}),
+]});
+
+/* ---------- 13.2 ---------- */
+wb('13.2',{
+F:[
+ ()=>{ const p=pick([[0,'Empty'],[1,'Almost empty'],[5,'Half full'],[9,'Almost full'],[10,'Full']]); return {q:'Label the bottle.', qVi:'Gọi tên mức nước trong bình.', type:'mc', opts:['Empty','Almost empty','Half full','Almost full','Full'], keep:true, ansText:p[1], pic:jug(10,p[0],'',1).replace(/<text[^>]*>\d+<\/text>/g,''), skill:'Đọc vạch chia', exp:`The water level shows: ${p[1]}.`, expVi:{Empty:'Rỗng','Almost empty':'Gần cạn','Half full':'Nửa bình','Almost full':'Gần đầy',Full:'Đầy'}[p[1]]+'.'}; },
+ ()=>{ const p=pick([['a cup ☕','Less'],['a bucket 🪣','More'],['a teaspoon 🥄','Less'],['a bath 🛁','More'],['a fish tank 🐠','More'],['a glass 🥛','Less']]); return {q:`When full, does ${p[0]} hold more or less than 1 litre?`, qVi:'Khi đầy, vật này chứa nhiều hơn hay ít hơn 1 lít?', type:'mc', opts:['More','Less'], keep:true, ansText:p[1], skill:'Đơn vị dung tích', exp:`${p[0]} holds ${p[1].toLowerCase()} than 1 litre.`, expVi:p[1]=='More'?'Nhiều hơn 1 lít.':'Ít hơn 1 lít.'}; },
+ ()=>({q:'A millilitre is about 20 drops of water. A small bottle of medicine holds about …', qVi:'1 ml khoảng 20 giọt nước. Một lọ thuốc nhỏ chứa khoảng …', type:'mc', opts:['9 millilitres','9 litres'], keep:true, ansText:'9 millilitres', pic:`<div class="emo huge">💊</div>`, skill:'Đơn vị dung tích', exp:'Small amounts are measured in millilitres.', expVi:'Lượng nhỏ đo bằng mi-li-lít.'}),
+],
+P:[
+ ()=>({q:"Sofia's wide jar holds 5 litres and is full. She pours it into a tall jar that holds only 3 litres. How much water is left over? [[2]] litres", qVi:'Bình rộng của Sofia chứa đầy 5 lít. Đổ sang bình cao chỉ chứa 3 lít. Còn thừa bao nhiêu lít?', pic:`<div class="row-pics">${jug(5,5,'litres')}${jug(3,3,'litres')}</div>`, skill:'Bài toán dung tích', exp:'5 − 3 = 2 litres left over.', expVi:'5 − 3 = 2 lít.'}),
+ ()=>{ const v=pick([20,40,60,80]); return {q:`How many millilitres are in the jug? [[${v}]] ml`, qVi:'Trong bình có bao nhiêu ml?', pic:jug(100,v,'millilitres',20), skill:'Đọc vạch chia', exp:`The water reaches the ${v} line.`, expVi:`Mực nước đến vạch ${v}.`}; },
+],
+C:[
+ ()=>({q:'Three learners need their bottles filled. Each bottle holds half a litre. The teacher has 2 and a half litres. Is there any left? How much? [[1]] litre', qVi:'3 bạn cần đổ đầy bình, mỗi bình nửa lít. Cô có 2 lít rưỡi. Còn lại bao nhiêu lít?', skill:'Bài toán dung tích', exp:'3 halves = 1 and a half litres. 2½ − 1½ = 1 litre left.', expVi:'3 nửa lít = 1 lít rưỡi. 2 rưỡi − 1 rưỡi = 1 lít.'}),
+ ()=>({q:'Marcus has 6 and a half litres of rain water. He uses 3 and a half litres. How much is left? [[3]] litres', qVi:'Marcus có 6 lít rưỡi nước mưa, dùng 3 lít rưỡi. Còn lại bao nhiêu?', skill:'Bài toán dung tích', exp:'6½ − 3½ = 3 litres.', expVi:'6 rưỡi − 3 rưỡi = 3 lít.'}),
+ ()=>({q:'How many half-litre bottles will fill a 2-litre bottle? [[4]]', qVi:'Bao nhiêu chai nửa lít thì đổ đầy chai 2 lít?', skill:'Bài toán dung tích', exp:'2 halves = 1 litre, so 4 halves = 2 litres.', expVi:'2 nửa lít = 1 lít; 4 nửa lít = 2 lít.'}),
+ ()=>{ const v=pick([15,60,70,35]); return {q:`Read the measuring cylinder: [[${v}]] millilitres`, qVi:'Đọc vạch trên ống đong.', pic:jug(100,v,'millilitres',10), skill:'Đọc vạch chia', exp:`Each mark is 10 ml. The water is at ${v} ml.`, expVi:`Mỗi vạch 10 ml. Nước ở ${v} ml.`}; },
+]});
+
+/* ---------- 14.1 ---------- */
+wb('14.1',{
+F:[
+ ()=>({q:'Complete the regular pattern: white, black, black, white, black, black, white, …', qVi:'Hoàn thành quy luật.', type:'mc', opts:[{h:patternRow(['circle:black']),v:'b'},{h:patternRow(['circle:white']),v:'w'}], ansVal:'b', pics:true, pic:patternRow(['circle:white','circle:black','circle:black','circle:white','circle:black','circle:black','circle:white','?']), skill:'Quy luật đều đặn', exp:'The pattern repeats white, black, black. After white comes black.', expVi:'Lặp lại: trắng, đen, đen. Sau trắng là đen.'}),
+ ()=>({q:'What is the difference between a regular pattern and a random sequence?', qVi:'Quy luật đều đặn và dãy ngẫu nhiên khác nhau thế nào?', type:'mc', opts:['A regular pattern follows a rule; a random sequence does not','They are the same','A random sequence always repeats'], skill:'Đều đặn hay ngẫu nhiên', exp:'Regular = follows a rule, you can say what comes next. Random = no rule.', expVi:'Đều đặn có quy tắc; ngẫu nhiên không có quy tắc.'}),
+ ()=>({q:'Without looking, Yusuf picks an object from a jar of 🔴 red and 🔵 blue balls. What could he pick? Choose all.', qVi:'Yusuf nhắm mắt lấy 1 vật từ lọ có bóng đỏ và bóng xanh. Bạn ấy có thể lấy được gì? Chọn tất cả.', type:'multi', opts:['🔴 a red ball','🔵 a blue ball','🟢 a green ball','⭐ a star'], keepOrder:true, ans:[0,1], pic:`<div class="emo big">🫙 🔴🔵🔴🔵🔴</div>`, skill:'Khả năng xảy ra', exp:'He can only pick what is in the jar: red or blue.', expVi:'Chỉ lấy được những gì có trong lọ: đỏ hoặc xanh.'}),
+],
+P:[
+ ()=>({q:'You have 5 red and 5 blue counters in a bag. You take out 2. Will you always get the same colour?', qVi:'Túi có 5 chấm đỏ và 5 chấm xanh. Lấy ra 2 cái. Có luôn được cùng màu không?', type:'mc', opts:['No — it is random, I might get two different colours','Yes, always','No, I always get one of each'], skill:'Khả năng xảy ra', exp:'The results are random and can change each time.', expVi:'Kết quả ngẫu nhiên, mỗi lần có thể khác nhau.'}),
+ ()=>({q:'A spinner has the numbers 1 to 6. Are you more likely to land on an odd or an even number?', qVi:'Vòng quay có số 1 đến 6. Khả năng ra số lẻ hay số chẵn cao hơn?', type:'mc', opts:['They are equally likely','odd','even'], pic:spinner(['red','blue','yellow','green','purple','orange']), skill:'Khả năng xảy ra', exp:'1, 3, 5 are odd and 2, 4, 6 are even: 3 each, so equally likely.', expVi:'Có 3 số lẻ và 3 số chẵn nên khả năng như nhau.'}),
+ ()=>({q:'A repeating pattern uses black, white and grey. Which one is a regular pattern?', qVi:'Dãy nào là quy luật lặp lại (đen, trắng, xám)?', type:'mc', opts:[{h:patternRow(['square:black','square:white','square:grey','square:black','square:white','square:grey']),v:'a'},{h:patternRow(['square:black','square:grey','square:white','square:white','square:black','square:grey']),v:'b'}], pics:true, wide:true, skill:'Quy luật đều đặn', exp:'black, white, grey repeats in the same order.', expVi:'đen, trắng, xám lặp lại theo cùng thứ tự.'}),
+],
+C:[
+ ()=>({q:'Where would you see a regular pattern?', qVi:'Con thấy quy luật đều đặn ở đâu?', type:'mc', opts:['on a zebra crossing / stripes on a T-shirt','raindrops on a window','leaves falling from a tree'], skill:'Đều đặn hay ngẫu nhiên', exp:'Stripes repeat in a rule. Raindrops and falling leaves are random.', expVi:'Vạch kẻ đường có quy luật; giọt mưa, lá rơi là ngẫu nhiên.'}),
+ ()=>({q:'You drop a card with a cross on one side 10 times. Will you get the same result if you do it 10 times again?', qVi:'Thả tấm thẻ có dấu X một mặt 10 lần. Làm lại 10 lần có được kết quả giống hệt không?', type:'mc', opts:['Probably not — it is random','Yes, exactly the same','It always lands on the cross'], skill:'Khả năng xảy ra', exp:'Chance experiments give different results each time.', expVi:'Thí nghiệm ngẫu nhiên cho kết quả khác nhau mỗi lần.'}),
+ ()=>({q:'Describe the sequence: 2, 4, 6, 8, 10, … What comes next? [[12]]', qVi:'Mô tả dãy số và tìm số tiếp theo.', skill:'Quy luật số', exp:'Count on in twos.', expVi:'Đếm thêm 2.'}),
+]});
+
+/* ---------- 15.1 ---------- */
+wb('15.1',{
+F:[
+ ()=>{ const p=[[0,2],[1,1],[1,2],[2,2],[3,0],[3,1],[3,2]]; return {q:'Use the mirror line to make a symmetrical picture. Which is correct?', qVi:'Dùng đường gương để tạo hình đối xứng. Hình nào đúng?', type:'mc', opts:[gridShape(4,6,p,3,C.teal,p.map(([r,c])=>[r,5-c])),gridShape(4,6,p,3,C.teal,p.map(([r,c])=>[r,c+3]))], pics:true, pic:gridShape(4,6,p,3,C.teal), skill:'Hình phản chiếu', exp:'The other half is a mirror image.', expVi:'Nửa kia là ảnh qua gương.'}; },
+ ()=>{ const d=pick(DIRS); const a=turnDir(d,'quarter',true); return {q:'Tick what this shape will look like after a <b>quarter turn clockwise</b>.', qVi:'Hình này sau khi quay 1/4 vòng theo chiều kim đồng hồ trông thế nào?', type:'mc', opts:DIRS.map(x=>({h:arrowPic(x,C.red),v:x})), keep:true, ansVal:a, pics:true, pic:arrowPic(d,C.red), skill:'Quay hình', exp:'Clockwise: up → right → down → left.', expVi:'Theo chiều kim đồng hồ: lên → phải → xuống → trái.'}; },
+ ()=>{ const cw=Math.random()<.5; return {q:`The minute hand starts at 12 and makes 1 quarter turn ${cw?'clockwise':'anticlockwise'}. What number does it stop on? [[${cw?3:9}]]`, qVi:`Kim phút bắt đầu ở số 12, quay 1/4 vòng ${cw?'theo chiều kim đồng hồ':'ngược chiều kim đồng hồ'}. Kim dừng ở số mấy?`, pic:clockMin(0), skill:'Quay theo chiều kim đồng hồ', exp:cw?'A quarter turn clockwise from 12 is 3.':'A quarter turn anticlockwise from 12 is 9.', expVi:cw?'Từ 12 quay 1/4 vòng thuận là số 3.':'Từ 12 quay 1/4 vòng ngược là số 9.'}; },
+],
+P:[
+ ()=>({q:'Which 4-sided shapes have a vertical line of symmetry? Choose all.', qVi:'Những hình 4 cạnh nào có trục đối xứng thẳng đứng? Chọn tất cả.', type:'multi', opts:[{h:symLine('square','v',C.yellow),v:'sq'},{h:symLine('rectangle','v',C.yellow),v:'rect'},{h:S(120,110,`<polygon points="60,8 100,55 60,102 20,55" fill="${C.yellow}" stroke="${C.ink}" stroke-width="2.5"/><line x1="60" y1="2" x2="60" y2="108" stroke="${C.red}" stroke-width="3" stroke-dasharray="7 5"/>`,100),v:'kite'},{h:S(120,110,`<polygon points="20,20 100,35 90,95 30,80" fill="${C.yellow}" stroke="${C.ink}" stroke-width="2.5"/><line x1="60" y1="2" x2="60" y2="108" stroke="${C.red}" stroke-width="3" stroke-dasharray="7 5"/>`,100),v:'irr'}], ans:[0,1,2], pics:true, skill:'Hình phản chiếu', exp:'The square, rectangle and diamond fold exactly; the uneven shape does not.', expVi:'Hình vuông, chữ nhật, hình thoi gấp được trùng khít; hình méo thì không.'}),
+ ()=>{ const d=pick(DIRS); const a=turnDir(d,'half',true); return {q:'Tick what this shape will look like after a <b>half turn clockwise</b>.', qVi:'Hình này sau khi quay nửa vòng trông thế nào?', type:'mc', opts:DIRS.map(x=>({h:arrowPic(x,C.blue),v:x})), keep:true, ansVal:a, pics:true, pic:arrowPic(d,C.blue), skill:'Quay hình', exp:'A half turn: it faces the opposite way.', expVi:'Quay nửa vòng: hướng ngược lại.'}; },
+ ()=>{ const p=pick([['a quarter turn anticlockwise',3],['a full turn anticlockwise',6],['a quarter turn clockwise',9],['a half turn',12]]); return {q:`The minute hand starts at 6. It makes ${p[0]}. What number does it stop on? [[${p[1]}]]`, qVi:'Kim phút bắt đầu ở số 6. Sau khi quay, kim dừng ở số mấy?', pic:clockMin(6), skill:'Quay theo chiều kim đồng hồ', exp:`From 6, ${p[0]} → ${p[1]}.`, expVi:`Từ 6 quay → ${p[1]}.`}; },
+],
+C:[
+ ()=>({q:'The minute hand starts at 12 and stops at 6. Which descriptions are correct? Choose all.', qVi:'Kim phút từ 12 đến 6. Những mô tả nào đúng? Chọn tất cả.', type:'multi', opts:['a half turn clockwise','a half turn anticlockwise','two quarter turns clockwise','a quarter turn clockwise'], ans:[0,1,2], pic:clockMin(6), skill:'Quay theo chiều kim đồng hồ', exp:'12 to 6 is half way round, either direction (= 2 quarter turns).', expVi:'Từ 12 đến 6 là nửa vòng, theo chiều nào cũng được.'}),
+ ()=>({q:'A shape turns a quarter turn clockwise, then a quarter turn anticlockwise. What do you notice?', qVi:'Một hình quay 1/4 vòng thuận rồi 1/4 vòng ngược. Con nhận thấy gì?', type:'mc', opts:['It is back where it started','It has made a half turn','It is upside down'], skill:'Chỉ dẫn di chuyển', exp:'The second turn is the reverse of the first.', expVi:'Lần quay thứ hai ngược với lần đầu nên trở về vị trí cũ.'}),
+ ()=>{ const d=pick(DIRS); const a=turnDir(turnDir(d,'quarter',true),'quarter',true); return {q:'Draw the shape after two quarter turns clockwise. Which is correct?', qVi:'Hình sau 2 lần quay 1/4 vòng theo chiều kim đồng hồ?', type:'mc', opts:DIRS.map(x=>({h:arrowPic(x,C.green),v:x})), keep:true, ansVal:a, pics:true, pic:arrowPic(d,C.green), skill:'Quay hình', exp:'Two quarter turns = a half turn.', expVi:'2 lần 1/4 vòng = nửa vòng.'}; },
+]});
+
 /* English → Vietnamese mini dictionary: word=meaning=emoji */
 const DICT_RAW=`a=một (mạo từ)=
 about=khoảng, về=
@@ -1942,7 +2574,180 @@ joshua=Joshua (tên bạn)=🧒
 tyler=Tyler (tên bạn)=🧒
 st=(đuôi số thứ tự: 1st = thứ nhất)=
 nd=(đuôi số thứ tự: 2nd = thứ hai)=
-rd=(đuôi số thứ tự: 3rd = thứ ba)=`;
+rd=(đuôi số thứ tự: 3rd = thứ ba)=
+adult=người lớn; con trưởng thành=🧑
+almost=gần như=
+already=đã, rồi=
+baby=em bé=👶
+ball=quả bóng=⚽
+bead=hạt cườm=📿
+bean=hạt đậu=🫘
+belong=thuộc về=
+better=tốt hơn=
+bicycle=xe đạp=🚲
+black=màu đen=⚫
+blank=trống, để trắng=⬜
+bowl=cái bát=🥣
+bread=bánh mì=🍞
+brick=viên gạch=🧱
+broken=bị vỡ, bị bẻ=
+bug=con bọ=🐞
+calves=con bê, con non (số nhiều của calf)=🐘
+carefully=cẩn thận=
+carton=hộp (đựng trứng, sữa)=📦
+case=hộp, hộp đựng (pencil case: hộp bút)=✏️
+caterpillar=con sâu bướm=🐛
+center=tâm (cách viết Mỹ)=🎯
+cloud=đám mây=☁️
+club=câu lạc bộ=
+clue=gợi ý (ô chữ)=🔎
+coffee=cà phê=☕
+come=đến=
+confuse=làm nhầm lẫn=😵
+cost=giá tiền; có giá=💲
+cream=kem (ice cream: kem lạnh)=🍦
+creams=kem=🍦
+cupboard=tủ, chạn=🗄️
+denominator=mẫu số (số dưới gạch phân số)=
+description=mô tả=
+diamond=hình thoi=🔷
+dinner=bữa tối=🍽️
+dolphin=cá heo=🐬
+duck=con vịt=🦆
+duckling=vịt con=🐥
+eagle=chim đại bàng=🦅
+eaten=đã ăn=
+elephant=con voi=🐘
+else=khác=
+falling=rơi=🍂
+farmer=nông dân=👩‍🌾
+feet=bàn chân (số nhiều)=🦶
+foot=bàn chân=🦶
+film=bộ phim=🎬
+flavour=hương vị=🍦
+flower=bông hoa=🌸
+fly=con ruồi; bay=🪰
+foal=ngựa con=🐴
+follow=đi theo, tuân theo=
+fork=cái dĩa (nĩa)=🍴
+friend=bạn=🧑‍🤝‍🧑
+frog=con ếch=🐸
+front=phía trước=
+garden=khu vườn=🏡
+given=được cho=🎁
+goal=bàn thắng=🥅
+grandfather=ông=👴
+grey=màu xám=
+halfway=ở giữa, nửa đường=
+identical=giống hệt=
+increase=tăng lên=📈
+japan=Nhật Bản=🇯🇵
+ladybird=con bọ rùa=🐞
+largest=lớn nhất=
+later=sau đó, muộn hơn=
+leaf=chiếc lá=🍃
+leaves=những chiếc lá=🍂
+lesson=tiết học=🧑‍🏫
+level=mức độ=
+lightest=nhẹ nhất=🪶
+live=sống=
+living=sống=
+magic=kỳ diệu, phép thuật=✨
+mango=quả xoài=🥭
+mangoes=quả xoài=🥭
+might=có thể=
+mum=mẹ=👩
+notice=nhận thấy=👀
+numerator=tử số (số trên gạch phân số)=
+octopus=con bạch tuộc=🐙
+onion=củ hành=🧅
+oval=hình bầu dục=🥚
+packet=gói=📦
+parent=bố mẹ, phụ huynh=👪
+party=bữa tiệc=🎉
+pear=quả lê=🍐
+pen=cây bút=🖊️
+penguin=chim cánh cụt=🐧
+pineapple=quả dứa=🍍
+plaster=băng dán cá nhân=🩹
+play=chơi=
+polygon=hình đa giác=
+pound=đồng bảng Anh (£)=💷
+pour=rót, đổ=🫗
+probably=có lẽ=
+puzzle=câu đố=🧩
+queue=hàng (người xếp hàng)=🧍🧍
+quick=nhanh=⚡
+raindrop=giọt mưa=💧
+rectangular=hình chữ nhật (tính từ)=
+related=liên quan=
+room=căn phòng=🛋️
+scoop=xúc=🥄
+score=điểm số; ghi bàn=
+shaded=được tô=
+shell=vỏ sò=🐚
+shoe=chiếc giày=👟
+shoelace=dây giày=👟
+shop=cửa hàng=🏪
+shopping=mua sắm=🛍️
+should=nên=
+silver=màu bạc=
+skipping=nhảy dây (skipping rope: dây nhảy)=
+snake=con rắn=🐍
+sold=đã bán=
+spend=tiêu (tiền)=💸
+spider=con nhện=🕷️
+spin=quay=🌀
+starfish=sao biển=⭐
+stone=hòn đá=🪨
+straw=ống hút=🥤
+strawberry=quả dâu tây=🍓
+strawberries=quả dâu tây=🍓
+symbol=ký hiệu=
+telephone=điện thoại=☎️
+tiger=con hổ=🐯
+triangular=hình tam giác (tính từ)=🔺
+tv=ti vi=📺
+tying=buộc=
+uk=Vương quốc Anh=🇬🇧
+unequal=không bằng nhau=
+uneven=không đều=
+upside=(upside down: lộn ngược)=🙃
+usa=nước Mỹ=🇺🇸
+usually=thường thường=
+vanilla=vani=🍦
+vegetable=rau củ=🥕
+very=rất=
+visit=thăm=
+wall=bức tường=🧱
+watch=xem; đồng hồ đeo tay=⌚
+watching=đang xem=📺
+weekend=cuối tuần=🎉
+weigh=cân, nặng=⚖️
+welcome=chào mừng=👋
+wheel=bánh xe=🛞
+white=màu trắng=⚪
+whose=của ai=
+why=tại sao=❓
+wider=rộng hơn=
+worm=con giun=🪱
+yen=đồng yên Nhật (¥)=💴
+zebra=ngựa vằn=🦓
+zebras=ngựa vằn=🦓
+been=đã (been: dạng của be)=
+came=đã đến=
+confusion=sự nhầm lẫn=😵
+glass=cái cốc thuỷ tinh=🥛
+lyra=Lyra (tên chú bọ rùa)=🐞
+max=Max (tên bạn)=🧒
+susie=Susie (tên bạn)=🧒
+tony=Tony (tên bạn)=🧒
+yusuf=Yusuf (tên bạn)=🧒
+ara=Ara (tên bạn)=🧒
+kai=Kai (tên bạn)=🧒
+ohan=Ohan (tên bạn)=🧒
+akila=Akila (tên bạn)=🧒
+semicircle=nửa hình tròn=◗`;
 const DICT={};
 DICT_RAW.split('\n').forEach(l=>{ const p=l.split('='); if(p.length>=2) DICT[p[0].trim()]={vi:p[1].trim(), em:(p[2]||'').trim()}; });
 const IRREG={children:'children',teeth:'teeth',vertices:'vertices',halves:'half',mice:'mouse',people:'people',bought:'bought',chose:'chose',got:'got',made:'made',spent:'spent',thrown:'thrown',taken:'taken',written:'written',drawn:'draw',seen:'see',sees:'see',does:'does',goes:'goes',was:'was',were:'were',has:'has',is:'is',grapes:'grapes',crisps:'crisps',glasses:'glasses',scales:'scales',tails:'tails',heads:'heads',dice:'dice',fives:'fives',twos:'twos',tens:'tens',ones:'ones',times:'times',lots:'lots',means:'means',makes:'makes',looks:'looks',says:'says',numbers:'numbers',quarters:'quarters',units:'units'};
@@ -2023,6 +2828,8 @@ window.addEventListener('hashchange',route);
 function route(){ trackNav(); if(window.speechSynthesis) speechSynthesis.cancel(); closeWord(); const h=location.hash.slice(1).split('/');
   if(h[0]=='unit') return showUnit(+h[1]);
   if(h[0]=='learn') return showLesson(h[1]);
+  if(h[0]=='wb') return showWB(h[1]);
+  if(h[0]=='wbhome') return showWBHome();
   if(h[0]=='quiz') return startQuiz(h[1]);
   if(h[0]=='report') return showReport();
   if(h[0]=='settings') return showSettings();
@@ -2038,7 +2845,7 @@ function showHome(){
   app.innerHTML=header('Cambridge Primary Maths 2')+`<main class="wrap">
   <section class="hero"><div><h1>Ôn tập Toán – Learner's Book 2</h1><p>Chọn một unit để học lại bài và làm bài tập. Bấm vào <b>bất kỳ từ tiếng Anh nào</b> để xem nghĩa tiếng Việt, nghe phát âm.</p>
   <div class="prog"><div style="width:${total?done/total*100:0}%"></div></div><small>Đã làm ${done}/${total} bài</small></div>
-  <button class="btn big" onclick="go('quiz/mix')">🎲 Đề tổng hợp (20 câu)</button></section>
+  <div class="herobtns"><button class="btn big" onclick="go('quiz/mix')">🎲 Đề tổng hợp (20 câu)</button><button class="btn big wbb" onclick="go('wbhome')">📒 Workbook 2</button></div></section>
   <div class="units">${UNITS.map(u=>{ const sc=u.subs.map(s=>b[s.id]).filter(x=>x!==undefined); const avg=sc.length?sc.reduce((a,c)=>a+c,0)/sc.length:undefined;
     return `<button class="ucard" style="--c:${u.color}" onclick="go('unit/${u.n}')"><span class="unum">${u.n}</span><span class="uicon">${u.icon}</span><span class="uname">${u.title}</span><span class="uvi">${u.vi}</span><span class="ust">${stars(sc.length==u.subs.length?avg:undefined)} ${sc.length}/${u.subs.length}</span></button>`; }).join('')}</div>
   <p class="foot">Nội dung bám theo Cambridge Primary Mathematics Learner's Book 2 (2nd edition). Hình minh hoạ được vẽ lại, không dùng hình trong sách.</p></main>`;
@@ -2049,7 +2856,7 @@ function showUnit(n){
   <div class="card intro"><div class="tt">${u.intro}</div><button class="btn sm ghost" onclick="speak(sayText(this.previousElementSibling.textContent))">🔊</button><button class="btn sm ghost" onclick="this.nextElementSibling.classList.toggle('hide')">🇻🇳 Dịch</button><div class="vi hide">${u.introVi}</div></div>
   ${u.subs.map(s=>`<div class="card sub" style="--c:${u.color}"><div class="subtop"><div><div class="sid">${s.id}</div><h3 class="tt">${s.title}</h3><div class="vi">${s.vi}</div></div><div class="best">${b[s.id]!==undefined?`<b>${b[s.id]}</b>/10<br>`:''}${stars(b[s.id])}</div></div>
     <div class="goals"><b class="tt">We are going to …</b><ul class="tt">${s.goals.map(g=>`<li>${g}</li>`).join('')}</ul></div>
-    <div class="row"><button class="btn ghost" onclick="go('learn/${s.id}')">📖 Học bài</button><button class="btn" onclick="go('quiz/${s.id}')">✏️ Làm bài tập</button></div></div>`).join('')}
+    <div class="row"><button class="btn ghost" onclick="go('learn/${s.id}')">📖 Học bài</button><button class="btn" onclick="go('quiz/${s.id}')">✏️ Làm bài tập</button><button class="btn wbb" onclick="go('wb/${s.id}')">📒 Workbook ${wbStars(s.id)}</button></div></div>`).join('')}
   <div class="card sub cp" style="--c:${u.color}"><div class="subtop"><div><div class="sid">✔</div><h3 class="tt">Check your progress</h3><div class="vi">Kiểm tra cuối unit${u.check.some(g=>/Project/.test(g().q))?' (có câu hỏi Project)':''}</div></div><div class="best">${b['cp'+u.n]!==undefined?`<b>${b['cp'+u.n]}</b>/10<br>`:''}${stars(b['cp'+u.n])}</div></div>
     <div class="row"><button class="btn" onclick="go('quiz/cp${u.n}')">🏁 Làm bài kiểm tra</button><button class="btn ghost" onclick="go('quiz/all${u.n}')">🎯 Ôn cả unit (12 câu)</button></div></div>
   <div class="navu">${n>1?`<button class="btn ghost" onclick="go('unit/${n-1}')">← Unit ${n-1}</button>`:'<span></span>'}${n<UNITS.length?`<button class="btn ghost" onclick="go('unit/${n+1}')">Unit ${n+1} →</button>`:''}</div></main>`;
@@ -2069,6 +2876,8 @@ function showLesson(id){
 /* ---------- Quiz ---------- */
 let quiz=null;
 function buildQuestions(id){
+  if(id.startsWith('wb-')){ const [,sid,lv]=id.split('-'); const f=findSub(sid); const w=WB[sid]; if(!f||!w) return null; const lvs=lv=='A'?['F','P','C']:[lv];
+    return {title:`📒 ${sid} ${lv=='A'?'Workbook (cả 3 mức)':LV[lv][0]}`, back:`wb/${sid}`, unit:f.u, items:lvs.flatMap(L=>(w[L]||[]).map(g=>Object.assign(g(),{sid:sid,lv:L})))}; }
   if(id=='mix'){ const all=[]; UNITS.forEach(u=>u.subs.forEach(s=>s.gens.forEach(g=>all.push([g,u,s.id])))); return {title:'Đề tổng hợp', titleEn:'Mixed review', back:'', items:sample(all,20).map(([g,u,sid])=>Object.assign(g(),{unit:u.n,sid}))}; }
   if(id.startsWith('cp')){ const u=UNITS.find(x=>x.n==+id.slice(2)); const extra=u.subs.map(s=>[pick(s.gens),s.id]); return {title:`Unit ${u.n} – Check your progress`, back:`unit/${u.n}`, unit:u, items:shuffle([...u.check.map(g=>Object.assign(g(),{sid:'cp'})),...extra.map(([g,sid])=>Object.assign(g(),{sid}))])}; }
   if(id.startsWith('all')){ const u=UNITS.find(x=>x.n==+id.slice(3)); const all=[]; u.subs.forEach(s=>s.gens.forEach(g=>all.push([g,s.id]))); u.check.forEach(g=>all.push([g,'cp'])); return {title:`Unit ${u.n} – Ôn cả unit`, back:`unit/${u.n}`, unit:u, items:sample(all,Math.min(12,all.length)).map(([g,sid])=>Object.assign(g(),{sid}))}; }
@@ -2175,11 +2984,25 @@ function showResult(){
   if(settings.auto) speak(sc>=9?'Excellent!':sc>=7?'Well done!':'Good try! Let us look at the mistakes.');
 }
 function retryWrong(){ const qs=quiz.res.filter(r=>!r.ok).map(r=>{ const q=Object.assign({},r.q); delete q.done; delete q.ok; delete q.sel; return prepQ(q); }); quiz=Object.assign(quiz,{qs,i:0,res:[],title:quiz.title.replace(/ \(làm lại\)$/,'')+' (làm lại)', id:quiz.id}); quiz.noSave=true; renderQ(); }
+function wbStars(sid){ const b=best(); const v=['F','P','C'].map(L=>b['wb-'+sid+'-'+L]).filter(x=>x!==undefined); return v.length? `<small>${v.length}/3</small>`:''; }
+function showWB(sid){
+  const f=findSub(sid), w=WB[sid]; if(!f||!w) return showHome(); const {u,s}=f; const b=best();
+  app.innerHTML=header(`Workbook ${sid}`,`unit/${u.n}`)+`<main class="wrap"><section class="uhead" style="--c:${u.color}"><div class="uicon big">📒</div><div><h2 class="tt">${sid} ${s.title}</h2><div class="vi">Workbook 2 · Exercise ${sid} · ${s.vi}</div></div></section>
+   <div class="card"><div class="tt">This workbook gives you questions to practise what you have learned in class. Each exercise has three parts.</div><div class="vi">Mỗi bài trong Workbook có 3 mức: <b>Focus</b> (cơ bản), <b>Practice</b> (luyện tập), <b>Challenge</b> (thử thách). Con nên làm lần lượt từ Focus.</div></div>
+   ${['F','P','C'].map(L=>{ const k='wb-'+sid+'-'+L, n=(w[L]||[]).length; return `<div class="card lv" style="--c:${LV[L][2]}"><div class="subtop"><div><span class="sid">${LV[L][0]}</span><h3>${LV[L][1]} · ${n} câu</h3><div class="vi">${LV[L][3]}</div></div><div class="best">${b[k]!==undefined?`<b>${b[k]}</b>/10<br>`:''}${stars(b[k])}</div></div><div class="row"><button class="btn" style="background:${LV[L][2]}" onclick="go('quiz/${k}')">✏️ Làm ${LV[L][0]}</button></div></div>`; }).join('')}
+   <div class="row center"><button class="btn ghost" onclick="go('quiz/wb-${sid}-A')">📚 Làm cả 3 mức liền</button><button class="btn ghost" onclick="go('learn/${sid}')">📖 Xem lại bài học</button></div></main>`;
+  wordify($('main'));
+}
+function showWBHome(){
+  const b=best();
+  app.innerHTML=header('Workbook 2','')+`<main class="wrap"><section class="hero wbh"><div><h1>📒 Cambridge Primary Mathematics Workbook 2</h1><p>Bài tập theo từng unit, mỗi bài có 3 mức: Focus – Practice – Challenge.</p></div></section>
+  ${UNITS.map(u=>`<div class="card" style="--c:${u.color}"><h3>${u.icon} Unit ${u.n}: <span class="tt">${u.title}</span></h3><div class="vi">${u.vi}</div><div class="wbsubs">${u.subs.map(s=>`<button class="wbsub" onclick="go('wb/${s.id}')"><b>${s.id}</b> <span>${s.title}</span><span class="lvdots">${['F','P','C'].map(L=>{const v=b['wb-'+s.id+'-'+L]; return `<i style="background:${v===undefined?'#e2e8f0':v>=8?'#06d6a0':v>=5?'#ffd166':'#ef476f'}" title="${LV[L][0]}">${L}</i>`;}).join('')}</span></button>`).join('')}</div></div>`).join('')}</main>`;
+}
 function showReport(){
   const hist=LS.get('hist',[]); const b=best(); const agg={};
   hist.forEach(h=>Object.entries(h.sk).forEach(([s,v])=>{ agg[s]=agg[s]||[0,0]; agg[s][0]+=v[0]; agg[s][1]+=v[1]; }));
   const rows=Object.entries(agg).sort((a,b)=>a[1][0]/a[1][1]-b[1][0]/b[1][1]);
-  app.innerHTML=header('Kết quả học tập','')+`<main class="wrap"><div class="card"><h3>📈 Điểm cao nhất từng bài</h3><table class="tbl">${UNITS.map(u=>`<tr><th colspan="2" style="background:${u.color}22">Unit ${u.n}: ${u.title}</th></tr>`+[...u.subs.map(s=>[s.id+' '+s.title,b[s.id]]),['Check your progress',b['cp'+u.n]]].map(([t,v])=>`<tr><td>${t}</td><td>${v===undefined?'<span class="muted">chưa làm</span>':`<b>${v}</b>/10 ${stars(v)}`}</td></tr>`).join('')).join('')}</table></div>
+  app.innerHTML=header('Kết quả học tập','')+`<main class="wrap"><div class="card"><h3>📈 Điểm cao nhất từng bài</h3><table class="tbl">${UNITS.map(u=>`<tr><th colspan="2" style="background:${u.color}22">Unit ${u.n}: ${u.title}</th></tr>`+[...u.subs.flatMap(s=>[[s.id+' '+s.title,b[s.id]],...['F','P','C'].map(L=>['📒 WB '+s.id+' '+LV[L][0],b['wb-'+s.id+'-'+L]])]),['Check your progress',b['cp'+u.n]]].map(([t,v])=>`<tr><td>${t}</td><td>${v===undefined?'<span class="muted">chưa làm</span>':`<b>${v}</b>/10 ${stars(v)}`}</td></tr>`).join('')).join('')}</table></div>
   <div class="card"><h3>🧠 Kỹ năng (tổng hợp mọi lần làm)</h3>${rows.length?`<table class="tbl skills">${rows.map(([s,v])=>`<tr><td>${s}</td><td><div class="bar"><div style="width:${v[0]/v[1]*100}%;background:${v[0]/v[1]>=.9?'#06d6a0':v[0]/v[1]>=.6?'#ffd166':'#ef476f'}"></div></div></td><td>${Math.round(v[0]/v[1]*100)}%</td></tr>`).join('')}</table><p class="muted">Kỹ năng ở trên cùng là kỹ năng con hay sai nhất.</p>`:'<p>Chưa có dữ liệu. Hãy làm vài bài nhé!</p>'}</div>
   <div class="card"><h3>🕘 Lịch sử gần đây</h3>${hist.length?`<table class="tbl">${hist.slice(0,30).map(h=>`<tr><td>${new Date(h.d).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</td><td>${h.t}</td><td><b>${Math.round(h.c/h.n*100)/10}</b>/10</td></tr>`).join('')}</table>`:'<p>Chưa có.</p>'}
   <div class="row"><button class="btn ghost sm" onclick="if(confirm('Xoá toàn bộ kết quả đã lưu?')){LS.set('hist',[]);LS.set('best',{});showReport();}">🗑️ Xoá kết quả</button></div></div></main>`;

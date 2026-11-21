@@ -137,6 +137,20 @@ label.chk{display:flex;gap:8px;align-items:center;margin:8px 0}
 .wbsub span:nth-child(2){flex:1;font-size:.92rem}
 .lvdots{display:flex;gap:3px}.lvdots i{font-style:normal;font-size:.7rem;font-weight:900;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e2e8f0}
 .card.lv h3{margin:6px 0 0}
+
+.qnav{display:flex;align-items:center;gap:8px;margin-top:8px}
+.qdots{display:flex;gap:5px;overflow-x:auto;padding:4px 2px;flex:1;scrollbar-width:thin}
+.qd{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:2px solid #cbd5e1;background:#fff;font:inherit;font-weight:800;font-size:.85rem;cursor:pointer;color:#475569;padding:0}
+.qd.dr{border-color:#3a86ff;color:#3a86ff}
+.qd.sk{background:#fff3bf;border-color:#f4a300;color:#7a5800}
+.qd.ok{background:#06d6a0;border-color:#06d6a0;color:#fff}
+.qd.no{background:#ef476f;border-color:#ef476f;color:#fff}
+.qd.cur{box-shadow:0 0 0 3px #2b2d42;transform:scale(1.08)}
+.btn.submit{white-space:nowrap}
+.qbtns{align-items:center}.qbtns .sp{flex:1}
+.btn:disabled{opacity:.35;cursor:default}
+.skt{color:#b7791f}
+@media(max-width:520px){.qbtns .btn{padding:8px 12px;font-size:.95rem}.qbtns .btn.big{font-size:1rem;padding:10px 14px}}
 </style></head>
 <body><div id="app"></div><div id="wordpop" onclick="if(event.target===this)closeWord()"><div class="inner"></div></div><div id="toast"></div>
 <script>/* ===== Hand-drawn style SVG illustrations (all original drawings) ===== */
@@ -2896,14 +2910,19 @@ function startQuiz(id){
   quiz={id, title:b.title, back:b.back, unit:b.unit, qs:b.items.map(prepQ), i:0, res:[]};
   renderQ();
 }
+function qDots(){ return `<div class="qdots">${quiz.qs.map((q,j)=>`<button class="qd ${q.done?(q.ok?'ok':'no'):q.skipped?'sk':(hasDraft(q)?'dr':'')} ${j==quiz.i?'cur':''}" onclick="goQ(${j})" title="Câu ${j+1}">${j+1}</button>`).join('')}</div>`; }
+function hasDraft(q){ return (q.vals&&q.vals.some(v=>String(v).trim()!==''))||(q.sel!==undefined&&!(Array.isArray(q.sel)&&!q.sel.length)); }
+function unanswered(){ return quiz.qs.map((q,j)=>q.done?-1:j).filter(j=>j>=0); }
+function nextOpen(from){ const n=quiz.qs.length; for(let k=1;k<=n;k++){ const j=(from+k)%n; if(!quiz.qs[j].done) return j; } return -1; }
 function renderQ(){
-  const q=quiz.qs[quiz.i], n=quiz.qs.length, col=(quiz.unit&&quiz.unit.color)||'#3a86ff';
+  const q=quiz.qs[quiz.i], n=quiz.qs.length, col=(quiz.unit&&quiz.unit.color)||'#3a86ff', doneN=quiz.qs.filter(x=>x.done).length;
   let ans='';
   if(q.type=='mc') ans=`<div class="opts ${q.pics?'pics':''} ${q.wide?'wide':''}">${q.O.map((o,k)=>`<button class="opt" data-k="${k}" onclick="selOpt(${k})">${o.h}</button>`).join('')}</div>`;
-  if(q.type=='multi') ans=`<div class="note">👉 Chọn TẤT CẢ đáp án đúng (có thể nhiều hơn 1).</div><div class="opts ${q.pics?'pics':''}">${q.O.map((o,k)=>`<button class="opt multi" data-k="${k}" onclick="togOpt(${k})">${o.h}</button>`).join('')}</div>`;
+  if(q.type=='multi') ans=`<div class="note">👉 Chọn TẤT CẢ đáp án đúng (có thể nhiều hơn 1).</div><div class="opts ${q.pics?'pics':''} ${q.wide?'wide':''}">${q.O.map((o,k)=>`<button class="opt multi" data-k="${k}" onclick="togOpt(${k})">${o.h}</button>`).join('')}</div>`;
   if(q.type=='order') ans=`<div class="note">👉 Bấm lần lượt theo đúng thứ tự. Bấm vào ô phía trên để bỏ chọn.</div><div class="ordered" id="ordered"></div><div class="opts order">${q.O.map((o,k)=>`<button class="opt" data-k="${k}" onclick="ordPick(${k})">${o.h}</button>`).join('')}</div>`;
-  app.innerHTML=header(quiz.title, quiz.back)+`<main class="wrap"><div class="qbar"><div style="width:${quiz.i/n*100}%;background:${col}"></div></div>
-   <div class="card q" style="--c:${col}"><div class="qtop"><span class="qn">Question ${quiz.i+1}/${n}</span><span class="sk">${q.skill}</span></div>
+  app.innerHTML=header(quiz.title, quiz.back)+`<main class="wrap"><div class="qbar"><div style="width:${doneN/n*100}%;background:${col}"></div></div>
+   <div class="qnav">${qDots()}<button class="btn sm ghost submit" onclick="submitQuiz()">🏁 Nộp bài</button></div>
+   <div class="card q" style="--c:${col}"><div class="qtop"><span class="qn">Question ${quiz.i+1}/${n}${q.skipped&&!q.done?' · <span class="skt">⏭ đã bỏ qua</span>':''}</span><span class="sk">${q.skill}</span></div>
    <div class="qtext tt">${q.type=='input'?q.html:q.q}</div>
    ${q.hint?`<div class="hint">Gợi ý từ: <b>${q.hint}</b></div>`:''}
    <div class="tools"><button class="btn sm ghost" onclick="speak(sayText(quiz.qs[quiz.i].q))">🔊 Đọc đề</button><button class="btn sm ghost" onclick="speak(sayText(quiz.qs[quiz.i].q),0.55)">🐢 Đọc chậm</button><button class="btn sm ghost" onclick="$('#qvi').classList.toggle('hide')">🇻🇳 Dịch đề</button></div>
@@ -2911,16 +2930,25 @@ function renderQ(){
    ${q.pic?`<div class="qpic tt">${q.pic}</div>`:''}
    ${ans}
    <div id="fb"></div>
-   <div class="row end"><button class="btn big" id="checkBtn" onclick="checkQ()">Kiểm tra ✔</button></div></div></main>`;
+   <div class="row qbtns"><button class="btn ghost" id="prevBtn" onclick="prevQ()" ${quiz.i==0?'disabled':''}>◀ Câu trước</button><span class="sp"></span><button class="btn ghost" id="skipBtn" onclick="skipQ()">Bỏ qua ⏭</button><button class="btn big" id="checkBtn" onclick="checkQ()">Kiểm tra ✔</button></div></div></main>`;
   wordify($('.qtext')); if($('.qpic')) wordify($('.qpic'));
-  const first=$('input.blank'); if(first && matchMedia('(pointer:fine)').matches) first.focus();
-  $$('input.blank').forEach((el,k,all)=>el.addEventListener('keydown',e=>{ if(e.key=='Enter'){ e.preventDefault(); if(all[k+1]) all[k+1].focus(); else checkQ(); } }));
-  if(settings.auto) setTimeout(()=>speak(sayText(q.q)),250);
+  const ins=$$('input.blank');
+  ins.forEach((el,k)=>{ if(q.vals && q.vals[k]!==undefined) el.value=q.vals[k]; el.addEventListener('input',()=>{ q.vals=ins.map(x=>x.value); }); el.addEventListener('keydown',e=>{ if(e.key=='Enter'){ e.preventDefault(); if(ins[k+1]) ins[k+1].focus(); else checkQ(); } }); });
+  if(q.type=='mc' && q.sel!==undefined) $$('.opt').forEach(b=>b.classList.toggle('sel',+b.dataset.k==q.sel));
+  if(q.type=='multi' && q.sel) $$('.opt').forEach(b=>b.classList.toggle('sel',q.sel.includes(+b.dataset.k)));
+  if(q.type=='order' && q.sel) drawOrd();
+  if(q.done){ paintDone(q,false); }
+  else { const first=ins.find(x=>!x.value); if(first && matchMedia('(pointer:fine)').matches) first.focus(); if(settings.auto) setTimeout(()=>speak(sayText(q.q)),250); }
+  const cur=$('.qd.cur'); if(cur && cur.scrollIntoView) cur.scrollIntoView({block:'nearest',inline:'center'});
 }
-function selOpt(k){ const q=quiz.qs[quiz.i]; if(q.done) return; q.sel=k; $$('.opt').forEach(b=>b.classList.toggle('sel',+b.dataset.k==k)); }
-function togOpt(k){ const q=quiz.qs[quiz.i]; if(q.done) return; q.sel=q.sel||[]; const i=q.sel.indexOf(k); if(i>=0) q.sel.splice(i,1); else q.sel.push(k); $$('.opt').forEach(b=>b.classList.toggle('sel',q.sel.includes(+b.dataset.k))); }
-function ordPick(k){ const q=quiz.qs[quiz.i]; if(q.done) return; q.sel=q.sel||[]; if(q.sel.includes(k)) return; q.sel.push(k); drawOrd(); }
+function goQ(j){ if(j<0||j>=quiz.qs.length) return; quiz.i=j; renderQ(); window.scrollTo(0,0); }
+function prevQ(){ if(quiz.i>0) goQ(quiz.i-1); }
+function skipQ(){ const q=quiz.qs[quiz.i]; if(!q.done) q.skipped=true; const j=nextOpen(quiz.i); if(j<0||j==quiz.i){ if(j==quiz.i) toast('Đây là câu cuối cùng chưa làm. Con thử làm nhé, hoặc bấm 🏁 Nộp bài.'); return; } if(j<quiz.i) toast('Quay lại các câu con đã bỏ qua nhé!'); goQ(j); }
+function selOpt(k){ const q=quiz.qs[quiz.i]; if(q.done) return; q.sel=k; $$('.opt').forEach(b=>b.classList.toggle('sel',+b.dataset.k==k)); refreshDots(); }
+function togOpt(k){ const q=quiz.qs[quiz.i]; if(q.done) return; q.sel=q.sel||[]; const i=q.sel.indexOf(k); if(i>=0) q.sel.splice(i,1); else q.sel.push(k); $$('.opt').forEach(b=>b.classList.toggle('sel',q.sel.includes(+b.dataset.k))); refreshDots(); }
+function ordPick(k){ const q=quiz.qs[quiz.i]; if(q.done) return; q.sel=q.sel||[]; if(q.sel.includes(k)) return; q.sel.push(k); drawOrd(); refreshDots(); }
 function ordUn(j){ const q=quiz.qs[quiz.i]; if(q.done) return; q.sel.splice(j,1); drawOrd(); }
+function refreshDots(){ const d=$('.qdots'); if(d) d.outerHTML=qDots(); }
 function drawOrd(){ const q=quiz.qs[quiz.i]; $('#ordered').innerHTML=q.sel.map((k,j)=>`<button class="ochip" onclick="ordUn(${j})">${q.O[k].h}</button>`).join(q.sel.length?'<span class="lt">→</span>':''); $$('.opts.order .opt').forEach(b=>b.classList.toggle('used',q.sel.includes(+b.dataset.k))); }
 const norm=s=>String(s).toLowerCase().replace(/[−–—]/g,'-').replace(/×/g,'x').replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').replace(/[.!]$/,'').trim();
 function sameAns(u,a){ if(/^-?\d+$/.test(a) && /^\s*-?\d+\s*$/.test(u)) return +u==+a; return norm(u)==norm(a) || norm(u).replace(/-/g,' ')==norm(a).replace(/-/g,' '); }
@@ -2938,32 +2966,44 @@ function checkQ(){
   const q=quiz.qs[quiz.i]; if(q.done){ return nextQ(); }
   let ok=false, given='', right='', notes=[];
   if(q.type=='input'){
-    const ins=$$('input.blank'); const vals=ins.map(x=>x.value); if(vals.every(v=>v.trim()==='')){ toast('Con hãy điền đáp án trước nhé!'); return; }
+    const vals=$$('input.blank').map(x=>x.value); q.vals=vals; if(vals.every(v=>v.trim()==='')){ toast('Con hãy điền đáp án trước, hoặc bấm "Bỏ qua ⏭" để làm câu khác.'); return; }
     let res=vals.map((v,k)=>q.B[k].some(a=>sameAns(v,a)));
     (q.anyOrder||[]).forEach(g=>{ if(g.length==2){ const [a,b]=g; if(!res[a]||!res[b]){ if(q.B[a].some(x=>sameAns(vals[b],x)) && q.B[b].some(x=>sameAns(vals[a],x))){ res[a]=res[b]=true; } } } });
-    ins.forEach((el,k)=>{ el.classList.add(res[k]?'right':'wrong'); el.readOnly=true; if(!res[k]){ const t=document.createElement('span'); t.className='corr'; t.textContent=q.B[k][0]; el.after(t); const dg=diagnose(vals[k],q.B[k][0]); if(dg) notes.push(dg); } });
+    q.bres=res; res.forEach((r,k)=>{ if(!r){ const dg=diagnose(vals[k],q.B[k][0]); if(dg) notes.push(dg); } });
     ok=res.every(Boolean); given=vals.map(v=>v||'∅').join(' ; '); right=q.B.map(b=>b[0]).join(' ; ');
   }
-  if(q.type=='mc'){ if(q.sel===undefined){ toast('Con hãy chọn một đáp án!'); return; } ok=q.O[q.sel].ok; $$('.opt').forEach(b=>{ const o=q.O[+b.dataset.k]; if(o.ok) b.classList.add('right'); else if(+b.dataset.k==q.sel) b.classList.add('wrong'); }); given=q.O[q.sel].h; right=q.O.find(o=>o.ok).h; }
-  if(q.type=='multi'){ if(!q.sel||!q.sel.length){ toast('Con hãy chọn đáp án!'); return; } ok=q.O.every((o,k)=>o.ok==q.sel.includes(k)); const miss=q.O.filter((o,k)=>o.ok&&!q.sel.includes(k)).length, extra=q.O.filter((o,k)=>!o.ok&&q.sel.includes(k)).length;
-    $$('.opt').forEach(b=>{ const k=+b.dataset.k, o=q.O[k]; if(o.ok) b.classList.add(q.sel.includes(k)?'right':'missed'); else if(q.sel.includes(k)) b.classList.add('wrong'); });
+  if(q.type=='mc'){ if(q.sel===undefined){ toast('Con hãy chọn một đáp án, hoặc bấm "Bỏ qua ⏭".'); return; } ok=q.O[q.sel].ok; given=q.O[q.sel].h; right=q.O.find(o=>o.ok).h; }
+  if(q.type=='multi'){ if(!q.sel||!q.sel.length){ toast('Con hãy chọn đáp án, hoặc bấm "Bỏ qua ⏭".'); return; } ok=q.O.every((o,k)=>o.ok==q.sel.includes(k)); const miss=q.O.filter((o,k)=>o.ok&&!q.sel.includes(k)).length, extra=q.O.filter((o,k)=>!o.ok&&q.sel.includes(k)).length;
     if(miss) notes.push(`Con còn thiếu ${miss} đáp án đúng (viền xanh nét đứt).`); if(extra) notes.push(`Con chọn thừa ${extra} đáp án sai (màu đỏ).`);
     given=q.sel.map(k=>q.O[k].h).join(', '); right=q.O.filter(o=>o.ok).map(o=>o.h).join(', '); }
-  if(q.type=='order'){ q.sel=q.sel||[]; if(q.sel.length<q.O.length){ toast('Con hãy xếp hết các ô!'); return; } const got=q.sel.map(k=>q.O[k].i); ok=got.every((v,i)=>v==i); given=q.sel.map(k=>q.O[k].h).join(' → '); right=q.items.join(' → '); if(!ok) notes.push('Thứ tự đúng: '+right); }
-  q.done=true; q.ok=ok;
+  if(q.type=='order'){ q.sel=q.sel||[]; if(q.sel.length<q.O.length){ toast('Con hãy xếp hết các ô, hoặc bấm "Bỏ qua ⏭".'); return; } const got=q.sel.map(k=>q.O[k].i); ok=got.every((v,i)=>v==i); given=q.sel.map(k=>q.O[k].h).join(' → '); right=q.items.join(' → '); if(!ok) notes.push('Thứ tự đúng: '+right); }
+  q.done=true; q.ok=ok; q.notes=notes; q.cheer=pick(['🎉 Correct! Đúng rồi!','🌟 Well done! Giỏi quá!','✅ Great! Chính xác!']);
   quiz.res[quiz.i]={ok, given, right, notes, q};
-  $('#fb').innerHTML=`<div class="fb ${ok?'good':'bad'}"><div class="fbh">${ok?pick(['🎉 Correct! Đúng rồi!','🌟 Well done! Giỏi quá!','✅ Great! Chính xác!']):'❌ Not quite. Chưa đúng rồi.'}</div>
-   ${!ok&&q.type!='input'&&q.type!='order'?`<div class="ra">Đáp án đúng: <span class="tt">${right}</span></div>`:''}
-   ${notes.length?`<div class="diag">🔎 ${notes.join('<br>🔎 ')}</div>`:''}
-   <div class="exp tt">💡 ${q.exp}</div><div class="vi">🇻🇳 ${q.expVi}</div>
-   <button class="btn sm ghost" onclick="speak(sayText(quiz.qs[quiz.i].exp))">🔊 Nghe giải thích</button></div>`;
-  wordify($('#fb .exp')); if(!ok) wordify($('#fb .ra')||document.createElement('div'));
-  const btn=$('#checkBtn'); btn.textContent=quiz.i<quiz.qs.length-1?'Câu tiếp ➜':'Xem kết quả 🏆'; btn.focus();
+  paintDone(q,true); refreshDots();
+  const bar=$('.qbar div'); if(bar) bar.style.width=(quiz.qs.filter(x=>x.done).length/quiz.qs.length*100)+'%';
   if(settings.auto) speak(ok?pick(['Correct!','Well done!','Great job!']):'Not quite. Look at the explanation.',settings.rate);
 }
-function nextQ(){ if(quiz.i<quiz.qs.length-1){ quiz.i++; renderQ(); window.scrollTo(0,0); } else { finishQuiz(); } }
+function paintDone(q,focus){
+  const ok=q.ok, r=quiz.res[quiz.qs.indexOf(q)], right=r?r.right:'';
+  if(q.type=='input'){ $$('input.blank').forEach((el,k)=>{ el.readOnly=true; el.classList.add(q.bres[k]?'right':'wrong'); if(!q.bres[k]){ const t=document.createElement('span'); t.className='corr'; t.textContent=q.B[k][0]; el.after(t); } }); }
+  if(q.type=='mc') $$('.opt').forEach(b=>{ const o=q.O[+b.dataset.k]; if(o.ok) b.classList.add('right'); else if(+b.dataset.k==q.sel) b.classList.add('wrong'); });
+  if(q.type=='multi') $$('.opt').forEach(b=>{ const k=+b.dataset.k, o=q.O[k]; if(o.ok) b.classList.add(q.sel.includes(k)?'right':'missed'); else if(q.sel.includes(k)) b.classList.add('wrong'); });
+  $('#fb').innerHTML=`<div class="fb ${ok?'good':'bad'}"><div class="fbh">${ok?q.cheer:'❌ Not quite. Chưa đúng rồi.'}</div>
+   ${!ok&&q.type!='input'&&q.type!='order'?`<div class="ra">Đáp án đúng: <span class="tt">${right}</span></div>`:''}
+   ${q.notes&&q.notes.length?`<div class="diag">🔎 ${q.notes.join('<br>🔎 ')}</div>`:''}
+   <div class="exp tt">💡 ${q.exp}</div><div class="vi">🇻🇳 ${q.expVi}</div>
+   <button class="btn sm ghost" onclick="speak(sayText(quiz.qs[quiz.i].exp))">🔊 Nghe giải thích</button></div>`;
+  wordify($('#fb .exp')); if(!ok && $('#fb .ra')) wordify($('#fb .ra'));
+  const left=nextOpen(quiz.i); const btn=$('#checkBtn'); btn.textContent=left<0?'Xem kết quả 🏆':'Câu tiếp ➜'; $('#skipBtn').classList.add('hide'); if(focus) btn.focus();
+}
+function nextQ(){ const j=nextOpen(quiz.i); if(j<0) return finishQuiz(); if(j<quiz.i) toast('Quay lại làm các câu con đã bỏ qua nhé!'); goQ(j); }
+function submitQuiz(){
+  const left=unanswered(); if(left.length && !confirm(`Còn ${left.length} câu chưa làm (câu ${left.map(j=>j+1).join(', ')}). Nộp bài luôn thì các câu này tính là chưa đúng. Nộp nhé?`)) { if(left.length) goQ(left[0]); return; }
+  finishQuiz();
+}
 const ADVICE={'Bảng 100 ô':'Ôn lại bảng 100 ô: sang phải +1, sang trái −1, xuống dưới +10, lên trên −10.','Chục và đơn vị':'Dùng que tính: 1 thanh = 1 chục, 1 khối nhỏ = 1 đơn vị. Đọc số chục trước, đơn vị sau.','Giá trị chữ số':'Chữ số bên trái là hàng chục (nhân 10), bên phải là hàng đơn vị.','Đếm thêm, đếm lùi':'Tập đếm thêm/lùi 1 và 10 trên bảng 100 ô.','Số chẵn, số lẻ':'Số chẵn tận cùng 0, 2, 4, 6, 8; số lẻ tận cùng 1, 3, 5, 7, 9.','So sánh số':'So sánh hàng chục trước; nếu bằng nhau mới so sánh hàng đơn vị.','Sắp xếp số':'Sắp xếp: so sánh hàng chục trước rồi đến hàng đơn vị.','Số thứ tự':'Ôn 1st first, 2nd second, 3rd third, 4th fourth…','Toán có lời văn':'Đọc kỹ đề, gạch chân từ khoá: altogether/total → cộng; left/fewer → trừ; each/groups → nhân/chia.','Đổi tiền':'Ôn giá trị: penny 1c, nickel 5c, dime 10c, quarter 25c, half dollar 50c; $1 = 100c.','Xem giờ':'Kim dài chỉ phút, kim ngắn chỉ giờ; mỗi số là 5 phút.','Past và To':'quarter past = 15 phút; half past = 30; quarter to = kém 15 (45 phút).','Đọc đồng hồ kim':'Đếm thêm 5 theo các số trên mặt đồng hồ để đọc phút.','Làm tròn':'Số tận cùng 0–4 làm tròn xuống, 5–9 làm tròn lên.','Trục đối xứng':'Gấp đôi hình theo đường thẳng: hai nửa phải trùng khít.','Đo bằng thước':'Đặt đầu vật ở vạch 0. Nếu không bắt đầu từ 0 thì lấy số cuối trừ số đầu.'};
 function finishQuiz(){
+  quiz.qs.forEach((q,j)=>{ if(!q.done) quiz.res[j]={ok:false,given:'(chưa làm)',right:q.type=='input'?q.B.map(b=>b[0]).join(' ; '):q.type=='order'?q.items.join(' → '):q.O.filter(o=>o.ok).map(o=>o.h).join(', '),notes:['Con đã bỏ qua câu này.'],q,skipped:true}; });
   const res=quiz.res, c=res.filter(r=>r.ok).length, n=res.length, sc=Math.round(c/n*100)/10;
   const skills={}; res.forEach(r=>{ const s=r.q.skill; skills[s]=skills[s]||[0,0]; skills[s][1]++; if(r.ok) skills[s][0]++; });
   const b=best(); const key=quiz.id.startsWith('cp')?quiz.id:quiz.id; if(!quiz.noSave && !quiz.id.startsWith('all') && quiz.id!='mix'){ if(b[key]===undefined || sc>b[key]) b[key]=sc; LS.set('best',b); }
@@ -2983,7 +3023,7 @@ function showResult(){
   $$('main .tt').forEach(wordify);
   if(settings.auto) speak(sc>=9?'Excellent!':sc>=7?'Well done!':'Good try! Let us look at the mistakes.');
 }
-function retryWrong(){ const qs=quiz.res.filter(r=>!r.ok).map(r=>{ const q=Object.assign({},r.q); delete q.done; delete q.ok; delete q.sel; return prepQ(q); }); quiz=Object.assign(quiz,{qs,i:0,res:[],title:quiz.title.replace(/ \(làm lại\)$/,'')+' (làm lại)', id:quiz.id}); quiz.noSave=true; renderQ(); }
+function retryWrong(){ const qs=quiz.res.filter(r=>!r.ok).map(r=>{ const q=Object.assign({},r.q); delete q.done; delete q.ok; delete q.sel; delete q.vals; delete q.skipped; delete q.bres; delete q.notes; return prepQ(q); }); quiz=Object.assign(quiz,{qs,i:0,res:[],final:null,title:quiz.title.replace(/ \(làm lại\)$/,'')+' (làm lại)', id:quiz.id}); quiz.noSave=true; renderQ(); }
 function wbStars(sid){ const b=best(); const v=['F','P','C'].map(L=>b['wb-'+sid+'-'+L]).filter(x=>x!==undefined); return v.length? `<small>${v.length}/3</small>`:''; }
 function showWB(sid){
   const f=findSub(sid), w=WB[sid]; if(!f||!w) return showHome(); const {u,s}=f; const b=best();
